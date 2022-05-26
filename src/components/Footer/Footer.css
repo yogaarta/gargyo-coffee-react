@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Rubik:wght@300;400;500;700&display=swap');
+
+.logo-pict{
+    width: 30px;
+}
+
+footer {
+    background-color: #F8F8F8;
+    padding-top: 100px;
+}
+
+.footer-container {
+    margin: 7.5%;
+}
+
+.coffeeshop-footer-text {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #4F5665;
+    margin-top: 20px;
+
+}
+
+.copyright {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-top: 20px;
+    color: #AFB5C0;
+
+}
+
+.footer-list-header {
+    font-family: Rubik;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.footer-list-item {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}

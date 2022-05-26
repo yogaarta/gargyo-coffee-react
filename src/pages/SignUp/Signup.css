@@ -1,0 +1,379 @@
+.coffee-pict{
+    width: 30px;
+}
+
+.google-pict{
+    width: 27px;
+}
+
+/* body {
+    max-width: 1440px;
+    height: 1628px;
+} */
+
+.global-container {
+    display: flex;
+}
+
+aside {
+    flex: 1;
+    border: 5px;
+    background-image: url(https://s3-alpha-sig.figma.com/img/94cf/d4df/dd22d129a5bbab44da4da62471dafa2a?Expires=1654473600&Signature=AV5Zrm2ThXQF2Cr7xokmGjGGpwaKBzHwvmN2Fnx3p7r3hA2wYw2Kyj~M8JSQSwkGTABX2bzIlX2tMeKfNRZ9yKwD-theqc80k7DQoOsAFZVnplNpx1dShp9QMr3HGzctc~uM2cBHbcd6Y~7fNSB5YQVsP9SF0eqLi40KYx8hoDNXZ77IazD26clm-jzoDaZYeF-7fjOKo3cDxbNEuq0rBrpSvIXP76v6ub6qxwB6lRcpy6yLkNFe~RgZBfnJcsEkd5tNtJQN-M3HDqdZSZ-xMio75j-SbE9Nrazx7Q3gnMFfuRJSRkMPHDIPSUyAp7BxZZNJ9kXrdRMBc0w3GilEjA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
+    background-size: cover;
+    width: 50%;
+    background-position: 50% 50%;
+
+}
+
+.aside-img {
+    max-width: 720px;
+}
+
+.main-content {
+    flex: 1;
+    max-width: 50%;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 70px;
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+
+}
+
+.coffeeshop-logo {
+    font-style: bold;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #0B132A;
+}
+
+.header-signup {
+    font-family: 'Rubik';
+    font-style: bold;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 41px;
+    color: #6A4029;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.flex-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #4F5665;
+}
+
+.signup-input {
+    width: 100%;
+    height: 75px;
+    left: 810px;
+    top: 238px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    border: 1px solid #4F5665;
+    border-radius: 20px;
+}
+
+.signup-input[type="text"],
+.signup-input[type="password"] {
+    font-size: 20px;
+    padding: 25px 30px;
+    font-weight: 400;
+    line-height: 27px;
+}
+
+.forgot {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-decoration-line: underline;
+
+    color: #6A4029;
+    cursor: pointer;
+}
+
+.signup {
+    background: #FFBA33;
+    border-color: #FFBA33;
+    border-radius: 20px;
+    box-shadow: 0px 6px 20px rgba(255, 186, 51, 0.4);
+    margin: 25px 0px;
+    font-family: 'Rubik';
+    font-style: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+    color: #6A4029;
+    width: 100%;
+    height: 75px;
+    left: 810px;
+    top: 238px;
+    text-align: center;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.signup:hover {
+    background-color: #fcaf16;
+}
+
+.signup:active {
+    background-color: #FFBA33;
+}
+
+
+.google-button {
+    width: 100%;
+    height: 75px;
+    left: 810px;
+    top: 751px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 6px 20px rgba(196, 196, 196, 0.67);
+    border-color: #FFFFFF;
+    border-radius: 20px;
+    font-family: 'Poppins';
+    font-style: bold;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 26px;
+}
+
+.have-account-container {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    padding: 25px;
+    width: 100%;
+}
+
+.have-account-text {
+    flex: 2;
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    color: #9F9F9F
+}
+
+.underline {
+    flex: 1;
+    height: 1px;
+    border-bottom: 2px solid #C4C4C4;
+    ;
+}
+
+.login-button {
+    width: 100%;
+    height: 75px;
+    left: 810px;
+    top: 751px;
+
+    background: #6A4029;
+    box-shadow: 0px 6px 20px rgba(106, 64, 41, 0.63);
+    border-radius: 20px;
+    border-color: #6A4029;
+    margin-bottom: 80px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 26px;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.login-button a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.login-button:hover {
+    background-color: #552d17;
+}
+
+.login-button:active {
+    background-color: #6A4029;
+}
+
+footer {
+
+    background-color: #F8F8F8;
+    width: 100%;
+}
+
+.footer-flex-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-right: 0px;
+    justify-content: space-between;
+}
+
+.footer-flex-item, .footer-flex-item-right {
+    flex: 1;
+    margin: 50px 0px;
+    width: 40%;
+    align-self: center;
+    padding-left: 20px;
+
+}
+
+.coffeeshop-footer-text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 30px;
+    /* or 188% */
+
+
+    color: #4F5665;
+}
+
+.copyright {
+    font-weight: 400;
+    font-size: 16px;
+    margin-top: 20px;
+
+    color: #AFB5C0;
+}
+
+.footer-list {
+    display: flex;
+}
+
+.footer-list-item {
+    flex: 1;
+}
+
+.footer-list-item>p {
+    margin-bottom: 5px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+
+
+    color: #4F5665;
+}
+
+.footer-list-header {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 30px;
+
+
+    color: #0B132A;
+}
+
+.footer-list-item-right-title{
+    margin-top: 15px;
+}
+
+
+@media(max-width: 840px) {
+    .global-container {
+        flex-direction: column;
+    }
+
+    aside {
+        background-image: url(https://s3-alpha-sig.figma.com/img/94cf/d4df/dd22d129a5bbab44da4da62471dafa2a?Expires=1654473600&Signature=AV5Zrm2ThXQF2Cr7xokmGjGGpwaKBzHwvmN2Fnx3p7r3hA2wYw2Kyj~M8JSQSwkGTABX2bzIlX2tMeKfNRZ9yKwD-theqc80k7DQoOsAFZVnplNpx1dShp9QMr3HGzctc~uM2cBHbcd6Y~7fNSB5YQVsP9SF0eqLi40KYx8hoDNXZ77IazD26clm-jzoDaZYeF-7fjOKo3cDxbNEuq0rBrpSvIXP76v6ub6qxwB6lRcpy6yLkNFe~RgZBfnJcsEkd5tNtJQN-M3HDqdZSZ-xMio75j-SbE9Nrazx7Q3gnMFfuRJSRkMPHDIPSUyAp7BxZZNJ9kXrdRMBc0w3GilEjA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
+        background-size: cover;
+        width: 100%;
+    }
+
+    .aside-pict {
+        width: 100%;
+        min-height: 180px;
+    }
+
+    .main-content {
+        max-width: 100%;
+    }
+
+    .coffeeshop-logo {
+        font-style: bold;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        color: #0B132A;
+    }
+/* 
+    .coffeeshop-footer-text {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .footer-list-item>p {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .footer-list-header {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+    } */
+
+    .footer-flex-container{
+        flex-direction: column-reverse;
+    }
+
+    .footer-list {
+        flex-direction: column;
+    }
+
+    .footer-flex-item, .footer-flex-item-right{
+        width: 90%;
+        padding-right: 20px;
+    }
+
+    .footer-list-item-right-title{
+        width: 40%;
+    }
+
+    .footer-flex-item-right{
+        display: flex;
+        justify-content: space-between;
+    }
+}

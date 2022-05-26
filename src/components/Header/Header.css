@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Rubik:wght@300;400;500;700&display=swap');
+
+.logo-pict{
+    width: 30px;
+}
+
+.custom-nav-container {
+    height: 100px;
+    align-items: center;
+    padding: 0% 7.5%;
+}
+
+.coffeeshop-logo {
+    font-style: bold;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #0B132A;
+}
+
+.custom-nav-list li {
+    display: inline;
+    margin: 0px 5%;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #4F5665;
+}
+
+.custom-active-nav {
+    text-decoration: none;
+    color: #6A4029;
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.custom-inactive-nav {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    text-decoration: none;
+    color: #4F5665;
+}
+
+.custom-nav-list a:hover {
+    text-decoration: none;
+    color: #6A4029;
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.custom-nav-icon {
+    align-items: center;
+}
+
+.custom-active-nav {
+    text-decoration: none;
+    color: #6A4029;
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.custom-login-button {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #0B132A;
+    align-items: center;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.custom-login-button a {
+    text-decoration: none;
+    color: #0B132A;
+}
+
+.custom-signup-button {
+    width: 150px;
+    height: 45px;
+
+    background: #FFBA33;
+    border-radius: 50px;
+
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #6A4029;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.custom-signup-button a {
+    text-decoration: none;
+    color: #6A4029;
+}
+
+.custom-signup-button:hover {
+    background-color: #fcaf16;
+}
+
+.custom-signup-button:active {
+    background-color: #FFBA33;
+}

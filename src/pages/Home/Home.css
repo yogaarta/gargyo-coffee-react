@@ -1,0 +1,781 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Rubik:wght@300;400;500;700&display=swap');
+
+.custom-banner {
+    background-image: url(https://s3-alpha-sig.figma.com/img/57c5/d504/de26c540ca74fd712a0e636cd4cdc0fb?Expires=1653868800&Signature=cTZ~9zwCoKudajIaxGlcqgRGGTqOKEi1wXNuWjeoRm09oixJh8E4AWOl5t3HbywsfrY84tSf0FSR5mPZvt~KQhpcFkpnE7etlS1Nqv1wpHlca1DWdsRg~TGhvrEmnDknljFlT1-aROMmWnMr975jywBy6iE2Xo6qbmNDkwJzcG8zVJCfoxNRDHKx3O8Qs3HNTooPeyoMa7q9Xw5QNvsy7VWoFTQ6PvMYdn9Im6J~YfrQwf5Q4CclV3SiEplbn8IvLmGqEltLkDnE3-xWJhx1Ogx-Yw0rGlw2t09yHUghOuxLSaPwr1fcBd0E6TF8PFFIVovs3cQwpwWAXG-hiSubtQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
+    height: 100%;
+
+    background-size: cover;
+    background-position: 50% 60%;
+    padding-bottom: 50px;
+}
+
+.custom-banner-left {
+    margin: 7% 7.5%
+}
+
+.custom-banner-left h2 {
+    font-family: Rubik;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 70px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #FFFFFF;
+}
+
+.custom-banner-left p {
+    font-family: Rubik;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-top: 20px;
+
+    color: #FFFFFF;
+}
+
+
+.custom-get-started-button {
+    width: 250px;
+    height: 60px;
+    margin-top: 40px;
+
+    background: #FFBA33;
+    border-radius: 10px;
+
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #6A4029;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.custom-get-started-button:hover {
+    background-color: #fcaf16;
+}
+
+.custom-get-started-button:active {
+    background-color: #FFBA33;
+}
+
+.custom-banner-right {
+    margin: 0 7.5%;
+    padding: 0;
+}
+
+.custom-search {
+    width: 50%;
+    height: 60px;
+    margin-top: 35px;
+    margin-right: 15%;
+    float: right;
+
+    background: #EFEEEE;
+    border-radius: 30px;
+
+    font-family: Poppins;
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+
+    display: flex;
+    align-items: center;
+
+}
+
+.custom-search-img {
+    padding-left: 10%;
+    padding-right: 2.5%;
+}
+
+.custom-search-img img {
+    width: 18px;
+    height: 18px;
+}
+
+.custom-search-text {
+    font-family: Poppins;
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+    opacity: 0.5;
+
+}
+
+input:active,
+input:focus {
+    outline: none;
+    background: #EFEEEE;
+}
+
+input#search {
+
+    border: none;
+    background: #EFEEEE;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 50px;
+    width: 100%;
+    height: 60px;
+
+    margin-top: 30px;
+    /* or 250% */
+    color: #000000;
+    border-radius: 30px;
+}
+
+.custom-store-info {
+    width: 80%;
+    height: 150px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: -60px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+}
+
+.custom-vector-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.custom-store-info-box {
+    border-left: 2px solid #EEEFF2;
+    border-right: 2px solid #EEEFF2;
+    height: 70%;
+    align-self: center;
+}
+
+
+.custom-vector {
+    width: 55px;
+    height: 55px;
+    background: #FFBA33;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.custom-vector img {
+    width: 50%;
+    height: 50%;
+}
+
+.person-vector {
+    height: 18px;
+    width: 16.8px;
+}
+
+.loc-vector {
+    height: 20px;
+    width: 14px;
+}
+
+.love-vector {
+    height: 23px;
+    width: 27px;
+}
+
+.custom-store-info-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.custom-store-info-number {
+    font-family: Rubik;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.custom-store-info-obj {
+    font-family: Rubik;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.custom-teamwork {
+    margin-top: 100px;
+}
+
+.custom-teamwork-left {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.teamwork-pict{
+    width: 80%;
+}
+
+.custom-teamwork-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.custom-teamwork-header {
+    font-family: Rubik;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 50px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #0B132A;
+
+}
+
+.custom-teamwork-paragraph {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #4F5665;
+}
+
+.custom-teamwork-list {
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+    color: #4F5665;
+}
+
+.custom-favorite {
+    background-color: #F8F8F8;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 7.5%;
+    padding-right: 7.5%;
+}
+
+.custom-favorite-title {
+    font-family: Rubik;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 50px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
+.custom-favorite-paragraph {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+
+    margin-bottom: 80px;
+
+}
+
+.custom-favorite-menu-card {
+    width: 330px;
+    height: 720px;
+    padding-top: 50px;
+    margin: 0px 25px;
+
+    background: #FFFFFF;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.custom-favorite-menu-card-selected {
+    width: 330px;
+    height: 720px;
+    padding-top: 50px;
+    margin: 0px 25px;
+
+    background: #FFFFFF;
+    border: 2px solid #6A4029;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.custom-favorite-picture {
+    margin-bottom: 40px;
+}
+
+.hazelnut-latte-pict {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    object-position: 110% 90%
+}
+
+.pinky-promise-pict {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    object-position: 0% 35%
+}
+
+.chicken-wings-pict {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    object-position: 0% 60%
+}
+
+.custom-favorite-name {
+    font-family: Rubik;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #0B132A;
+
+    margin-bottom: 30px;
+
+}
+
+.custom-favorite-list {
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #4F5665;
+
+    height: 330px;
+
+}
+
+.custom-favorite-price {
+    font-family: Rubik;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #0B132A;
+
+}
+
+.custom-favorite-button {
+    margin-top: 20px;
+    width: 80%;
+    height: 45px;
+
+    border: 2px solid #FFBA33;
+    border-radius: 50px;
+
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #6A4029;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.custom-favorite-button:hover {
+    background-color: #fcaf16;
+}
+
+.custom-favorite-button:active {
+    background-color: #FFBA33;
+}
+
+.custom-favorite-button-selected {
+    margin-top: 20px;
+    width: 80%;
+    height: 45px;
+
+    background: #FFBA33;
+    border-radius: 50px;
+
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #6A4029;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.custom-favorite-button-selected:hover {
+    background-color: #fcaf16;
+}
+
+.custom-favorite-button-selected:active {
+    background-color: #FFBA33;
+}
+
+
+.custom-store-loc {
+    background-color: #FFFFFF;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 7.5%;
+    padding-right: 7.5%;
+}
+
+.custom-store-loc-title {
+    font-family: Rubik;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 50px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
+.custom-store-loc-paragraph {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+
+    margin-bottom: 80px;
+}
+
+.custom-store-map {
+    display: flex;
+    justify-content: center;
+}
+
+.custom-main-title {
+    font-family: Rubik;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 50px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
+.custom-partner-logo {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    padding-left: 7.5%;
+    padding-right: 7.5%;
+}
+
+.custom-partner-logo-reddit{
+    width: 200px;
+}
+
+.custom-partner-logo-netflix {
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.custom-partner-logo-amazon {
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.custom-partner-logo-discord{
+    width: 200px;
+}
+
+.custom-partner-logo-spotify{
+    width: 200px;
+}
+
+.custom-partner-logo-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-testimony-title {
+    font-family: Rubik;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 50px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
+.custom-testimony-paragraph {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+
+    margin-bottom: 80px;
+}
+
+.custom-review {
+    padding-left: 7.5%;
+    margin-bottom: 100px;
+}
+
+.custom-review-card-selected {
+    width: 400px;
+    min-height: 250px;
+    padding: 30px;
+    margin: 50px 1.5%;
+
+    background: #FFFFFF;
+    border: 2px solid #6A4029;
+    border-radius: 10px;
+}
+
+.custom-review-card {
+    width: 400px;
+    min-height: 250px;
+    padding: 30px;
+    margin: 50px 1.5%;
+
+    background: #FFFFFF;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+}
+
+.custom-review-profpict-viezh {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.custom-review-name {
+    font-family: Rubik;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #0B132A;
+
+}
+
+.custom-review-from {
+    font-family: Rubik;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #4F5665;
+
+}
+
+.custom-review-rating {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #0B132A;
+}
+
+.custom-review-testimony {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.custom-long-container {
+    align-items: center;
+}
+
+.custom-long {
+    width: 30px;
+    height: 10px;
+    background-color: #6A4029;
+    border-radius: 15%;
+
+}
+
+.custom-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #DDE0E4;
+    border-radius: 50%;
+
+}
+
+.custom-leftarrow {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #6A4029;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-rightarrow {
+    width: 60px;
+    height: 60px;
+    background-color: #6A4029;
+    border: 2px solid #6A4029;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-promo {
+    width: 80%;
+    height: 230px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: -100px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    padding: 2.5px 2.5%;
+    position: relative;
+    z-index: 1;
+}
+
+.custom-promo-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.custom-promo-title-head {
+    font-family: Rubik;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 45px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.custom-promo-title-paragraph {
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.custom-see-promo-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-see-promo-button {
+    width: 100%;
+    height: 45px;
+
+    background: #FFBA33;
+    border-radius: 10px;
+
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #6A4029;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.custom-see-promo-button:hover {
+    background-color: #fcaf16;
+}
+
+.custom-see-promo-button:active {
+    background-color: #FFBA33;
+}
