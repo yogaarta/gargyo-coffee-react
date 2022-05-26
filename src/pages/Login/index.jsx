@@ -13,7 +13,7 @@ export default class Login extends Component {
         return (
             <div>
                 <div class="global-container">
-        <aside>
+        <aside className="signup-aside">
             <div class="aside-pict"></div>
         </aside>
         <div class="main-content">

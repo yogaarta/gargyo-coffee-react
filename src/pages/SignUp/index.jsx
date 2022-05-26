@@ -13,7 +13,7 @@ export default class SignUp extends Component {
         return (
             <div>
                 <div className="global-container">
-                    <aside>
+                    <aside className='signup-aside'>
                         <div className="aside-pict"></div>
                     </aside>
                     <div className="main-content">

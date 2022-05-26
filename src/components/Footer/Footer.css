@@ -9,11 +9,11 @@ footer {
     padding-top: 100px;
 }
 
-.footer-container {
+.main-footer-container {
     margin: 7.5%;
 }
 
-.coffeeshop-footer-text {
+.coffeeshop-main-footer-text {
     font-family: Rubik;
     font-size: 16px;
     font-weight: 500;
@@ -37,7 +37,12 @@ footer {
 
 }
 
-.footer-list-header {
+.main-footer-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.main-footer-list-header {
     font-family: Rubik;
     font-size: 18px;
     font-weight: 500;
@@ -47,7 +52,7 @@ footer {
 
 }
 
-.footer-list-item {
+.main-footer-list-item {
     font-family: Rubik;
     font-size: 16px;
     font-weight: 400;

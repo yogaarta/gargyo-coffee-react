@@ -10,6 +10,7 @@ import Home from "./pages/Home"
 import SignUp from "./pages/SignUp"
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import Product from "./pages/Product";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/product" element={<Product />} />
         {/* <Route path="/auth" element={<Auth />} />
       <Route path="/profile/:id" element={<Profile />} />
       <Route

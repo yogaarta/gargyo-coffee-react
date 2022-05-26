@@ -16,8 +16,8 @@ export default class Header extends Component {
             </div>
             <div className="custom-nav-list col-6">
                 <ul>
-                    <li><a href="index.html" className="custom-active-nav">Home</a></li>
-                    <li><a href="product.html" className="custom-inactive-nav ">Product</a></li>
+                    <li><a href="/" className="custom-active-nav">Home</a></li>
+                    <li><a href="/product" className="custom-inactive-nav ">Product</a></li>
                     <li>Your Cart</li>
                     <li>History</li>
                 </ul>
