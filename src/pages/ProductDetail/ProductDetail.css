@@ -237,7 +237,22 @@
     line-height: 45px;
     letter-spacing: 0em;
     text-align: center;
+    cursor: pointer;
 
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+
+}
+
+.pd-size-vector:hover {
+    background-color: #fcaf16;
+}
+
+.pd-size-vector:active {
+    background-color: #FFBA33;
 }
 
 .pd-delivery-container {
@@ -348,6 +363,13 @@
     border-bottom: 1px solid #9F9F9F
 }
 
+.pd-settime input:active,
+.pd-settime input:focus {
+    border: none;
+    border-bottom: 1px solid #000000;
+    outline: none;
+}
+
 .pd-checkout-container {
     z-index: 1;
     display: flex;
@@ -442,6 +464,13 @@
     line-height: 38px;
     letter-spacing: 0em;
     text-align: center;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
 
 }
 
@@ -460,6 +489,13 @@
     line-height: 38px;
     letter-spacing: 0em;
     text-align: center;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
 
 }
 
