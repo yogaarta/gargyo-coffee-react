@@ -62,10 +62,10 @@ export default class ProductDetail extends Component {
                                     <div className="pd-delivery-door-button">Door Delivery</div>
                                     <div className="pd-delivery-pickup-button">Pick up</div>
                                 </div>
-                                <div className="pd-settime">
+                                <form className="pd-settime">
                                     <label htmlFor="settime">Set time:</label>
                                     <input type="text" name="settime" id="settime" placeholder="Enter the time you'll arrived" />
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </section>
