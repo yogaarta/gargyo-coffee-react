@@ -11,6 +11,8 @@ import SignUp from "./pages/SignUp"
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
+import Forgot from "./pages/Forgot";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/product" element={<Product />} />
+        <Route path="/product/detail" element={<ProductDetail />} />
+        <Route path="/forgot" element={<Forgot />} />
         {/* <Route path="/auth" element={<Auth />} />
       <Route path="/profile/:id" element={<Profile />} />
       <Route

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 // import img
 import Logo from "../../assets/img/coffee logo.png"
 import Google from "../../assets/img/google logo.png"
@@ -33,7 +34,7 @@ export default class Login extends Component {
                         <input type="text" name="email" id="email" placeholder="Enter your email address" className='signup-input'/>
                         <label for="password">Password:</label>
                         <input type="password" name="password" id="password" placeholder="Enter your password" className='signup-input'/>
-                        <p class="forgot">Forgot Password?</p>
+                        <Link to={"/forgot"}><p class="forgot">Forgot Password?</p></Link>
                         <div class="signup">Login</div>
                     </form>
                     <button class="google-button"><img src={Google} alt="google-logo"

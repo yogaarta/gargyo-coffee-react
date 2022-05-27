@@ -1,8 +1,8 @@
-.coffee-pict{
+.coffee-pict {
     width: 30px;
 }
 
-.google-pict{
+.google-pict {
     width: 27px;
 }
 
@@ -10,10 +10,10 @@
     display: flex;
 }
 
-.signup-aside {
+.forgot-aside {
     flex: 1;
     border: 5px;
-    background-image: url(https://s3-alpha-sig.figma.com/img/94cf/d4df/dd22d129a5bbab44da4da62471dafa2a?Expires=1654473600&Signature=AV5Zrm2ThXQF2Cr7xokmGjGGpwaKBzHwvmN2Fnx3p7r3hA2wYw2Kyj~M8JSQSwkGTABX2bzIlX2tMeKfNRZ9yKwD-theqc80k7DQoOsAFZVnplNpx1dShp9QMr3HGzctc~uM2cBHbcd6Y~7fNSB5YQVsP9SF0eqLi40KYx8hoDNXZ77IazD26clm-jzoDaZYeF-7fjOKo3cDxbNEuq0rBrpSvIXP76v6ub6qxwB6lRcpy6yLkNFe~RgZBfnJcsEkd5tNtJQN-M3HDqdZSZ-xMio75j-SbE9Nrazx7Q3gnMFfuRJSRkMPHDIPSUyAp7BxZZNJ9kXrdRMBc0w3GilEjA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
+    background-image: url(https://s3-alpha-sig.figma.com/img/245d/3c2d/d9b99b0f8bb8ff1c5992ab8bd7684491?Expires=1654473600&Signature=eisO3DYa2TxLCA7KetEpnA4MUFMhCfqHXZ2jVwUd6Eyt59rhPl6vgGE~is09dzsk7OYx~XyLWmqJ-mEGddWp3RDTUnMybtXeh6-P0cOHBFYEcRAt-bZni-HIE74YWMVvBt7S8e0CuHiwi6LMbVfK4RbcaPWOgdqE3Vz4WqTlkiIoGTAnE~zM37woSDgyqXexaWyALKBzszIaryoQV2OEpZVsrLyWZ83dKPMu9BKqcrKdHYMuj1YbS~3Mjs8g~ALuLJHA41~WKBjfii6axepcNVWg9HyKD4FI-rcvrg0DhYDtYq1djX5TQXovLDtFLrKmv0tiOQ8oQpqIRF9PytCP-A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
     background-size: cover;
     width: 50%;
     background-position: 50% 50%;
@@ -24,15 +24,15 @@
     max-width: 720px;
 }
 
-.main-content {
+.forgot-main-content {
     flex: 1;
     max-width: 50%;
 }
 
-.header-container {
+.forgot-header-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     height: 70px;
     margin-top: 5%;
     margin-left: 15%;
@@ -64,6 +64,36 @@
     padding-right: 15%;
 }
 
+.forgot-title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+    margin-bottom: 50px;
+}
+
+.forgot-title {
+
+    font-family: Poppins;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 78px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
+.forgot-paragraph {
+    font-family: Poppins;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 41px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
 .flex-form-container {
     display: flex;
     flex-direction: column;
@@ -81,9 +111,7 @@ form {
 .signup-input {
     width: 100%;
     height: 75px;
-    left: 810px;
-    top: 238px;
-    margin-top: 15px;
+    margin-top: 30px;
     margin-bottom: 30px;
     border: 1px solid #4F5665;
     border-radius: 20px;
@@ -114,7 +142,7 @@ form {
     border-color: #FFBA33;
     border-radius: 20px;
     box-shadow: 0px 6px 20px rgba(255, 186, 51, 0.4);
-    margin: 25px 0px;
+    margin: 50px 0px;
     font-family: 'Rubik';
     font-style: normal;
     display: flex;
@@ -164,7 +192,7 @@ form {
     line-height: 26px;
 }
 
-.have-account-container {
+.resend-container {
     display: flex;
     column-gap: 10px;
     align-items: center;
@@ -172,13 +200,15 @@ form {
     width: 100%;
 }
 
-.have-account-text {
-    flex: 2;
-    margin-top: 16px;
-    font-size: 16px;
+.resend-text {
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 400;
     line-height: 30px;
+    letter-spacing: 0em;
     text-align: center;
-    color: #9F9F9F
+    margin: 0px;
+
 }
 
 .underline {
@@ -188,16 +218,15 @@ form {
     ;
 }
 
-.login-button {
+.resend-button {
     width: 100%;
     height: 75px;
-    left: 810px;
-    top: 751px;
 
     background: #6A4029;
     box-shadow: 0px 6px 20px rgba(106, 64, 41, 0.63);
     border-radius: 20px;
     border-color: #6A4029;
+    margin-top: 50px;
     margin-bottom: 80px;
     color: #FFFFFF;
     display: flex;
@@ -216,16 +245,16 @@ form {
     -o-user-select: none;
 }
 
-.login-button a{
+.resend-button a {
     text-decoration: none;
     color: #FFFFFF;
 }
 
-.login-button:hover {
+.resend-button:hover {
     background-color: #552d17;
 }
 
-.login-button:active {
+.resend-button:active {
     background-color: #6A4029;
 }
 
@@ -245,7 +274,8 @@ footer {
     justify-content: space-between;
 }
 
-.footer-flex-item, .footer-flex-item-right {
+.footer-flex-item,
+.footer-flex-item-right {
     flex: 1;
     margin: 50px 0px;
     width: 40%;
@@ -299,7 +329,7 @@ footer {
     color: #0B132A;
 }
 
-.footer-list-item-right-title{
+.footer-list-item-right-title {
     margin-top: 15px;
 }
 
@@ -309,18 +339,17 @@ footer {
         flex-direction: column;
     }
 
-    .signup-aside {
-        background-image: url(https://s3-alpha-sig.figma.com/img/94cf/d4df/dd22d129a5bbab44da4da62471dafa2a?Expires=1654473600&Signature=AV5Zrm2ThXQF2Cr7xokmGjGGpwaKBzHwvmN2Fnx3p7r3hA2wYw2Kyj~M8JSQSwkGTABX2bzIlX2tMeKfNRZ9yKwD-theqc80k7DQoOsAFZVnplNpx1dShp9QMr3HGzctc~uM2cBHbcd6Y~7fNSB5YQVsP9SF0eqLi40KYx8hoDNXZ77IazD26clm-jzoDaZYeF-7fjOKo3cDxbNEuq0rBrpSvIXP76v6ub6qxwB6lRcpy6yLkNFe~RgZBfnJcsEkd5tNtJQN-M3HDqdZSZ-xMio75j-SbE9Nrazx7Q3gnMFfuRJSRkMPHDIPSUyAp7BxZZNJ9kXrdRMBc0w3GilEjA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
+    .forgot-aside {
         background-size: cover;
         width: 100%;
     }
 
-    .aside-pict {
+    .aside-forgot-pict {
         width: 100%;
         min-height: 180px;
     }
 
-    .main-content {
+    .forgot-main-content {
         max-width: 100%;
     }
 
@@ -331,7 +360,8 @@ footer {
         line-height: 24px;
         color: #0B132A;
     }
-/* 
+
+    /* 
     .coffeeshop-footer-text {
         font-weight: 500;
         font-size: 12px;
@@ -350,7 +380,7 @@ footer {
         line-height: 20px;
     } */
 
-    .footer-flex-container{
+    .footer-flex-container {
         flex-direction: column-reverse;
     }
 
@@ -358,16 +388,17 @@ footer {
         flex-direction: column;
     }
 
-    .footer-flex-item, .footer-flex-item-right{
+    .footer-flex-item,
+    .footer-flex-item-right {
         width: 90%;
         padding-right: 20px;
     }
 
-    .footer-list-item-right-title{
+    .footer-list-item-right-title {
         width: 40%;
     }
 
-    .footer-flex-item-right{
+    .footer-flex-item-right {
         display: flex;
         justify-content: space-between;
     }
