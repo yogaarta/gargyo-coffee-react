@@ -1,4 +1,4 @@
-.custom-promo-img{
+.custom-promo-img {
     width: 70px;
 }
 
@@ -216,8 +216,8 @@
 }
 
 .custom-product-card {
-    max-width: 160px;
-    height: 200px;
+    max-width: 150px;
+    min-height: 200px;
 
     background: #FFFFFF;
     box-shadow: 0px 30px 60px rgba(57, 57, 57, 0.1);
@@ -227,7 +227,7 @@
 .custom-product-promo {
     z-index: 1;
     position: absolute;
-    margin-top: -13px;
+    margin-top: 20px;
     margin-left: 110px;
 
     width: 50px;
@@ -242,13 +242,11 @@
     line-height: 38px;
     letter-spacing: 0em;
     text-align: center;
-
-
 }
 
 .custom-product-name {
     font-family: Poppins;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 900;
     line-height: 22px;
     letter-spacing: 0em;
@@ -258,6 +256,22 @@
 
 }
 
+.custom-card-img-container {
+    max-width: 150px;
+    min-height: 150px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-img-top {
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
 .card-img-top,
 .custom-product-info {
     margin-top: -40px;
@@ -265,7 +279,7 @@
 
 .custom-product-price {
     font-family: Poppins;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 26px;
     letter-spacing: 0em;
@@ -282,4 +296,29 @@
     text-align: left;
 
     color: #6A4029;
+}
+
+@media (max-width:840px) {
+    .custom-main-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .custom-promo-column {
+        width: 100%;
+    }
+
+    .custom-main-product-column {
+        width: 100%;
+    }
+
+
+}
+
+@media (max-width: 500px) {
+    .custom-product-nav a {
+        font-size: 14px;
+    }
 }

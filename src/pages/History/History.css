@@ -41,7 +41,21 @@
     letter-spacing: 0em;
     text-align: right;
     text-decoration-line: underline;
+    cursor: pointer;
 
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.h-select-all:hover {
+    color: #e9e6e6;
+}
+
+.h-select-all:active {
+    color: #FFFFFF;
 }
 
 .h-product-card {

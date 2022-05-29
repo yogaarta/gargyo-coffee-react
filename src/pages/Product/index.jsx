@@ -1,30 +1,15 @@
 import React, { Component } from 'react'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
+import { Routes, Route, Link } from 'react-router-dom'
 
-import axios from 'axios'
 import "./Product.css"
+import ProductsFavorite from '../../components/Product/ProductsFavorite'
+import ProductsAll from '../../components/Product/ProductAll'
+
+// import ColdBrew from "../../assets/img/coldbrew.png"
 
 export default class Product extends Component {
-    constructor() {
-        super();
-        this.state = {
-            product: [],
-        };
-    }
-
-    componentDidMount() {
-        axios
-            .get('http://localhost:8080/products')
-            .then(result => {
-                this.setState({
-                    product: result.data.data,
-                });
-                console.log(result)
-            }).catch(error => {
-                console.log(error)
-            })
-    }
     render() {
         return (
             <div>
@@ -83,29 +68,37 @@ export default class Product extends Component {
                         <nav className="custom-product-nav">
                             <ul className="row">
                                 <li className="col-3">
-                                    <a href="#a" className="custom-product-nav-active">Favorite & Promo</a>
+                                    <Link to='/product/favorite' className="custom-product-nav-inactive">Favorite & Promo</Link>
                                 </li>
                                 <li className="col">
-                                    <a href="#a" className="custom-product-nav-inactive">Coffee</a>
+                                    <Link to='/product/favorite' className="custom-product-nav-inactive">Coffee</Link>
                                 </li>
                                 <li className="col">
-                                    <a href="#a" className="custom-product-nav-inactive">Non Coffee</a>
+                                    <Link to='/product/favorite' className="custom-product-nav-inactive">Non Coffee</Link>
                                 </li>
                                 <li className="col">
-                                    <a href="#a" className="custom-product-nav-inactive">Foods</a>
+                                    <Link to='/product/favorite' className="custom-product-nav-inactive">Foods</Link>
                                 </li>
                                 <li className="col">
-                                    <a href="#a" className="custom-product-nav-inactive">Add-on</a>
+                                    <Link to='/product/favorite' className="custom-product-nav-inactive">Add-on</Link>
                                 </li>
                             </ul>
                         </nav>
                         <div className="custom-food-container">
-                            <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
-                                {this.state.product.map((product) => (
+                            <Routes>
+                                <Route path="/" element={<ProductsAll />} />
+                                <Route path="/favorite" element={<ProductsFavorite />} />
+                            </Routes>
+                            {/* <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
+                                { this.state.product.length === 0 ? <div>DATA NOT FOUND</div> : 
+                                this.state.product.map((product) => (
                                     <div className="col custom-product-card-container">
                                         <div className="card custom-product-card">
+                                            <div className="custom-card-img-container">
                                             <img key={product.picture} src={`http:localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
-                                            <div className="custom-product-promo">10%</div>
+
+                                            </div>
+                                            <div className="custom-product-promo">0%</div>
                                             <div className="card-body custom-product-info">
                                                 <h5 key={product.name} className="card-title custom-product-name">{product.name}</h5>
                                                 <p key={product.price} className="card-text custom-product-price">IDR. {product.price}</p>
@@ -113,7 +106,8 @@ export default class Product extends Component {
                                         </div>
                                     </div>
                                 ))}
-                            </div>
+                                
+                            </div> */}
                             <div className="custom-notes">*the price has been cutted by discount appears</div>
                         </div>
                     </main>

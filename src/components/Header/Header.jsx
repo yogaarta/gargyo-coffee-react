@@ -16,15 +16,15 @@ export default class Header extends Component {
             </div>
             <div className="custom-nav-list col-6">
                 <ul>
-                    <li><a href="/" className="custom-active-nav">Home</a></li>
-                    <li><a href="/product" className="custom-inactive-nav ">Product</a></li>
-                    <li>Your Cart</li>
-                    <li>History</li>
+                    <li><Link to="/" className="custom-inactive-nav">Home</Link></li>
+                    <li><Link to="/product" className="custom-inactive-nav">Product</Link></li>
+                    <li><Link to="#" className="custom-inactive-nav">Your Cart</Link></li>
+                    <li><Link to="#" className="custom-inactive-nav">History</Link></li>
                 </ul>
             </div>
             <div className="custom-nav-icon col-3 row">
-                <div className="col custom-login-button"><a href="/login">Login</a></div>
-                <div className="col custom-signup-button"><Link to="/signup"> Sign Up</Link></div>
+                <div className="col custom-login-button"><Link to="/login">Login</Link></div>
+                <div className="col custom-signup-button"><Link to="/signup">Sign Up</Link></div>
             </div>
         </nav>
     </header>

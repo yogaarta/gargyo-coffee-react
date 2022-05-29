@@ -7,21 +7,23 @@ import Twitter from "../../assets/img/twitter vector.png"
 import Instagram from "../../assets/img/ig vector.png"
 
 import "./Signup.css"
-// import axios from 'axios'
+import axios from 'axios'
 
 export default class SignUp extends Component {
-    state = {
-        email: "",
-        pass: "",
-        mobile_number: "",
-        isPasswordShown: false,
-        isError: false,
-        errorMsg: ""
+    constructor() {
+        super();
+        this.state = {
+            email: "",
+            pass: "",
+            mobile_number: "",
+            isPasswordShown: false,
+            isError: false,
+            errorMsg: ""
+        };
     };
 
+
     render() {
-        // const userInfo = JSON.parse(localStorage.getItem("newuserinfo"));
-        // console.log(userInfo.token);
         return (
             <div>
                 <div className="global-container">
@@ -42,46 +44,51 @@ export default class SignUp extends Component {
                             <div className="main-container">
                                 <form className="flex-form-container">
                                     <label htmlFor="email">Email Address:</label>
-                                    <input type="text" name="email" id="email" placeholder="Enter your email address" className='signup-input' 
-                                    // onChange={e => {
-                                    //     this.setState({
-                                    //         email: e.target.value,
-                                    //     })
-                                    // }} 
+                                    <input type="text" name="email" id="email" placeholder="Enter your email address" className='signup-input'
+                                        value={this.state.email}
+                                        onChange={e => {
+                                            this.setState({
+                                                email: e.target.value,
+                                            })
+                                        }}
                                     />
                                     <label htmlFor="password">Password:</label>
                                     <input type="password" name="password" id="password" placeholder="Enter your password" className='signup-input'
-                                        // onChange={e => {
-                                        //     this.setState({
-                                        //         pass: e.target.value
-                                        //     })
-                                        // }} 
-                                        />
+                                        value={this.state.pass}
+                                        onChange={e => {
+                                            this.setState({
+                                                pass: e.target.value
+                                            })
+                                        }}
+                                    />
                                     <label htmlFor="phone">Phone Number:</label>
                                     <input type="text" name="phone" id="phone" placeholder="Enter your phone number" className='signup-input'
-                                        // onChange={e => {
-                                        //     this.setState({
-                                        //         mobile_number: e.target.value
-                                        //     })
-                                        // }} 
-                                        />
+                                        value={this.state.mobile_number}
+                                        onChange={e => {
+                                            this.setState({
+                                                mobile_number: e.target.value
+                                            })
+                                        }}
+                                    />
 
                                     {/* {this.state.isError ? <p>{this.state.errorMsg}</p> : <></>} */}
 
                                     <div className="signup"
-                                        // onClick={() => {
-                                        //     const { email, pass, mobile_number } = this.state;
-                                        //     const body = { email, pass, mobile_number };
-                                        //     axios
-                                        //         .post("http://localhost:8080/auth/new", body)
-                                        //         .then(result => {
-                                        //             console.log(result);
-                                        //         })
-                                        //         .catch(error => {
-                                        //             console.log(error)
-                                        //         })
-                                        // }
-                                        // }
+                                        onClick={() => {
+                                            const { email, pass, mobile_number } = this.state;
+                                            const body = { email, pass, mobile_number };
+                                            axios
+                                                .post("http://localhost:8080/auth/new", body)
+                                                .then(result => {
+                                                    console.log(result)
+                                                    alert(result.data.data.msg)
+                                                })
+                                                .catch(error => {
+                                                    console.log(error)
+                                                    alert(error.response.data.msg)
+                                                })
+                                        }
+                                        }
                                     >Sign Up</div>
                                 </form>
                                 <button className="google-button"><img src={Google} alt="google-logo"
