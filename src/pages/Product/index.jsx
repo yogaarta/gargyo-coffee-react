@@ -125,9 +125,6 @@ export default class Product extends Component {
                 isFood: false
             })
         }
-
-
-
     }
 
     render() {

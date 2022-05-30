@@ -1,7 +1,17 @@
+<div style="display: flex;
+    justify-content: center;
+    align-items: center;">
+
 # GARGYO COFFEE SHOP
+
+</div>
+<div style="display: flex;
+    justify-content: center;
+    align-items: center;">
 
 ![coffee](src/assets/img/coffee%20logo.png)
 
+</div>
 
 ## BUILT WITH
 
@@ -29,7 +39,17 @@
 
 3. Open menu **Terminal > New Terminal** or press **ctrl+shift+`** 
 
-4. 
+4. On terminal, change directory to **gargyo-coffee-react** then run 
+    ```
+    npm start
+    ```
+
+5. Open another terminal, change directory to **gargyo-coffee** then run
+    ```
+    npm run startDev
+    ```
+
+6. Enjoy the app!
 
 ## PREVIEW
 <div style="display:flex, flex-direction: column" >

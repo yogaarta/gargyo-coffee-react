@@ -21,6 +21,9 @@ export default class Profile extends Component {
             display_name: "",
             first_name: "",
             last_name: "",
+            address: "",
+            birthday: "",
+            gender: "",
             isUpdated: false
         }
     }
@@ -59,9 +62,9 @@ export default class Profile extends Component {
                     console.log(error)
                 })
 
-                this.setState({
-                    isUpdated: false
-                })
+            this.setState({
+                isUpdated: false
+            })
         }
     }
     render() {
@@ -89,8 +92,8 @@ export default class Profile extends Component {
                             <div className="save-change-text">Do you want to save the change?</div>
                             <div className="save-change-button"
                                 onClick={() => {
-                                    const { email, mobile_number, display_name, first_name, last_name } = this.state;
-                                    const body = { email, mobile_number, display_name, first_name, last_name };
+                                    const { email, mobile_number, display_name, first_name, last_name, address, birthday, gender } = this.state;
+                                    const body = { email, mobile_number, display_name, first_name, last_name, address, birthday, gender };
                                     const { token } = JSON.parse(localStorage.getItem("user-info"))
                                     const config = { headers: { Authorization: `Bearer ${token}` } }
                                     axios
@@ -127,8 +130,8 @@ export default class Profile extends Component {
                                 <div className="form-row">
                                     <div className="label-input">
                                         <label for="email">Email Address:</label>
-                                        <input type="text" name="email" id="email" placeholder="Enter email address" className="input-left profile-input"
-                                            // value={this.state.profile.email}
+                                        <input type="text" name="email" id="email" className="input-left profile-input"
+                                            placeholder={this.state.profile.email ? this.state.profile.email : "Enter email address"}
                                             onChange={(e) => {
                                                 this.setState({
                                                     email: e.target.value
@@ -138,8 +141,9 @@ export default class Profile extends Component {
                                     </div>
                                     <div className="label-input">
                                         <label for="phone">Mobile number:</label>
-                                        <input type="text" name="phone" id="phone" placeholder="Enter number" className="input-right profile-input"
+                                        <input type="text" name="phone" id="phone" className="input-right profile-input"
                                             // value={this.state.profile.mobile_number}
+                                            placeholder={this.state.profile.mobile_number ? this.state.profile.mobile_number : "Enter number"}
                                             onChange={(e) => {
                                                 this.setState({
                                                     mobile_number: e.target.value
@@ -150,8 +154,15 @@ export default class Profile extends Component {
                                 </div>
                                 <div className="label-input">
                                     <label for="address">Delivery Address:</label>
-                                    <input type="text" name="address" id="address" placeholder="Enter delivery address"
-                                        className="input-left profile-input" />
+                                    <input type="text" name="address" id="address"
+                                        className="input-left profile-input"
+                                        placeholder={this.state.profile.address ? this.state.profile.address : "Enter delivery address"}
+                                        onChange={(e) => {
+                                            this.setState({
+                                                address: e.target.value
+                                            })
+                                        }}
+                                    />
                                 </div>
                                 <div>
                                     <h4 className="form-title">Details</h4>
@@ -159,9 +170,9 @@ export default class Profile extends Component {
                                 <div className="form-row">
                                     <div className="label-input">
                                         <label for="display-name">Display Name:</label>
-                                        <input type="text" name="display-name" id="display-name" placeholder="Enter display name"
-                                            className="input-left profile-input"
+                                        <input type="text" name="display-name" id="display-name" className="input-left profile-input"
                                             // value={this.state.profile.display_name}
+                                            placeholder={this.state.profile.display_name ? this.state.profile.display_name : "Enter display name"}
                                             onChange={(e) => {
                                                 this.setState({
                                                     display_name: e.target.value
@@ -170,15 +181,22 @@ export default class Profile extends Component {
                                         />
                                     </div>
                                     <div className="label-input">
-                                        <label for="date">DD/MM/YY</label>
-                                        <input type="date" name="date" id="date" placeholder="Enter birth date" className="input-right profile-input" />
+                                        <label for="date">Birthday</label>
+                                        <input type="date" name="date" id="date" className="input-right profile-input"
+                                            placeholder={this.state.profile.birthday ? this.state.profile.birthday : "Enter birth date"}
+                                            onChange={(e) => {
+                                                this.setState({
+                                                    birthday: e.target.value
+                                                })
+                                            }}
+                                        />
                                     </div>
                                 </div>
                                 <div className="label-input">
                                     <label for="first-name">First Name:</label>
-                                    <input type="text" name="first-name" id="first-name" placeholder="Enter first name"
-                                        className="input-left profile-input"
-                                        value={this.state.profile.first_name}
+                                    <input type="text" name="first-name" id="first-name" className="input-left profile-input"
+                                        placeholder={this.state.profile.first_name ? this.state.profile.first_name : "Enter first name"}
+                                        // value={this.state.profile.first_name}
                                         onChange={(e) => {
                                             this.setState({
                                                 first_name: e.target.value
@@ -188,8 +206,8 @@ export default class Profile extends Component {
                                 </div>
                                 <div className="label-input">
                                     <label for="last-name">Last Name:</label>
-                                    <input type="text" name="last-name" id="last-name" placeholder="Enter last name"
-                                        className="input-left profile-input"
+                                    <input type="text" name="last-name" id="last-name" className="input-left profile-input"
+                                        placeholder={this.state.profile.last_name ? this.state.profile.last_name : "Enter last name"}
                                         // value={this.state.profile.last_name}
                                         onChange={(e) => {
                                             this.setState({
@@ -200,11 +218,23 @@ export default class Profile extends Component {
                                 </div>
                                 <div className="malefemale">
                                     <label className="radio-container">Male
-                                        <input type="radio" name="radio" />
+                                        <input type="radio" name="radio"
+                                            onChange={() => {
+                                                this.setState({
+                                                    gender: "male"
+                                                })
+                                            }}
+                                        />
                                         <span className="checkmark"></span>
                                     </label>
                                     <label className="radio-container">Female
-                                        <input type="radio" name="radio" />
+                                        <input type="radio" name="radio" 
+                                        onChange={() => {
+                                            this.setState({
+                                                gender: "female"
+                                            })
+                                        }}
+                                        />
                                         <span className="checkmark"></span>
                                     </label>
                                 </div>
