@@ -20,7 +20,8 @@ export default class Profile extends Component {
             mobile_number: "",
             display_name: "",
             first_name: "",
-            last_name: ""
+            last_name: "",
+            isUpdated: false
         }
     }
 
@@ -39,6 +40,29 @@ export default class Profile extends Component {
             .catch(error => {
                 console.log(error)
             })
+    }
+
+    componentDidUpdate() {
+        if (this.state.isUpdated) {
+            const { token } = JSON.parse(localStorage.getItem("user-info"))
+
+            const config = { headers: { Authorization: `Bearer ${token}` } }
+            axios
+                .get('http://localhost:8080/users', config)
+                .then(result => {
+                    console.log(result.data.data[0])
+                    this.setState({
+                        profile: result.data.data[0]
+                    })
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+
+                this.setState({
+                    isUpdated: false
+                })
+        }
     }
     render() {
         if (this.state.isLoggedIn === false) {
@@ -71,11 +95,14 @@ export default class Profile extends Component {
                                     const config = { headers: { Authorization: `Bearer ${token}` } }
                                     axios
                                         .patch('http://localhost:8080/users', body, config)
-                                        .then(result=>{
+                                        .then(result => {
                                             console.log(result)
                                             alert(result.data.msg)
+                                            this.setState({
+                                                isUpdated: true
+                                            })
                                         })
-                                        .catch(error=>{
+                                        .catch(error => {
                                             console.log(error)
                                         })
                                 }}
@@ -101,7 +128,7 @@ export default class Profile extends Component {
                                     <div className="label-input">
                                         <label for="email">Email Address:</label>
                                         <input type="text" name="email" id="email" placeholder="Enter email address" className="input-left profile-input"
-                                            value={this.state.profile.email}
+                                            // value={this.state.profile.email}
                                             onChange={(e) => {
                                                 this.setState({
                                                     email: e.target.value
@@ -112,7 +139,7 @@ export default class Profile extends Component {
                                     <div className="label-input">
                                         <label for="phone">Mobile number:</label>
                                         <input type="text" name="phone" id="phone" placeholder="Enter number" className="input-right profile-input"
-                                            value={this.state.profile.mobile_number}
+                                            // value={this.state.profile.mobile_number}
                                             onChange={(e) => {
                                                 this.setState({
                                                     mobile_number: e.target.value
@@ -134,7 +161,7 @@ export default class Profile extends Component {
                                         <label for="display-name">Display Name:</label>
                                         <input type="text" name="display-name" id="display-name" placeholder="Enter display name"
                                             className="input-left profile-input"
-                                            value={this.state.profile.display_name}
+                                            // value={this.state.profile.display_name}
                                             onChange={(e) => {
                                                 this.setState({
                                                     display_name: e.target.value
@@ -163,7 +190,7 @@ export default class Profile extends Component {
                                     <label for="last-name">Last Name:</label>
                                     <input type="text" name="last-name" id="last-name" placeholder="Enter last name"
                                         className="input-left profile-input"
-                                        value={this.state.profile.last_name}
+                                        // value={this.state.profile.last_name}
                                         onChange={(e) => {
                                             this.setState({
                                                 last_name: e.target.value

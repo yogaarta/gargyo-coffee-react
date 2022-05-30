@@ -27,8 +27,8 @@ export default class Header extends Component {
                         <ul>
                             <li><Link to="/" className="custom-inactive-nav">Home</Link></li>
                             <li><Link to="/product" className="custom-inactive-nav">Product</Link></li>
-                            <li><Link to="#" className="custom-inactive-nav">Your Cart</Link></li>
-                            <li><Link to="#" className="custom-inactive-nav">History</Link></li>
+                            <li><Link to="/payment" className="custom-inactive-nav">Your Cart</Link></li>
+                            <li><Link to="/history" className="custom-inactive-nav">History</Link></li>
                         </ul>
                     </div>
                     {this.state.isLoggedIn ?

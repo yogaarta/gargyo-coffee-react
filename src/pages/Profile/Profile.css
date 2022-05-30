@@ -24,7 +24,7 @@
     display: flex;
     background: #F8F8F8;
     border-radius: 20px;
-    height: 951px;
+    min-height: 951px;
     width: 80%;
     align-self: center;
     padding: 50px 40px 50px 0px
@@ -55,7 +55,7 @@
 }
 
 .choose-button {
-    width: 207px;
+    width: 80%;
     height: 44px;
     margin: 5px 0;
 
@@ -89,7 +89,7 @@
 }
 
 .remove-button {
-    width: 207px;
+    width: 80%;
     height: 44px;
     margin: 5px 0;
 
@@ -123,7 +123,7 @@
 }
 
 .editpass-button {
-    width: 207px;
+    width: 80%;
     height: 60px;
     margin-top: 30px;
 
@@ -172,7 +172,7 @@
 }
 
 .save-change-button {
-    width: 207px;
+    width: 80%;
     height: 60px;
     margin: 10px 0;
 
@@ -207,7 +207,7 @@
 }
 
 .cancel-change-button {
-    width: 207px;
+    width: 80%;
     height: 60px;
     margin: 10px 0;
 
@@ -243,7 +243,7 @@
 }
 
 .logout-button {
-    width: 207px;
+    width: 80%;
     height: 60px;
     margin: 30px 0;
 
@@ -268,6 +268,11 @@
     -ms-user-select: none;
     user-select: none;
     -o-user-select: none;
+}
+
+.logout-button a{
+    text-decoration: none;
+    color: #6A4029
 }
 
 .logout-button:hover {
@@ -434,4 +439,70 @@ label {
 /* Show the indicator (dot/circle) when checked */
 .radio-container input:checked~.checkmark:after {
     display: block;
+}
+
+@media (max-width: 1000px) {
+    .choose-button, .logout-button, .save-change-button, .cancel-change-button, .remove-button,
+    .editpass-button {
+        width: 80%
+    }
+
+    .profile-picture{
+        width: 150px;
+        height: 150px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .input-right{
+        width: 300px;
+    }
+}
+
+@media (max-width: 720px) {
+    .main-card{
+        flex-direction: column;
+        height: 100%;
+        padding: 5%;
+    }
+    
+    .input-left, .input-right{
+        width: 80%;
+    }
+
+    .footer-flex-item-right{
+        flex-direction: column;
+    }
+
+    .coffeeshop-logo {
+        font-style: bold;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        color: #0B132A;
+    }
+
+    .coffeeshop-footer-text {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .footer-list-item>p {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .footer-list-header {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .nav-list ul{
+        flex-direction: column;
+    }
 }

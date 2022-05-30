@@ -2,14 +2,14 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
-import { Routes, Route, Link } from 'react-router-dom'
+// import { Routes, Route, Link } from 'react-router-dom'
 
 
 import "./Product.css"
-import ProductsFavorite from '../../components/Product/ProductsFavorite'
-import ProductsAll from '../../components/Product/ProductAll'
-import ProductsCoffee from '../../components/Product/ProductCoffee'
-import ProductsNonCoffee from '../../components/Product/ProductNonCoffee'
+// import ProductsFavorite from '../../components/Product/ProductsFavorite'
+// import ProductsAll from '../../components/Product/ProductAll'
+// import ProductsCoffee from '../../components/Product/ProductCoffee'
+// import ProductsNonCoffee from '../../components/Product/ProductNonCoffee'
 
 // import ColdBrew from "../../assets/img/coldbrew.png"
 
@@ -18,7 +18,12 @@ export default class Product extends Component {
         super();
         this.state = {
             product: [],
-            isFavorite: false
+            isFavorite: false,
+            isCoffee: false,
+            isNonCoffee: false,
+            isFood: false,
+            isAll: false
+
         };
     }
 
@@ -35,6 +40,95 @@ export default class Product extends Component {
             })
     }
 
+    componentDidUpdate() {
+        // let url= "http://localhost:8080/products"
+        if (this.state.isAll) {
+            axios
+                .get("http://localhost:8080/products")
+                .then(result => {
+                    this.setState({
+                        product: result.data.data,
+                    });
+                    console.log(result)
+                }).catch(error => {
+                    console.log(error)
+                })
+
+            this.setState({
+                isAll: false
+            })
+        }
+        if (this.state.isFavorite) {
+            axios
+                .get("http://localhost:8080/products/favorite")
+                .then(result => {
+                    this.setState({
+                        product: result.data.data,
+                    });
+                    console.log(result)
+                }).catch(error => {
+                    console.log(error)
+                })
+
+            this.setState({
+                isFavorite: false
+            })
+        }
+
+        if (this.state.isCoffee) {
+            axios
+                .get("http://localhost:8080/products?category=coffee")
+                .then(result => {
+                    this.setState({
+                        product: result.data.data,
+                    });
+                    console.log(result)
+                }).catch(error => {
+                    console.log(error)
+                })
+
+            this.setState({
+                isCoffee: false
+            })
+        }
+
+        if (this.state.isNonCoffee) {
+            axios
+                .get("http://localhost:8080/products?category=noncoffee")
+                .then(result => {
+                    this.setState({
+                        product: result.data.data,
+                    });
+                    console.log(result)
+                }).catch(error => {
+                    console.log(error)
+                })
+
+            this.setState({
+                isNonCoffee: false
+            })
+        }
+
+        if (this.state.isFood) {
+            axios
+                .get("http://localhost:8080/products?category=food")
+                .then(result => {
+                    this.setState({
+                        product: result.data.data,
+                    });
+                    console.log(result)
+                }).catch(error => {
+                    console.log(error)
+                })
+
+            this.setState({
+                isFood: false
+            })
+        }
+
+
+
+    }
 
     render() {
         return (
@@ -94,70 +188,60 @@ export default class Product extends Component {
                         <nav className="custom-product-nav">
                             <ul className="row">
                                 <li className="col-2">
-                                    <Link to='/product/favorite' className="custom-product-nav-inactive">Favorite & Promo</Link>
-                                </li>
-                                <li className="col">
-                                    <Link to='/product/coffee' className="custom-product-nav-inactive">Coffee</Link>
-                                </li>
-                                <li className="col">
-                                    <Link to='/product/noncoffee' className="custom-product-nav-inactive">Non Coffee</Link>
-                                </li>
-                                <li className="col">
-                                    <Link to='#' className="custom-product-nav-inactive">Foods</Link>
-                                </li>
-                                <li className="col">
-                                    <Link to='#' className="custom-product-nav-inactive">Add-on</Link>
-                                </li>
-
-                                {/* <li className="col-2">
                                     <div className="custom-product-nav-inactive"
                                         onClick={() => {
-                                            axios
-                                                .get('http://localhost:8080/products/favorite')
-                                                .then(result => {
-                                                    this.setState({
-                                                        product: result.data.data,
-                                                    });
-                                                    console.log(result)
-                                                }).catch(error => {
-                                                    console.log(error)
-                                                })
+                                            this.setState({
+                                                isFavorite: true,
+                                            })
                                         }}
                                     >Favorite & Promo</div>
                                 </li>
                                 <li className="col">
-                                    <div className="custom-product-nav-inactive">Coffee</div>
+                                    <div className="custom-product-nav-inactive"
+                                        onClick={() => {
+                                            this.setState({
+                                                isCoffee: true,
+                                            })
+                                        }}
+                                    >Coffee</div>
                                 </li>
                                 <li className="col">
-                                    <div className="custom-product-nav-inactive">Non Coffee</div>
+                                    <div className="custom-product-nav-inactive"
+                                        onClick={() => {
+                                            this.setState({
+                                                isNonCoffee: true,
+                                            })
+                                        }}
+                                    >Non Coffee</div>
                                 </li>
                                 <li className="col">
-                                    <div className="custom-product-nav-inactive">Foods</div>
+                                    <div className="custom-product-nav-inactive"
+                                        onClick={() => {
+                                            this.setState({
+                                                isFood: true,
+                                            })
+                                        }}
+                                    >Foods</div>
                                 </li>
                                 <li className="col">
-                                    <div className="custom-product-nav-inactive">Add-on</div>
-                                </li> */}
-
+                                    <div className="custom-product-nav-inactive"
+                                        onClick={() => {
+                                            this.setState({
+                                                isAll: true,
+                                            })
+                                        }}
+                                    >All</div>
+                                </li>
                             </ul>
                         </nav>
                         <div className="custom-food-container">
-
-                            <Routes>
-                                <Route path="/" element={<ProductsAll />} />
-                                <Route path="/favorite" element={<ProductsFavorite />} />
-                                <Route path="/coffee" element={<ProductsCoffee />} />
-                                <Route path="/noncoffee" element={<ProductsNonCoffee />} />
-                            </Routes>
-
-
-                            {/* <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
+                            <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
                                 {this.state.product.length === 0 ? <div>DATA NOT FOUND</div> :
                                     this.state.product.map((product) => (
                                         <div className="col custom-product-card-container">
                                             <div className="card custom-product-card">
                                                 <div className="custom-card-img-container">
                                                     <img key={product.picture} src={`http:localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
-
                                                 </div>
                                                 <div className="custom-product-promo">0%</div>
                                                 <div className="card-body custom-product-info">
@@ -167,8 +251,7 @@ export default class Product extends Component {
                                             </div>
                                         </div>
                                     ))}
-
-                            </div> */}
+                            </div>
                             <div className="custom-notes">*the price has been cutted by discount appears</div>
                         </div>
                     </main>
