@@ -18,6 +18,10 @@ import RightArrow from "../../assets/img/Vectorrightarrow.png"
 import Star from "../../assets/img/Vectorstar.png"
 
 export default class Home extends Component {
+    componentDidMount(){
+        document.title="Gargyo Coffee"
+    }
+
     render() {
         return (
             <div>

@@ -23,6 +23,9 @@ export default class Login extends Component {
             isLoggedin: false
         };
     };
+    componentDidMount(){
+        document.title="Login"
+    }
 
 
 

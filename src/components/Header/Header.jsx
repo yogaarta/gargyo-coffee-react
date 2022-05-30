@@ -9,10 +9,12 @@ import ChatLogo from "../../assets/img/chat logo.png"
 import MiniPict from "../../assets/img/profile photo.png"
 
 export default class Header extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            isLoggedIn: localStorage.getItem("user-info") ? true : false
+            isLoggedIn: localStorage.getItem("user-info") ? true : false,
+            isSearch: true,
+            setSearchName: props
         }
     }
     render() {
@@ -33,8 +35,28 @@ export default class Header extends Component {
                     </div>
                     {this.state.isLoggedIn ?
                         <div className="custom-nav-icon col-3 row">
-                            <div className="col">
-                                <img src={MagnGlass} alt="magnifying-glass" className='magn-glass' />
+                            <div className="col header-search-container">
+                                { this.state.isSearch ? 
+
+                                    <img src={MagnGlass} alt="magnifying-glass" className='magn-glass'
+                                    onClick={() => {
+                                        this.setState({
+                                            isSearch: false
+                                        })
+                                    }}
+                                    />
+                                :
+                                <input type="text" id="header-search" name="search" className='header-search' placeholder="Search" 
+                                // onKeyUp={(e)=>{
+                                //     if(e.key === 'Enter'){
+                                //         console.log(this.state.searchName)
+                                //     }
+                                // }} onChange={e=>{
+                                //     this.props.setSearchName(e.target.value)
+                                // }}
+                                />
+                                }
+
                             </div>
                             <div className="col">
                                 <img src={ChatLogo} alt="chat-logo" className='chat-logo' />

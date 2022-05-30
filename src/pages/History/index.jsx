@@ -6,10 +6,13 @@ import 'react-bootstrap'
 import './History.css'
 
 // import img
-import Coldbrew from "../../assets/img/coldbrew.png"
+import Coldbrew from "../../assets/img/tomatomix.png"
 
 
 export default class History extends Component {
+    componentDidMount(){
+        document.title="History"
+    }
     render() {
         return (
             <div>

@@ -27,7 +27,7 @@
 ![postgreSQL](https://img.shields.io/badge/postgreSQL-14-blue)
 
 
-## HOW TO INSTALL
+## HOW TO USE
 1. Clone this 2 repository.
     ```
     $ git clone https://github.com/yogaarta/gargyo-coffee-react.git
@@ -58,5 +58,5 @@
 <img src="src/assets/img/profile.PNG" style="width: 600px">
 </div>
 
-## RELATED PROJECT
+## BACKEND
 [gargyo-coffee-backend](https://github.com/yogaarta/gargyo_coffee.git)

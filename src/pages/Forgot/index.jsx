@@ -8,6 +8,9 @@ import Instagram from "../../assets/img/ig vector.png"
 import "./Forgot.css"
 
 export default class Forgot extends Component {
+    componentDidMount() {
+        document.title = "Forgot Password"
+    }
     render() {
         return (
             <div>

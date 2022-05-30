@@ -22,12 +22,22 @@ export default class Product extends Component {
             isCoffee: false,
             isNonCoffee: false,
             isFood: false,
-            isAll: false
+            isAll: false,
+            sort: "",
+            order: "asc",
+            searchName: "",
 
         };
     }
 
+    // setSearchName = (props) => {
+    //     this.setState({
+    //         searchName: props
+    //     })
+    // }
+
     componentDidMount() {
+        document.title = "Product"
         axios
             .get('http://localhost:8080/products')
             .then(result => {
@@ -41,10 +51,22 @@ export default class Product extends Component {
     }
 
     componentDidUpdate() {
-        // let url= "http://localhost:8080/products"
         if (this.state.isAll) {
+            let url = "http://localhost:8080/products"
+            if(this.state.sort === "name"){
+                url += `?sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "category"){
+                url += `?sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "price"){
+                url += `?sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "release"){
+                url += `?sort=${this.state.sort}&order=${this.state.order}`
+            }
             axios
-                .get("http://localhost:8080/products")
+                .get(url)
                 .then(result => {
                     this.setState({
                         product: result.data.data,
@@ -59,8 +81,21 @@ export default class Product extends Component {
             })
         }
         if (this.state.isFavorite) {
+            let url = "http://localhost:8080/products/favorite"
+            if(this.state.sort === "name"){
+                url += `?sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "category"){
+                url += `?sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "price"){
+                url += `?sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "release"){
+                url += `?sort=${this.state.sort}&order=${this.state.order}`
+            }
             axios
-                .get("http://localhost:8080/products/favorite")
+                .get(url)
                 .then(result => {
                     this.setState({
                         product: result.data.data,
@@ -76,8 +111,21 @@ export default class Product extends Component {
         }
 
         if (this.state.isCoffee) {
+            let url = "http://localhost:8080/products?category=coffee"
+            if(this.state.sort === "name"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "category"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "price"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "release"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
             axios
-                .get("http://localhost:8080/products?category=coffee")
+                .get(url)
                 .then(result => {
                     this.setState({
                         product: result.data.data,
@@ -93,8 +141,21 @@ export default class Product extends Component {
         }
 
         if (this.state.isNonCoffee) {
+            let url = "http://localhost:8080/products?category=noncoffee"
+            if(this.state.sort === "name"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "category"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "price"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "release"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
             axios
-                .get("http://localhost:8080/products?category=noncoffee")
+                .get(url)
                 .then(result => {
                     this.setState({
                         product: result.data.data,
@@ -110,13 +171,25 @@ export default class Product extends Component {
         }
 
         if (this.state.isFood) {
+            let url = "http://localhost:8080/products?category=food"
+            if(this.state.sort === "name"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "category"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "price"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
+            if(this.state.sort === "release"){
+                url += `&sort=${this.state.sort}&order=${this.state.order}`
+            }
             axios
-                .get("http://localhost:8080/products?category=food")
+                .get(url)
                 .then(result => {
                     this.setState({
                         product: result.data.data,
                     });
-                    console.log(result)
                 }).catch(error => {
                     console.log(error)
                 })
@@ -125,6 +198,22 @@ export default class Product extends Component {
                 isFood: false
             })
         }
+
+        // if(this.state.searchName !== ''){
+        //     axios
+        //         .get(`http://localhost:8080/products?name=${this.state.searchName}`)
+        //         .then(result=>{
+        //             this.setState({
+        //                 product: result.data.data
+        //             })
+        //             this.setState({
+        //                 searchName: ''
+        //             })
+        //         })
+        //         .catch(error=>{
+        //             console.log(error)
+        //         })
+        // }
     }
 
     render() {
@@ -230,6 +319,33 @@ export default class Product extends Component {
                                     >All</div>
                                 </li>
                             </ul>
+                            <div className='dropdown-sort'>
+                                <label htmlFor="sort-product">Sort by: </label>
+                                <select name="sort-product" id="sort-product"
+                                    onClick={(e) => {
+                                        this.setState({
+                                            sort: e.target.value
+                                        })
+                                    }}
+                                >
+                                    <option value="name"
+
+                                    >Name</option>
+                                    <option value="category">Category</option>
+                                    <option value="price">Price</option>
+                                    <option value="createdat">Release</option>
+                                </select>
+                                <select name="order-product" id="order-product"
+                                    onClick={(e) => {
+                                        this.setState({
+                                            order: e.target.value
+                                        })
+                                    }}
+                                >
+                                    <option value="asc">asc</option>
+                                    <option value="desc">desc</option>
+                                </select>
+                            </div>
                         </nav>
                         <div className="custom-food-container">
                             <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
@@ -238,7 +354,7 @@ export default class Product extends Component {
                                         <div className="col custom-product-card-container">
                                             <div className="card custom-product-card">
                                                 <div className="custom-card-img-container">
-                                                    <img key={product.picture} src={`http:localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
+                                                    <img key={product.picture} src={`http://localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
                                                 </div>
                                                 <div className="custom-product-promo">0%</div>
                                                 <div className="card-body custom-product-info">

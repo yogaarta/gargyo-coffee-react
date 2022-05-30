@@ -29,13 +29,14 @@ export default class Profile extends Component {
     }
 
     componentDidMount() {
+        document.title="Profile"
         const { token } = JSON.parse(localStorage.getItem("user-info"))
 
         const config = { headers: { Authorization: `Bearer ${token}` } }
         axios
             .get('http://localhost:8080/users', config)
             .then(result => {
-                console.log(result.data.data[0])
+                console.log(result.data.data)
                 this.setState({
                     profile: result.data.data[0]
                 })

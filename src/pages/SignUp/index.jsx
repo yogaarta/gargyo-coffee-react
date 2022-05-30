@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 // import img
 import Logo from "../../assets/img/coffee logo.png"
 import Google from "../../assets/img/google logo.png"
@@ -17,14 +17,20 @@ export default class SignUp extends Component {
             email: "",
             pass: "",
             mobile_number: "",
-            isPasswordShown: false,
             isError: false,
-            errorMsg: ""
+            errorMsg: "",
+            isRegistered: false
         };
     };
 
+    componentDidMount() {
+        document.title = "Sign Up"
+    }
 
     render() {
+        if (this.state.isRegistered === true) {
+            return <Navigate to="/login" />
+        }
         return (
             <div>
                 <div className="global-container">
@@ -83,11 +89,14 @@ export default class SignUp extends Component {
                                                 .then(result => {
                                                     console.log(result.data.data)
                                                     alert(result.data.data.msg)
-                                                    
+                                                    this.setState({
+                                                        isRegistered: true
+                                                    })
+
                                                 })
                                                 .catch(error => {
                                                     console.log(error.response)
-                                                    // alert(error.response.data.msg)
+
                                                     this.setState({
                                                         isError: true,
                                                         errorMsg: `${error.response.data.msg}`

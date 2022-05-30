@@ -11,6 +11,9 @@ import Bank from "../../assets/img/bank.png"
 import Cod from "../../assets/img/cod.png"
 
 export default class Payment extends Component {
+    componentDidMount(){
+        document.title="Cart"
+    }
     render() {
         return (
             <div>
