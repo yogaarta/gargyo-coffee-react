@@ -157,7 +157,7 @@
     font-family: 'Rubik';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 24px;
     text-align: center;
     /* identical to box height */
@@ -179,7 +179,7 @@
 
 .custom-product-nav-inactive {
     font-family: Rubik;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0em;
@@ -191,7 +191,7 @@
 
 .custom-product-nav a:hover {
     font-family: Rubik;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 24px;
     letter-spacing: 0em;
@@ -201,6 +201,19 @@
     border-bottom: 3px solid #6A4029;
 
 }
+
+/* .custom-product-nav-inactive:hover {
+    font-family: Rubik;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    text-decoration: none;
+    color: #6A4029;
+    border-bottom: 3px solid #6A4029;
+
+} */
 
 .custom-food-container {
     padding: 50px 5%;

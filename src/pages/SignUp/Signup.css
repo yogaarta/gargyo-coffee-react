@@ -109,6 +109,11 @@ form {
     cursor: pointer;
 }
 
+.signup-error{
+    font-size: 16px;
+    text-align: center;
+}
+
 .signup {
     background: #FFBA33;
     border-color: #FFBA33;

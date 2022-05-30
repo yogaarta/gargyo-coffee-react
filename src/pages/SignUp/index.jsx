@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 // import img
 import Logo from "../../assets/img/coffee logo.png"
 import Google from "../../assets/img/google logo.png"
@@ -71,7 +72,7 @@ export default class SignUp extends Component {
                                         }}
                                     />
 
-                                    {/* {this.state.isError ? <p>{this.state.errorMsg}</p> : <></>} */}
+                                    {this.state.isError ? <div className='signup-error'>{this.state.errorMsg}</div> : <></>}
 
                                     <div className="signup"
                                         onClick={() => {
@@ -80,12 +81,17 @@ export default class SignUp extends Component {
                                             axios
                                                 .post("http://localhost:8080/auth/new", body)
                                                 .then(result => {
-                                                    console.log(result)
+                                                    console.log(result.data.data)
                                                     alert(result.data.data.msg)
+                                                    
                                                 })
                                                 .catch(error => {
-                                                    console.log(error)
-                                                    alert(error.response.data.msg)
+                                                    console.log(error.response)
+                                                    // alert(error.response.data.msg)
+                                                    this.setState({
+                                                        isError: true,
+                                                        errorMsg: `${error.response.data.msg}`
+                                                    })
                                                 })
                                         }
                                         }
@@ -98,7 +104,7 @@ export default class SignUp extends Component {
                                     <p className="have-account-text">Already have an account?</p>
                                     <div className="underline"></div>
                                 </div>
-                                <div className="login-button"><a href="/login">Login Here</a></div>
+                                <div className="login-button"><Link to="/login">Login Here</Link></div>
                             </div>
                         </main>
                         <footer>

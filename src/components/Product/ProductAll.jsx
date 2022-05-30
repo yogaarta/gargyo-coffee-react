@@ -8,6 +8,7 @@ export default class ProductsAll extends Component {
         super();
         this.state = {
             product: [],
+            category: ""
         };
     }
 

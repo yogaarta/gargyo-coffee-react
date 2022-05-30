@@ -1,15 +1,41 @@
+import axios from 'axios'
 import React, { Component } from 'react'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import { Routes, Route, Link } from 'react-router-dom'
 
+
 import "./Product.css"
 import ProductsFavorite from '../../components/Product/ProductsFavorite'
 import ProductsAll from '../../components/Product/ProductAll'
+import ProductsCoffee from '../../components/Product/ProductCoffee'
+import ProductsNonCoffee from '../../components/Product/ProductNonCoffee'
 
 // import ColdBrew from "../../assets/img/coldbrew.png"
 
 export default class Product extends Component {
+    constructor() {
+        super();
+        this.state = {
+            product: [],
+            isFavorite: false
+        };
+    }
+
+    componentDidMount() {
+        axios
+            .get('http://localhost:8080/products')
+            .then(result => {
+                this.setState({
+                    product: result.data.data,
+                });
+                console.log(result)
+            }).catch(error => {
+                console.log(error)
+            })
+    }
+
+
     render() {
         return (
             <div>
@@ -67,46 +93,81 @@ export default class Product extends Component {
                     <main className="col-8 custom-main-product-column">
                         <nav className="custom-product-nav">
                             <ul className="row">
-                                <li className="col-3">
+                                <li className="col-2">
                                     <Link to='/product/favorite' className="custom-product-nav-inactive">Favorite & Promo</Link>
                                 </li>
                                 <li className="col">
-                                    <Link to='/product/favorite' className="custom-product-nav-inactive">Coffee</Link>
+                                    <Link to='/product/coffee' className="custom-product-nav-inactive">Coffee</Link>
                                 </li>
                                 <li className="col">
-                                    <Link to='/product/favorite' className="custom-product-nav-inactive">Non Coffee</Link>
+                                    <Link to='/product/noncoffee' className="custom-product-nav-inactive">Non Coffee</Link>
                                 </li>
                                 <li className="col">
-                                    <Link to='/product/favorite' className="custom-product-nav-inactive">Foods</Link>
+                                    <Link to='#' className="custom-product-nav-inactive">Foods</Link>
                                 </li>
                                 <li className="col">
-                                    <Link to='/product/favorite' className="custom-product-nav-inactive">Add-on</Link>
+                                    <Link to='#' className="custom-product-nav-inactive">Add-on</Link>
                                 </li>
+
+                                {/* <li className="col-2">
+                                    <div className="custom-product-nav-inactive"
+                                        onClick={() => {
+                                            axios
+                                                .get('http://localhost:8080/products/favorite')
+                                                .then(result => {
+                                                    this.setState({
+                                                        product: result.data.data,
+                                                    });
+                                                    console.log(result)
+                                                }).catch(error => {
+                                                    console.log(error)
+                                                })
+                                        }}
+                                    >Favorite & Promo</div>
+                                </li>
+                                <li className="col">
+                                    <div className="custom-product-nav-inactive">Coffee</div>
+                                </li>
+                                <li className="col">
+                                    <div className="custom-product-nav-inactive">Non Coffee</div>
+                                </li>
+                                <li className="col">
+                                    <div className="custom-product-nav-inactive">Foods</div>
+                                </li>
+                                <li className="col">
+                                    <div className="custom-product-nav-inactive">Add-on</div>
+                                </li> */}
+
                             </ul>
                         </nav>
                         <div className="custom-food-container">
+
                             <Routes>
                                 <Route path="/" element={<ProductsAll />} />
                                 <Route path="/favorite" element={<ProductsFavorite />} />
+                                <Route path="/coffee" element={<ProductsCoffee />} />
+                                <Route path="/noncoffee" element={<ProductsNonCoffee />} />
                             </Routes>
-                            {/* <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
-                                { this.state.product.length === 0 ? <div>DATA NOT FOUND</div> : 
-                                this.state.product.map((product) => (
-                                    <div className="col custom-product-card-container">
-                                        <div className="card custom-product-card">
-                                            <div className="custom-card-img-container">
-                                            <img key={product.picture} src={`http:localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
 
-                                            </div>
-                                            <div className="custom-product-promo">0%</div>
-                                            <div className="card-body custom-product-info">
-                                                <h5 key={product.name} className="card-title custom-product-name">{product.name}</h5>
-                                                <p key={product.price} className="card-text custom-product-price">IDR. {product.price}</p>
+
+                            {/* <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
+                                {this.state.product.length === 0 ? <div>DATA NOT FOUND</div> :
+                                    this.state.product.map((product) => (
+                                        <div className="col custom-product-card-container">
+                                            <div className="card custom-product-card">
+                                                <div className="custom-card-img-container">
+                                                    <img key={product.picture} src={`http:localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
+
+                                                </div>
+                                                <div className="custom-product-promo">0%</div>
+                                                <div className="card-body custom-product-info">
+                                                    <h5 key={product.name} className="card-title custom-product-name">{product.name}</h5>
+                                                    <p key={product.price} className="card-text custom-product-price">IDR. {product.price}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
-                                
+                                    ))}
+
                             </div> */}
                             <div className="custom-notes">*the price has been cutted by discount appears</div>
                         </div>

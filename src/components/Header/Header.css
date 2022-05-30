@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Rubik:wght@300;400;500;700&display=swap');
 
-.logo-pict{
+.logo-pict {
     width: 30px;
 }
 
@@ -143,4 +143,19 @@
 
 .custom-signup-button:active {
     background-color: #FFBA33;
+}
+
+.magn-glass,
+.chat-logo {
+    width: 30px;
+}
+
+.mini-photo {
+    filter: drop-shadow(0px 3px 20px rgba(106, 64, 41, 0.8));
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border: 2px solid #6A4029;
+    border-radius: 50%;
+    object-position: 100% 20%;
 }

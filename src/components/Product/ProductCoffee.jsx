@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 
-export default class ProductsFavorite extends Component {
+export default class ProductsCoffee extends Component {
     constructor() {
         super();
         this.state = {
@@ -13,7 +13,7 @@ export default class ProductsFavorite extends Component {
 
     componentDidMount() {
         axios
-            .get('http://localhost:8080/products/favorite')
+            .get('http://localhost:8080/products?category=coffee')
             .then(result => {
                 this.setState({
                     product: result.data.data,
