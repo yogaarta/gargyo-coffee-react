@@ -53,9 +53,12 @@
 
 ## PREVIEW
 <div style="display:flex, flex-direction: column" >
+
 <img src="src/assets/img/homepage.png" style="width: 600px">
 <img src="src/assets/img/login.PNG" style="width: 600px">
-<img src="src/assets/img/profile.PNG" style="width: 600px">
+<img src="src/assets/img/profile-page.PNG" style="width: 600px">
+<img src="src/assets/img/product-page.PNG" style="width: 600px">
+
 </div>
 
 ## BACKEND

@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
+import { Link } from 'react-router-dom'
 // import { Routes, Route, Link } from 'react-router-dom'
 
 
@@ -53,16 +54,16 @@ export default class Product extends Component {
     componentDidUpdate() {
         if (this.state.isAll) {
             let url = "http://localhost:8080/products"
-            if(this.state.sort === "name"){
+            if (this.state.sort === "name") {
                 url += `?sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "category"){
+            if (this.state.sort === "category") {
                 url += `?sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "price"){
+            if (this.state.sort === "price") {
                 url += `?sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "release"){
+            if (this.state.sort === "release") {
                 url += `?sort=${this.state.sort}&order=${this.state.order}`
             }
             axios
@@ -71,7 +72,7 @@ export default class Product extends Component {
                     this.setState({
                         product: result.data.data,
                     });
-                    console.log(result)
+                    
                 }).catch(error => {
                     console.log(error)
                 })
@@ -82,16 +83,16 @@ export default class Product extends Component {
         }
         if (this.state.isFavorite) {
             let url = "http://localhost:8080/products/favorite"
-            if(this.state.sort === "name"){
+            if (this.state.sort === "name") {
                 url += `?sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "category"){
+            if (this.state.sort === "category") {
                 url += `?sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "price"){
+            if (this.state.sort === "price") {
                 url += `?sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "release"){
+            if (this.state.sort === "release") {
                 url += `?sort=${this.state.sort}&order=${this.state.order}`
             }
             axios
@@ -100,7 +101,7 @@ export default class Product extends Component {
                     this.setState({
                         product: result.data.data,
                     });
-                    console.log(result)
+                    
                 }).catch(error => {
                     console.log(error)
                 })
@@ -112,16 +113,16 @@ export default class Product extends Component {
 
         if (this.state.isCoffee) {
             let url = "http://localhost:8080/products?category=coffee"
-            if(this.state.sort === "name"){
+            if (this.state.sort === "name") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "category"){
+            if (this.state.sort === "category") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "price"){
+            if (this.state.sort === "price") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "release"){
+            if (this.state.sort === "release") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
             axios
@@ -130,7 +131,7 @@ export default class Product extends Component {
                     this.setState({
                         product: result.data.data,
                     });
-                    console.log(result)
+                    
                 }).catch(error => {
                     console.log(error)
                 })
@@ -142,16 +143,16 @@ export default class Product extends Component {
 
         if (this.state.isNonCoffee) {
             let url = "http://localhost:8080/products?category=noncoffee"
-            if(this.state.sort === "name"){
+            if (this.state.sort === "name") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "category"){
+            if (this.state.sort === "category") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "price"){
+            if (this.state.sort === "price") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "release"){
+            if (this.state.sort === "release") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
             axios
@@ -160,7 +161,7 @@ export default class Product extends Component {
                     this.setState({
                         product: result.data.data,
                     });
-                    console.log(result)
+                    
                 }).catch(error => {
                     console.log(error)
                 })
@@ -172,16 +173,16 @@ export default class Product extends Component {
 
         if (this.state.isFood) {
             let url = "http://localhost:8080/products?category=food"
-            if(this.state.sort === "name"){
+            if (this.state.sort === "name") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "category"){
+            if (this.state.sort === "category") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "price"){
+            if (this.state.sort === "price") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
-            if(this.state.sort === "release"){
+            if (this.state.sort === "release") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
             }
             axios
@@ -354,7 +355,9 @@ export default class Product extends Component {
                                         <div className="col custom-product-card-container">
                                             <div className="card custom-product-card">
                                                 <div className="custom-card-img-container">
-                                                    <img key={product.picture} src={`http://localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
+                                                    <Link to="/product/detail">
+                                                        <img key={product.picture} src={`http://localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
+                                                    </Link>
                                                 </div>
                                                 <div className="custom-product-promo">0%</div>
                                                 <div className="card-body custom-product-info">
