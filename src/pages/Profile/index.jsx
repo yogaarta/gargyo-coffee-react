@@ -16,6 +16,7 @@ export default class Profile extends Component {
         this.state = {
             isLoggedIn: localStorage.getItem("user-info") ? true : false,
             profile: [],
+            getBirthday: "",
             email: "",
             mobile_number: "",
             display_name: "",
@@ -24,26 +25,37 @@ export default class Profile extends Component {
             address: "",
             birthday: "",
             gender: "",
-            isUpdated: false
+            isUpdated: false,
+            isEdit: false
         }
     }
 
     componentDidMount() {
-        document.title="Profile"
+        document.title = "Profile"
         const { token } = JSON.parse(localStorage.getItem("user-info"))
 
         const config = { headers: { Authorization: `Bearer ${token}` } }
         axios
             .get('http://localhost:8080/users', config)
             .then(result => {
-                console.log(result.data.data)
+                console.log(result.data.data[0])
                 this.setState({
-                    profile: result.data.data[0]
+                    profile: result.data.data[0],
                 })
+                this.setState({
+                    getBirthday: this.state.profile.birthday
+
+                })
+                console.log(this.state.profile.birthday)
+                console.log(this.state.getBirthday)
+                
             })
             .catch(error => {
                 console.log(error)
             })
+
+    
+
     }
 
     componentDidUpdate() {
@@ -100,7 +112,6 @@ export default class Profile extends Component {
                                     axios
                                         .patch('http://localhost:8080/users', body, config)
                                         .then(result => {
-                                            console.log(result)
                                             alert(result.data.msg)
                                             this.setState({
                                                 isUpdated: true
@@ -126,13 +137,26 @@ export default class Profile extends Component {
                             <form>
                                 <div className="form-top">
                                     <h4 className="form-title">Contacts</h4>
-                                    <div className="edit-bullet"><img src={EditIcon} alt="edit" className="edit-bullet-img" /></div>
+                                    <div className="edit-bullet"
+                                        onClick={() => {
+                                            this.state.isEdit ?
+                                                this.setState({
+                                                    isEdit: false
+                                                })
+                                                :
+                                                this.setState({
+                                                    isEdit: true
+                                                })
+                                        }}
+                                    ><img src={EditIcon} alt="edit" className="edit-bullet-img" /></div>
                                 </div>
                                 <div className="form-row">
                                     <div className="label-input">
                                         <label for="email">Email Address:</label>
                                         <input type="text" name="email" id="email" className="input-left profile-input"
-                                            placeholder={this.state.profile.email ? this.state.profile.email : "Enter email address"}
+                                            placeholder={"Enter email address"}
+                                            value={this.state.isEdit ? null : this.state.profile.email}
+                                            disabled={this.state.isEdit ? false : true}
                                             onChange={(e) => {
                                                 this.setState({
                                                     email: e.target.value
@@ -143,8 +167,9 @@ export default class Profile extends Component {
                                     <div className="label-input">
                                         <label for="phone">Mobile number:</label>
                                         <input type="text" name="phone" id="phone" className="input-right profile-input"
-                                            // value={this.state.profile.mobile_number}
                                             placeholder={this.state.profile.mobile_number ? this.state.profile.mobile_number : "Enter number"}
+                                            value={this.state.isEdit ? null : this.state.profile.mobile_number}
+                                            disabled={this.state.isEdit ? false : true}
                                             onChange={(e) => {
                                                 this.setState({
                                                     mobile_number: e.target.value
@@ -157,7 +182,9 @@ export default class Profile extends Component {
                                     <label for="address">Delivery Address:</label>
                                     <input type="text" name="address" id="address"
                                         className="input-left profile-input"
-                                        placeholder={this.state.profile.address ? this.state.profile.address : "Enter delivery address"}
+                                        placeholder={"Enter delivery address"}
+                                        value={this.state.isEdit ? null : this.state.profile.address}
+                                        disabled={this.state.isEdit ? false : true}
                                         onChange={(e) => {
                                             this.setState({
                                                 address: e.target.value
@@ -172,8 +199,9 @@ export default class Profile extends Component {
                                     <div className="label-input">
                                         <label for="display-name">Display Name:</label>
                                         <input type="text" name="display-name" id="display-name" className="input-left profile-input"
-                                            // value={this.state.profile.display_name}
-                                            placeholder={this.state.profile.display_name ? this.state.profile.display_name : "Enter display name"}
+                                            value={this.state.isEdit ? null : this.state.profile.display_name}
+                                            disabled={this.state.isEdit ? false : true}
+                                            placeholder="Enter display name"
                                             onChange={(e) => {
                                                 this.setState({
                                                     display_name: e.target.value
@@ -184,7 +212,9 @@ export default class Profile extends Component {
                                     <div className="label-input">
                                         <label for="date">Birthday</label>
                                         <input type="date" name="date" id="date" className="input-right profile-input"
-                                            placeholder={this.state.profile.birthday ? this.state.profile.birthday : "Enter birth date"}
+                                            placeholder={"Enter birth date"}
+                                            value={"1995-04-15"} //{this.state.isEdit ? null : new Date("1995-04-15")}
+                                            disabled={this.state.isEdit ? false : true}
                                             onChange={(e) => {
                                                 this.setState({
                                                     birthday: e.target.value
@@ -196,8 +226,9 @@ export default class Profile extends Component {
                                 <div className="label-input">
                                     <label for="first-name">First Name:</label>
                                     <input type="text" name="first-name" id="first-name" className="input-left profile-input"
-                                        placeholder={this.state.profile.first_name ? this.state.profile.first_name : "Enter first name"}
-                                        // value={this.state.profile.first_name}
+                                        placeholder={"Enter first name"}
+                                        value={this.state.isEdit ? null : this.state.profile.first_name}
+                                        disabled={this.state.isEdit ? false : true}
                                         onChange={(e) => {
                                             this.setState({
                                                 first_name: e.target.value
@@ -208,8 +239,9 @@ export default class Profile extends Component {
                                 <div className="label-input">
                                     <label for="last-name">Last Name:</label>
                                     <input type="text" name="last-name" id="last-name" className="input-left profile-input"
-                                        placeholder={this.state.profile.last_name ? this.state.profile.last_name : "Enter last name"}
-                                        // value={this.state.profile.last_name}
+                                        placeholder={"Enter last name"}
+                                        value={this.state.isEdit ? null : this.state.profile.last_name}
+                                        disabled={this.state.isEdit ? false : true}
                                         onChange={(e) => {
                                             this.setState({
                                                 last_name: e.target.value
@@ -229,12 +261,12 @@ export default class Profile extends Component {
                                         <span className="checkmark"></span>
                                     </label>
                                     <label className="radio-container">Female
-                                        <input type="radio" name="radio" 
-                                        onChange={() => {
-                                            this.setState({
-                                                gender: "female"
-                                            })
-                                        }}
+                                        <input type="radio" name="radio"
+                                            onChange={() => {
+                                                this.setState({
+                                                    gender: "female"
+                                                })
+                                            }}
                                         />
                                         <span className="checkmark"></span>
                                     </label>

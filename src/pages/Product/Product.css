@@ -167,11 +167,11 @@
 
 .custom-product-nav-active {
     font-family: Rubik;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 24px;
     letter-spacing: 0em;
-    text-align: left;
+    text-align: center;
     text-decoration: none;
     color: #6A4029;
     border-bottom: 3px solid #6A4029;
@@ -336,7 +336,7 @@
 @media (max-width:840px) {
     .custom-main-container {
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         justify-content: center;
         align-items: center;
     }

@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 
 
 import "./Product.css"
+
+// import Check from "../../assets/img/Vectorcheck.png"
 // import ProductsFavorite from '../../components/Product/ProductsFavorite'
 // import ProductsAll from '../../components/Product/ProductAll'
 // import ProductsCoffee from '../../components/Product/ProductCoffee'
@@ -23,10 +25,11 @@ export default class Product extends Component {
             isCoffee: false,
             isNonCoffee: false,
             isFood: false,
-            isAll: false,
-            sort: "",
+            isAll: true,
+            sort: "category",
             order: "asc",
             searchName: "",
+            go: true
 
         };
     }
@@ -72,14 +75,10 @@ export default class Product extends Component {
                     this.setState({
                         product: result.data.data,
                     });
-                    
+
                 }).catch(error => {
                     console.log(error)
                 })
-
-            this.setState({
-                isAll: false
-            })
         }
         if (this.state.isFavorite) {
             let url = "http://localhost:8080/products/favorite"
@@ -101,14 +100,10 @@ export default class Product extends Component {
                     this.setState({
                         product: result.data.data,
                     });
-                    
+
                 }).catch(error => {
                     console.log(error)
                 })
-
-            this.setState({
-                isFavorite: false
-            })
         }
 
         if (this.state.isCoffee) {
@@ -131,14 +126,11 @@ export default class Product extends Component {
                     this.setState({
                         product: result.data.data,
                     });
-                    
+
                 }).catch(error => {
                     console.log(error)
                 })
 
-            this.setState({
-                isCoffee: false
-            })
         }
 
         if (this.state.isNonCoffee) {
@@ -161,14 +153,11 @@ export default class Product extends Component {
                     this.setState({
                         product: result.data.data,
                     });
-                    
+
                 }).catch(error => {
                     console.log(error)
                 })
 
-            this.setState({
-                isNonCoffee: false
-            })
         }
 
         if (this.state.isFood) {
@@ -195,9 +184,6 @@ export default class Product extends Component {
                     console.log(error)
                 })
 
-            this.setState({
-                isFood: false
-            })
         }
 
         // if(this.state.searchName !== ''){
@@ -275,45 +261,65 @@ export default class Product extends Component {
                         <nav className="custom-product-nav">
                             <ul className="row">
                                 <li className="col-2">
-                                    <div className="custom-product-nav-inactive"
+                                    <div className={this.state.isFavorite ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
                                                 isFavorite: true,
+                                                isCoffee: false,
+                                                isNonCoffee: false,
+                                                isFood: false,
+                                                isAll: false,
                                             })
                                         }}
                                     >Favorite & Promo</div>
                                 </li>
                                 <li className="col">
-                                    <div className="custom-product-nav-inactive"
+                                    <div className={this.state.isCoffee ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
+                                                isFavorite: false,
                                                 isCoffee: true,
+                                                isNonCoffee: false,
+                                                isFood: false,
+                                                isAll: false,
                                             })
                                         }}
                                     >Coffee</div>
                                 </li>
                                 <li className="col">
-                                    <div className="custom-product-nav-inactive"
+                                    <div className={this.state.isNonCoffee ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
+                                                isFavorite: false,
+                                                isCoffee: false,
                                                 isNonCoffee: true,
+                                                isFood: false,
+                                                isAll: false,
                                             })
                                         }}
                                     >Non Coffee</div>
                                 </li>
                                 <li className="col">
-                                    <div className="custom-product-nav-inactive"
+                                    <div className={this.state.isFood ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
+                                                isFavorite: false,
+                                                isCoffee: false,
+                                                isNonCoffee: false,
                                                 isFood: true,
+                                                isAll: false,
                                             })
                                         }}
                                     >Foods</div>
                                 </li>
                                 <li className="col">
-                                    <div className="custom-product-nav-inactive"
+                                    <div className={this.state.isAll ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
+                                                isFavorite: false,
+                                                isCoffee: false,
+                                                isNonCoffee: false,
+                                                isFood: false,
                                                 isAll: true,
                                             })
                                         }}
@@ -329,10 +335,8 @@ export default class Product extends Component {
                                         })
                                     }}
                                 >
-                                    <option value="name"
-
-                                    >Name</option>
                                     <option value="category">Category</option>
+                                    <option value="name">Name</option>
                                     <option value="price">Price</option>
                                     <option value="createdat">Release</option>
                                 </select>
@@ -346,6 +350,13 @@ export default class Product extends Component {
                                     <option value="asc">asc</option>
                                     <option value="desc">desc</option>
                                 </select>
+                                {/* <div className="confirm-button"
+                                // onClick={()=>{
+                                //     this.setState({
+                                //         go: true
+                                //     })
+                                // }}
+                                ><img src={Check} alt="check" /></div> */}
                             </div>
                         </nav>
                         <div className="custom-food-container">
@@ -353,16 +364,16 @@ export default class Product extends Component {
                                 {this.state.product.length === 0 ? <div>DATA NOT FOUND</div> :
                                     this.state.product.map((product) => (
                                         <div className="col custom-product-card-container">
-                                            <div className="card custom-product-card">
+                                            <div key={product.id} className="card custom-product-card">
                                                 <div className="custom-card-img-container">
                                                     <Link to="/product/detail">
-                                                        <img key={product.picture} src={`http://localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
+                                                        <img src={`http://localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
                                                     </Link>
                                                 </div>
                                                 <div className="custom-product-promo">0%</div>
                                                 <div className="card-body custom-product-info">
-                                                    <h5 key={product.name} className="card-title custom-product-name">{product.name}</h5>
-                                                    <p key={product.price} className="card-text custom-product-price">IDR. {product.price}</p>
+                                                    <h5 className="card-title custom-product-name">{product.name}</h5>
+                                                    <p className="card-text custom-product-price">IDR. {product.price}</p>
                                                 </div>
                                             </div>
                                         </div>
