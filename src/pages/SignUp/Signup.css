@@ -112,6 +112,10 @@ form {
 .signup-error{
     font-size: 16px;
     text-align: center;
+    color: red;
+    z-index: 1;
+    position: relative;
+    margin-bottom: -24px;
 }
 
 .signup {

@@ -270,7 +270,7 @@
     -o-user-select: none;
 }
 
-.logout-button a{
+.logout-button a {
     text-decoration: none;
     color: #6A4029
 }
@@ -300,12 +300,12 @@
     flex-direction: row;
 }
 
-.form-top{
+.form-top {
     display: flex;
     justify-content: space-between;
 }
 
-.edit-bullet{
+.edit-bullet {
     width: 40px;
     height: 40px;
     background-color: #6A4029;
@@ -324,7 +324,7 @@
     -o-user-select: none;
 }
 
-.edit-bullet-img{
+.edit-bullet-img {
     width: 15px;
 }
 
@@ -448,13 +448,44 @@ label {
     display: block;
 }
 
+.profile-modal-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #6A4029
+}
+
+.profile-btn-primary{
+    background: #6A4029;
+    border-radius: 5px;
+    font-family: 'Poppins';
+    font-style: normal;
+}
+
+.profile-btn-primary:hover{
+    background-color: #552d17;
+}
+
+.profile-btn-primary:focus, .profile-btn-primary:active{
+    background-color: #6A4029;
+    border: none;
+}
+
 @media (max-width: 1000px) {
-    .choose-button, .logout-button, .save-change-button, .cancel-change-button, .remove-button,
+
+    .choose-button,
+    .logout-button,
+    .save-change-button,
+    .cancel-change-button,
+    .remove-button,
     .editpass-button {
         width: 80%
     }
 
-    .profile-picture{
+    .profile-picture {
         width: 150px;
         height: 150px;
     }
@@ -463,23 +494,24 @@ label {
         flex-direction: column;
     }
 
-    .input-right{
+    .input-right {
         width: 300px;
     }
 }
 
 @media (max-width: 720px) {
-    .main-card{
+    .main-card {
         flex-direction: column;
         height: 100%;
         padding: 5%;
     }
-    
-    .input-left, .input-right{
+
+    .input-left,
+    .input-right {
         width: 80%;
     }
 
-    .footer-flex-item-right{
+    .footer-flex-item-right {
         flex-direction: column;
     }
 
@@ -509,7 +541,7 @@ label {
         line-height: 20px;
     }
 
-    .nav-list ul{
+    .nav-list ul {
         flex-direction: column;
     }
 }

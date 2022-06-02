@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 import "./Product.css"
 
-// import Check from "../../assets/img/Vectorcheck.png"
+import Check from "../../assets/img/Vectorcheck.png"
 // import ProductsFavorite from '../../components/Product/ProductsFavorite'
 // import ProductsAll from '../../components/Product/ProductAll'
 // import ProductsCoffee from '../../components/Product/ProductCoffee'
@@ -21,11 +21,13 @@ export default class Product extends Component {
         super();
         this.state = {
             product: [],
+            categoryActive: "all",
             isFavorite: false,
             isCoffee: false,
             isNonCoffee: false,
             isFood: false,
             isAll: true,
+            isFilter: false,
             sort: "category",
             order: "asc",
             searchName: "",
@@ -55,7 +57,7 @@ export default class Product extends Component {
     }
 
     componentDidUpdate() {
-        if (this.state.isAll) {
+        if (this.state.isAll && this.state.isFilter) {
             let url = "http://localhost:8080/products"
             if (this.state.sort === "name") {
                 url += `?sort=${this.state.sort}&order=${this.state.order}`
@@ -79,8 +81,12 @@ export default class Product extends Component {
                 }).catch(error => {
                     console.log(error)
                 })
+            this.setState({
+                isFilter: false
+            })
         }
-        if (this.state.isFavorite) {
+
+        if (this.state.isFavorite && this.state.isFilter) {
             let url = "http://localhost:8080/products/favorite"
             if (this.state.sort === "name") {
                 url += `?sort=${this.state.sort}&order=${this.state.order}`
@@ -104,9 +110,12 @@ export default class Product extends Component {
                 }).catch(error => {
                     console.log(error)
                 })
+            this.setState({
+                isFilter: false
+            })
         }
 
-        if (this.state.isCoffee) {
+        if (this.state.isCoffee && this.state.isFilter) {
             let url = "http://localhost:8080/products?category=coffee"
             if (this.state.sort === "name") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
@@ -130,10 +139,12 @@ export default class Product extends Component {
                 }).catch(error => {
                     console.log(error)
                 })
-
+            this.setState({
+                isFilter: false
+            })
         }
 
-        if (this.state.isNonCoffee) {
+        if (this.state.isNonCoffee && this.state.isFilter) {
             let url = "http://localhost:8080/products?category=noncoffee"
             if (this.state.sort === "name") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
@@ -157,10 +168,12 @@ export default class Product extends Component {
                 }).catch(error => {
                     console.log(error)
                 })
-
+            this.setState({
+                isFilter: false
+            })
         }
 
-        if (this.state.isFood) {
+        if (this.state.isFood && this.state.isFilter) {
             let url = "http://localhost:8080/products?category=food"
             if (this.state.sort === "name") {
                 url += `&sort=${this.state.sort}&order=${this.state.order}`
@@ -183,7 +196,9 @@ export default class Product extends Component {
                 }).catch(error => {
                     console.log(error)
                 })
-
+            this.setState({
+                isFilter: false
+            })
         }
 
         // if(this.state.searchName !== ''){
@@ -261,7 +276,7 @@ export default class Product extends Component {
                         <nav className="custom-product-nav">
                             <ul className="row">
                                 <li className="col-2">
-                                    <div className={this.state.isFavorite ? "custom-product-nav-active" : "custom-product-nav-inactive"}
+                                    <div className={this.state.categoryActive === "favorite" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
                                                 isFavorite: true,
@@ -274,7 +289,7 @@ export default class Product extends Component {
                                     >Favorite & Promo</div>
                                 </li>
                                 <li className="col">
-                                    <div className={this.state.isCoffee ? "custom-product-nav-active" : "custom-product-nav-inactive"}
+                                    <div className={this.state.categoryActive === "coffee" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
                                                 isFavorite: false,
@@ -287,7 +302,7 @@ export default class Product extends Component {
                                     >Coffee</div>
                                 </li>
                                 <li className="col">
-                                    <div className={this.state.isNonCoffee ? "custom-product-nav-active" : "custom-product-nav-inactive"}
+                                    <div className={this.state.categoryActive === "noncoffee" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
                                                 isFavorite: false,
@@ -322,6 +337,7 @@ export default class Product extends Component {
                                                 isFood: false,
                                                 isAll: true,
                                             })
+
                                         }}
                                     >All</div>
                                 </li>
@@ -341,7 +357,7 @@ export default class Product extends Component {
                                     <option value="createdat">Release</option>
                                 </select>
                                 <select name="order-product" id="order-product"
-                                    onClick={(e) => {
+                                    onChange={(e) => {
                                         this.setState({
                                             order: e.target.value
                                         })
@@ -350,13 +366,13 @@ export default class Product extends Component {
                                     <option value="asc">asc</option>
                                     <option value="desc">desc</option>
                                 </select>
-                                {/* <div className="confirm-button"
-                                // onClick={()=>{
-                                //     this.setState({
-                                //         go: true
-                                //     })
-                                // }}
-                                ><img src={Check} alt="check" /></div> */}
+                                <div className="confirm-button"
+                                    onClick={() => {
+                                        this.setState({
+                                            isFilter: true
+                                        })
+                                    }}
+                                ><img src={Check} alt="check" /></div>
                             </div>
                         </nav>
                         <div className="custom-food-container">
@@ -366,7 +382,7 @@ export default class Product extends Component {
                                         <div className="col custom-product-card-container">
                                             <div key={product.id} className="card custom-product-card">
                                                 <div className="custom-card-img-container">
-                                                    <Link to="/product/detail">
+                                                    <Link to={`/product/${product.id}`}>
                                                         <img src={`http://localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
                                                     </Link>
                                                 </div>

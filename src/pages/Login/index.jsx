@@ -23,15 +23,15 @@ export default class Login extends Component {
             isLoggedin: false
         };
     };
-    componentDidMount(){
-        document.title="Login"
+    componentDidMount() {
+        document.title = "Login"
     }
 
 
 
     render() {
-        if(this.state.isSuccess === true){
-            return <Navigate to="/"/>
+        if (this.state.isSuccess === true) {
+            return <Navigate to="/" />
         }
         return (
             <div>

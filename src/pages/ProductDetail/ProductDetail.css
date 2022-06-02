@@ -63,6 +63,8 @@
     text-align: center;
     margin: 0px;
 
+    text-transform: uppercase;
+
 }
 
 .pd-main-product-name p {
@@ -73,6 +75,7 @@
     letter-spacing: 0em;
     text-align: center;
     margin: 0px;
+
 
 }
 
@@ -154,10 +157,14 @@
     width: 50%;
 }
 
+.pd-desc-info{
+    min-height: 280px ;
+}
+
 .pd-desc-card {
     background: #FFFFFF;
     border-radius: 20px;
-    padding: 50px 10%
+    padding: 50px 10%;
 }
 
 .pd-desc-delivery {

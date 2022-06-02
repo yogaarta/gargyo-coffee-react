@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import { Link, Navigate } from 'react-router-dom'
+import 'bootstrap'
 
 import "./Profile.css"
 // import img
@@ -48,13 +49,13 @@ export default class Profile extends Component {
                 })
                 console.log(this.state.profile.birthday)
                 console.log(this.state.getBirthday)
-                
+
             })
             .catch(error => {
                 console.log(error)
             })
 
-    
+
 
     }
 
@@ -123,14 +124,14 @@ export default class Profile extends Component {
                                 }}
                             >Save Change</div>
                             <div className="cancel-change-button">Cancel</div>
-                            <div className="logout-button">
-                                <Link to="/"
+                            <div className="logout-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                {/* <Link to="/"
                                     onClick={() => {
                                         localStorage.removeItem("user-info")
                                     }}
-                                >
-                                    Log Out
-                                </Link>
+                                > */}
+                                Log Out
+                                {/* </Link> */}
                             </div>
                         </div>
                         <div className="form-card">
@@ -213,7 +214,8 @@ export default class Profile extends Component {
                                         <label for="date">Birthday</label>
                                         <input type="date" name="date" id="date" className="input-right profile-input"
                                             placeholder={"Enter birth date"}
-                                            value={"1995-04-15"} //{this.state.isEdit ? null : new Date("1995-04-15")}
+                                            // value={"1995-04-15"} 
+                                            //{this.state.isEdit ? null : new Date("1995-04-15")}
                                             disabled={this.state.isEdit ? false : true}
                                             onChange={(e) => {
                                                 this.setState({
@@ -276,6 +278,27 @@ export default class Profile extends Component {
                     </div>
                 </main >
                 <Footer />
+                {/* MODAL */}
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title profile-modal-title" id="exampleModalLabel">Are You Sure?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                 <Link to="/"
+                                    onClick={() => {
+                                        localStorage.removeItem("user-info")
+                                    }}
+                                >
+                                <button type="button" class="btn btn-primary profile-btn-primary" data-bs-dismiss="modal">Log Out</button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div >
 
         )

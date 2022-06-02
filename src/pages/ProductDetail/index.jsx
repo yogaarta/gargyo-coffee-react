@@ -3,25 +3,49 @@ import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 
 import './ProductDetail.css'
+import withParams from '../../Helper/withParams'
 
 // import img
 import ColdBrew from "../../assets/img/coldbrew.png"
+import axios from 'axios'
 
-export default class ProductDetail extends Component {
+class ProductDetail extends Component {
+    constructor() {
+        super();
+        this.state = {
+            product: [],
+        }
+    }
+
+    componentDidMount() {
+        const { params } = this.props
+        axios
+            .get(`http://localhost:8080/products/${params.id}`)
+            .then(result => {
+                console.log(this.state.product)
+                this.setState({
+                    product: result.data.data[0]
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     render() {
         return (
             <div>
                 <Header />
                 <section className="pd-main-container">
-                    <div className="pd-title-menu">Favorite {'&'} Promo <span>{'>'} Cold Brew</span></div>
+                    <div className="pd-title-menu">Favorite {'&'} Promo <span>{`> ${this.state.product.name}`}</span></div>
                     <section className="pd-main-content">
                         <div className="pd-left-content">
                             <div className="pd-main-img-container">
-                                <img src={ColdBrew} alt="coldbrew" className="pd-main-img" />
+                                <img src={`http://localhost:8080${this.state.product.picture}`} alt="coldbrew" className="pd-main-img" />
                             </div>
                             <div className="pd-main-product-name">
-                                <h2>COLDBREW</h2>
-                                <p>IDR. 30.000</p>
+                                <h2>{this.state.product.name}</h2>
+                                <p>IDR. {this.state.product.price}</p>
                             </div>
                             <div className="pd-addcart-button">Add to Cart</div>
                             <div className="pd-askstaff-button">Ask a Staff</div>
@@ -32,7 +56,9 @@ export default class ProductDetail extends Component {
                                     <p>Delivery only on <span>Monday to friday</span>  at <span>1 - 7 pm</span> </p>
                                 </div>
                                 <div className="pd-desc-info">
-                                    <p>Cold brewing is a method of brewing that combines ground coffee and cool water and uses time instead of heat to extract the flavor. It is brewed in small batches and steeped for as long as 48 hours.</p>
+                                    <p>
+                                        {this.state.product.description}
+                                    </p>
                                 </div>
                                 <div className="pd-choose-size">
                                     <h4 className="pd-size-title">Choose a size</h4>
@@ -96,3 +122,5 @@ export default class ProductDetail extends Component {
         )
     }
 }
+
+export default withParams(ProductDetail)
