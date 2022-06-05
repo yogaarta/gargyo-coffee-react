@@ -13,7 +13,14 @@
     letter-spacing: 0em;
     text-align: left;
     margin-bottom: 20px;
+    text-transform: capitalize;
 
+    color: #4F5665;
+}
+
+.pd-title-menu a{
+    text-decoration: none;
+    
     color: #4F5665;
 }
 
@@ -227,10 +234,10 @@
 
 
 .pd-size-vector {
-    background-color: #F4F4F8;
     width: 70px;
     height: 70px;
     border-radius: 50%;
+    z-index: 2;
 
     margin-left: 25px;
     margin-right: 25px;
@@ -244,6 +251,7 @@
     font-weight: 700;
     line-height: 45px;
     letter-spacing: 0em;
+    color: #000000;
     text-align: center;
     cursor: pointer;
 
@@ -256,12 +264,12 @@
 }
 
 .pd-size-checkmark {
+    width: 70px;
+    height: 70px;
+    z-index: -1;
+    border-radius: 50%;
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 100px;
-    background-color: #fcaf16;
+    background-color: #F4F4F8;
   }
 
 
@@ -269,13 +277,13 @@
     background-color: #fcaf16;
 }
 
-.pd-size-vector:active input:checked ~ .pd-size-checkmark{
+.pd-size-vector input:checked ~ .pd-size-checkmark{
     background-color: #FFBA33;
 }
 
 .pd-size-input {
     position: absolute;
-    /* opacity: 0; */
+    opacity: 0;
     cursor: pointer;
 
     -moz-user-select: none;

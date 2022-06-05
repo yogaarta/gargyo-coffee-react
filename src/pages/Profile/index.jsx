@@ -162,7 +162,7 @@ export default class Profile extends Component {
                                     <div className="label-input">
                                         <label htmlFor="phone">Mobile number:</label>
                                         <input type="text" name="phone" id="phone" className="input-right profile-input"
-                                            placeholder={this.state.profile.mobile_number ? this.state.profile.mobile_number : "Enter number"}
+                                            placeholder={"Enter number"}
                                             value={this.state.isEdit ? null : this.state.profile.mobile_number}
                                             disabled={this.state.isEdit ? false : true}
                                             onChange={(e) => {

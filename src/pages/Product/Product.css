@@ -175,6 +175,13 @@
     text-decoration: none;
     color: #6A4029;
     border-bottom: 3px solid #6A4029;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
 }
 
 .custom-product-nav-inactive {

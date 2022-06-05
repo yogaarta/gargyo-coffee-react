@@ -58,20 +58,19 @@ class Product extends Component {
     }
 
     componentDidUpdate() {
-        if (this.state.isAll && this.state.isFilter) {
-            let url = "http://localhost:8080/products"
-            if (this.state.sort === "name") {
-                url += `?sort=${this.state.sort}&order=${this.state.order}`
+        if (this.state.isFilter) {
+            let url = `http://localhost:8080/products`
+            if (this.state.categoryActive === "all") {
+                url += `?`
             }
-            if (this.state.sort === "category") {
-                url += `?sort=${this.state.sort}&order=${this.state.order}`
+            if (this.state.categoryActive === "favorite") {
+                url += `/favorite?`
             }
-            if (this.state.sort === "price") {
-                url += `?sort=${this.state.sort}&order=${this.state.order}`
+            if (this.state.categoryActive !== "all" && this.state.categoryActive !== "favorite") {
+                url += `?category=${this.state.categoryActive}&`
             }
-            if (this.state.sort === "release") {
-                url += `?sort=${this.state.sort}&order=${this.state.order}`
-            }
+            url += `sort=${this.state.sort}&order=${this.state.order}`
+
             axios
                 .get(url)
                 .then(result => {
@@ -87,120 +86,6 @@ class Product extends Component {
             })
         }
 
-        if (this.state.isFavorite && this.state.isFilter) {
-            let url = "http://localhost:8080/products/favorite"
-            if (this.state.sort === "name") {
-                url += `?sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "category") {
-                url += `?sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "price") {
-                url += `?sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "release") {
-                url += `?sort=${this.state.sort}&order=${this.state.order}`
-            }
-            axios
-                .get(url)
-                .then(result => {
-                    this.setState({
-                        product: result.data.data,
-                    });
-
-                }).catch(error => {
-                    console.log(error)
-                })
-            this.setState({
-                isFilter: false
-            })
-        }
-
-        if (this.state.isCoffee && this.state.isFilter) {
-            let url = "http://localhost:8080/products?category=coffee"
-            if (this.state.sort === "name") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "category") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "price") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "release") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            axios
-                .get(url)
-                .then(result => {
-                    this.setState({
-                        product: result.data.data,
-                    });
-
-                }).catch(error => {
-                    console.log(error)
-                })
-            this.setState({
-                isFilter: false
-            })
-        }
-
-        if (this.state.isNonCoffee && this.state.isFilter) {
-            let url = "http://localhost:8080/products?category=noncoffee"
-            if (this.state.sort === "name") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "category") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "price") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "release") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            axios
-                .get(url)
-                .then(result => {
-                    this.setState({
-                        product: result.data.data,
-                    });
-
-                }).catch(error => {
-                    console.log(error)
-                })
-            this.setState({
-                isFilter: false
-            })
-        }
-
-        if (this.state.isFood && this.state.isFilter) {
-            let url = "http://localhost:8080/products?category=food"
-            if (this.state.sort === "name") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "category") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "price") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            if (this.state.sort === "release") {
-                url += `&sort=${this.state.sort}&order=${this.state.order}`
-            }
-            axios
-                .get(url)
-                .then(result => {
-                    this.setState({
-                        product: result.data.data,
-                    });
-                }).catch(error => {
-                    console.log(error)
-                })
-            this.setState({
-                isFilter: false
-            })
-        }
 
         // if(this.state.searchName !== ''){
         //     axios
@@ -279,65 +164,54 @@ class Product extends Component {
                             <ul className="row">
                                 <li className="col-2">
                                     <div className={this.state.categoryActive === "favorite" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
-                                        onClick={() => {
-                                            this.setState({
-                                                isFavorite: true,
-                                                isCoffee: false,
-                                                isNonCoffee: false,
-                                                isFood: false,
-                                                isAll: false,
-                                            })
-                                        }}
+                                        onClick={
+                                            () => {
+                                                this.setState({
+                                                    isFilter: true,
+                                                    categoryActive: "favorite"
+                                                })
+                                            }
+                                        }
                                     >Favorite & Promo</div>
                                 </li>
                                 <li className="col">
                                     <div className={this.state.categoryActive === "coffee" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
-                                        onClick={() => {
-                                            this.setState({
-                                                isFavorite: false,
-                                                isCoffee: true,
-                                                isNonCoffee: false,
-                                                isFood: false,
-                                                isAll: false,
-                                            })
-                                        }}
+                                        onClick={
+                                            () => {
+                                                this.setState({
+                                                    isFilter: true,
+                                                    categoryActive: "coffee"
+                                                })
+                                            }
+                                        }
                                     >Coffee</div>
                                 </li>
                                 <li className="col">
                                     <div className={this.state.categoryActive === "noncoffee" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
-                                                isFavorite: false,
-                                                isCoffee: false,
-                                                isNonCoffee: true,
-                                                isFood: false,
-                                                isAll: false,
+                                                isFilter: true,
+                                                categoryActive: "noncoffee"
                                             })
                                         }}
                                     >Non Coffee</div>
                                 </li>
                                 <li className="col">
-                                    <div className={this.state.isFood ? "custom-product-nav-active" : "custom-product-nav-inactive"}
+                                    <div className={this.state.categoryActive === "food" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
-                                                isFavorite: false,
-                                                isCoffee: false,
-                                                isNonCoffee: false,
-                                                isFood: true,
-                                                isAll: false,
+                                                isFilter: true,
+                                                categoryActive: "food"
                                             })
                                         }}
                                     >Foods</div>
                                 </li>
                                 <li className="col">
-                                    <div className={this.state.isAll ? "custom-product-nav-active" : "custom-product-nav-inactive"}
+                                    <div className={this.state.categoryActive === "all" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
-                                                isFavorite: false,
-                                                isCoffee: false,
-                                                isNonCoffee: false,
-                                                isFood: false,
-                                                isAll: true,
+                                                isFilter: true,
+                                                categoryActive: "all"
                                             })
 
                                         }}
@@ -356,7 +230,7 @@ class Product extends Component {
                                     <option value="category">Category</option>
                                     <option value="name">Name</option>
                                     <option value="price">Price</option>
-                                    <option value="createdat">Release</option>
+                                    <option value="created_at">Release</option>
                                 </select>
                                 <select name="order-product" id="order-product"
                                     onChange={(e) => {

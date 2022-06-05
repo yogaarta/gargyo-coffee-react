@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
+import { Link } from 'react-router-dom'
 
 import './ProductDetail.css'
 import withParams from '../../Helper/withParams'
 
 // import img
-import ColdBrew from "../../assets/img/coldbrew.png"
 import axios from 'axios'
 
 class ProductDetail extends Component {
@@ -14,7 +14,19 @@ class ProductDetail extends Component {
         super();
         this.state = {
             product: [],
+            size: "",
+            allSize: [],
+            cart: [],
         }
+    }
+
+    cartHandle = (e) =>{
+        e.preventDefault();
+        // this.setState({
+        //     allSize: this.state.allSize.push(this.state.size),
+        // })
+        this.state.allSize.push(this.state.size)
+        console.log(this.state.allSize)
     }
 
     componentDidMount() {
@@ -38,7 +50,7 @@ class ProductDetail extends Component {
             <div>
                 <Header />
                 <section className="pd-main-container">
-                    <div className="pd-title-menu">{`${this.state.product.category}   `}<span>{`>  ${this.state.product.name}`}</span></div>
+                    <div className="pd-title-menu"> <Link to={"/product"}>{`${this.state.product.category === "noncoffee" ? "Non Coffee" : this.state.product.category}   `}</Link><span>{`>  ${this.state.product.name}`}</span></div>
                     <section className="pd-main-content">
                         <div className="pd-left-content">
                             <div className="pd-main-img-container">
@@ -48,7 +60,9 @@ class ProductDetail extends Component {
                                 <h2>{this.state.product.name}</h2>
                                 <p>IDR. {this.state.product.price}</p>
                             </div>
-                            <div className="pd-addcart-button">Add to Cart</div>
+                            <div className="pd-addcart-button"
+                                onClick={this.cartHandle}
+                            >Add to Cart</div>
                             <div className="pd-askstaff-button">Ask a Staff</div>
                         </div>
                         <div className="pd-right-content">
@@ -65,13 +79,28 @@ class ProductDetail extends Component {
                                     <h4 className="pd-size-title">Choose a size</h4>
                                     <div className="pd-size-container">
                                         <label className="pd-size-vector">R
-                                            <input type="radio" className='pd-size-input' name='pd-size-input' /><span className='pd-size-checkmark'></span>
+                                            <input type="radio" className='pd-size-input' name='pd-size-input'
+                                                onChange={() => {
+                                                    this.setState({ size: "R" })
+                                                }
+                                                }
+                                            /><span className='pd-size-checkmark'></span>
                                         </label>
                                         <label className="pd-size-vector">L
-                                            <input type="radio" className='pd-size-input' name='pd-size-input' /><span className='pd-size-checkmark'></span>
+                                            <input type="radio" className='pd-size-input' name='pd-size-input'
+                                                onChange={() => {
+                                                    this.setState({ size: "L" })
+                                                }
+                                                }
+                                            /><span className='pd-size-checkmark'></span>
                                         </label>
                                         <label className="pd-size-vector">XL
-                                            <input type="radio" className='pd-size-input' name='pd-size-input' /><span className='pd-size-checkmark'></span>
+                                            <input type="radio" className='pd-size-input' name='pd-size-input'
+                                                onChange={() => {
+                                                    this.setState({ size: "XL" })
+                                                }
+                                                }
+                                            /><span className='pd-size-checkmark'></span>
                                         </label>
                                     </div>
                                 </div>
@@ -105,13 +134,17 @@ class ProductDetail extends Component {
                     <section className="pd-checkout-container">
                         <div className="pd-product-checkout">
                             <div className="pd-checkout-img">
-                                <img src={ColdBrew} alt="coldbrew" className='pd-check-out-img' />
+                                <img src={`http://localhost:8080${this.state.product.picture}`} alt="coldbrew" className='pd-check-out-img' />
                             </div>
                             <div className="pd-checkout-info">
-                                <h4 className="pd-checkout-name">COLD BREW</h4>
+                                <h4 className="pd-checkout-name">{this.state.product.name}</h4>
                                 <div className="pd-checkout-details">
+                                    {this.state.allSize.map((size)=>(
+                                        <p>x1 {size === "R" ? "Regular" : size === "L" ? "Large" : "Extra Large"}</p>
+                                    ))}
+                                    {/* <p>{this.state.allSize}</p>
                                     <p>x1 (Large)</p>
-                                    <p>x1 (Regular)</p>
+                                    <p>x1 (Regular)</p> */}
                                 </div>
                             </div>
                             <div className="pd-checkout-quantity">
@@ -122,7 +155,6 @@ class ProductDetail extends Component {
                         </div>
                         <div className="pd-checkout-button">CHECKOUT</div>
                     </section>
-
                 </section>
                 <Footer />
             </div>
