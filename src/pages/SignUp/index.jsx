@@ -111,7 +111,7 @@ export default class SignUp extends Component {
 
                                                     this.setState({
                                                         isError: true,
-                                                        errorMsg: `${error.response.data.msg}`
+                                                        errorMsg: `${error.response.data.err.msg}`
                                                     })
                                                 })
                                         }
