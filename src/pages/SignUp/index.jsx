@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { Link, Navigate } from 'react-router-dom'
+import 'bootstrap'
 // import img
 import Logo from "../../assets/img/coffee logo.png"
 import Google from "../../assets/img/google logo.png"
 import Facebook from "../../assets/img/facebook vector.png"
 import Twitter from "../../assets/img/twitter vector.png"
 import Instagram from "../../assets/img/ig vector.png"
+import OpenEye from "../../assets/img/open-eye.png"
+import ClosedEye from "../../assets/img/closed-eye.png"
 
 import "./Signup.css"
 import axios from 'axios'
@@ -19,7 +22,8 @@ export default class SignUp extends Component {
             mobile_number: "",
             isError: false,
             errorMsg: "",
-            isRegistered: false
+            isRegistered: false,
+            isPasswordShown: false,
         };
     };
 
@@ -40,8 +44,8 @@ export default class SignUp extends Component {
                     <div className="main-content">
                         <header className="header-container">
                             <div>
-                                <h6 className="coffeeshop-logo"><a href="/"><img src={Logo} alt="logo"
-                                    className='coffee-pict' /></a> Coffee Shop</h6>
+                                <h6 className="coffeeshop-logo"><Link to="/"><img src={Logo} alt="logo"
+                                    className='coffee-pict' /></Link> Coffee Shop</h6>
                             </div>
                             <div>
                                 <h3 className="header-signup">Sign Up</h3>
@@ -60,14 +64,24 @@ export default class SignUp extends Component {
                                         }}
                                     />
                                     <label htmlFor="password">Password:</label>
-                                    <input type="password" name="password" id="password" placeholder="Enter your password" className='signup-input'
-                                        value={this.state.pass}
-                                        onChange={e => {
-                                            this.setState({
-                                                pass: e.target.value
-                                            })
-                                        }}
-                                    />
+                                    <div className='signup-input-pass-container'>
+                                        <input type={this.state.isPasswordShown ? "text" : "password"} name="password" id="password" placeholder="Enter your password" className='signup-input-pass'
+                                            value={this.state.pass}
+                                            onChange={e => {
+                                                this.setState({
+                                                    pass: e.target.value
+                                                })
+                                            }}
+                                        />
+                                        <div className="icon-pass-container"
+                                            onClick={() => {
+                                                this.setState({
+                                                    isPasswordShown: !this.state.isPasswordShown
+                                                })
+                                            }}>
+                                            {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
+                                        </div>
+                                    </div>
                                     <label htmlFor="phone">Phone Number:</label>
                                     <input type="text" name="phone" id="phone" placeholder="Enter your phone number" className='signup-input'
                                         value={this.state.mobile_number}
@@ -80,7 +94,7 @@ export default class SignUp extends Component {
 
                                     {this.state.isError ? <div className='signup-error'>{this.state.errorMsg}</div> : <></>}
 
-                                    <div className="signup"
+                                    <div className="signup" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                         onClick={() => {
                                             const { email, pass, mobile_number } = this.state;
                                             const body = { email, pass, mobile_number };
@@ -88,11 +102,9 @@ export default class SignUp extends Component {
                                                 .post("http://localhost:8080/auth/new", body)
                                                 .then(result => {
                                                     console.log(result.data.data)
-                                                    alert(result.data.data.msg)
                                                     this.setState({
-                                                        isRegistered: true
+                                                        isError: false,
                                                     })
-
                                                 })
                                                 .catch(error => {
                                                     console.log(error.response)
@@ -166,8 +178,31 @@ export default class SignUp extends Component {
                                 </div>
 
                             </div>
-
                         </footer>
+                    </div>
+                </div>
+                {/* MODAL */}
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title profile-modal-title" id="exampleModalLabel">
+                                    {this.state.isError ? <p className='profile-modal-title-error'>{this.state.errorMsg}</p> : "Register Success"}
+                                </h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-footer">
+                                {this.state.isError ? <></>
+                                    :
+                                    <button type="button" className="btn btn-primary profile-btn-primary" data-bs-dismiss="modal"
+                                        onClick={() => {
+                                            this.setState({
+                                                isRegistered: true
+                                            })
+                                        }}
+                                    >Proceed</button>}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

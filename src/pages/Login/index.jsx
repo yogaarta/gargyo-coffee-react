@@ -6,6 +6,9 @@ import Google from "../../assets/img/google logo.png"
 import Facebook from "../../assets/img/facebook vector.png"
 import Twitter from "../../assets/img/twitter vector.png"
 import Instagram from "../../assets/img/ig vector.png"
+import OpenEye from "../../assets/img/open-eye.png"
+import ClosedEye from "../../assets/img/closed-eye.png"
+
 
 import "./Login.css"
 import axios from 'axios'
@@ -27,8 +30,6 @@ export default class Login extends Component {
         document.title = "Login"
     }
 
-
-
     render() {
         if (this.state.isSuccess === true) {
             return <Navigate to="/" />
@@ -42,8 +43,11 @@ export default class Login extends Component {
                     <div className="main-content">
                         <header className="header-container">
                             <div className="logo-container">
-                                <h6 className="coffeeshop-logo"><a href="/"><img src={Logo}
-                                    alt="logo" className="coffee-pict" /></a>Coffee Shop</h6>
+                                <h6 className="coffeeshop-logo">
+                                    <Link to="/"><img src={Logo}
+                                        alt="logo" className="coffee-pict" />
+                                    </Link>Coffee Shop
+                                </h6>
                             </div>
                             <div>
                                 <h3 className="header-signup">Login</h3>
@@ -52,7 +56,7 @@ export default class Login extends Component {
                         <main>
                             <div className="main-container">
                                 <form className="flex-form-container">
-                                    <label forHtml="email">Email Address:</label>
+                                    <label htmlFor="email">Email Address:</label>
                                     <input type="text" name="email" id="email" placeholder="Enter your email address" className='signup-input'
                                         onChange={e => {
                                             this.setState({
@@ -60,14 +64,24 @@ export default class Login extends Component {
                                             })
                                         }}
                                     />
-                                    <label forHtml="password">Password:</label>
-                                    <input type="password" name="password" id="password" placeholder="Enter your password" className='signup-input'
-                                        onChange={e => {
+                                    <label htmlFor="password">Password:</label>
+                                    <div className='signup-input-pass-container'>
+                                        <input type={this.state.isPasswordShown ? "text" : "password"} name="password" id="password" placeholder="Enter your password" className='signup-input-pass'
+                                            onChange={e => {
+                                                this.setState({
+                                                    pass: e.target.value,
+                                                })
+                                            }}
+                                        />
+                                        <div className="icon-pass-container"
+                                        onClick={()=>{
                                             this.setState({
-                                                pass: e.target.value,
+                                                isPasswordShown: !this.state.isPasswordShown
                                             })
-                                        }}
-                                    />
+                                        }}>
+                                        {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon'/> : <img src={ClosedEye} alt="closed-eye" className='pass-icon'/>}
+                                        </div>
+                                    </div>
                                     <Link to={"/forgot"}><p className="forgot">Forgot Password?</p></Link>
 
                                     {this.state.isError ? <div className='signup-error'>{this.state.errorMsg}</div> : <></>}

@@ -458,6 +458,16 @@ label {
     color: #6A4029
 }
 
+.profile-modal-title-error {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: red
+}
+
 .profile-btn-primary{
     background: #6A4029;
     border-radius: 5px;
@@ -472,6 +482,7 @@ label {
 .profile-btn-primary:focus, .profile-btn-primary:active{
     background-color: #6A4029;
     border: none;
+    outline: none;
 }
 
 @media (max-width: 1000px) {

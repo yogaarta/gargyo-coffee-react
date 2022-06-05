@@ -47,8 +47,8 @@ export default class Profile extends Component {
                     getBirthday: this.state.profile.birthday
 
                 })
-                console.log(this.state.profile.birthday)
-                console.log(this.state.getBirthday)
+                // console.log(this.state.profile.birthday)
+                // console.log(this.state.getBirthday)
 
             })
             .catch(error => {
@@ -105,6 +105,7 @@ export default class Profile extends Component {
                             <div className="editpass-button">Edit Password</div>
                             <div className="save-change-text">Do you want to save the change?</div>
                             <div className="save-change-button"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 onClick={() => {
                                     const { email, mobile_number, display_name, first_name, last_name, address, birthday, gender } = this.state;
                                     const body = { email, mobile_number, display_name, first_name, last_name, address, birthday, gender };
@@ -113,7 +114,6 @@ export default class Profile extends Component {
                                     axios
                                         .patch('http://localhost:8080/users', body, config)
                                         .then(result => {
-                                            alert(result.data.msg)
                                             this.setState({
                                                 isUpdated: true
                                             })
@@ -124,14 +124,8 @@ export default class Profile extends Component {
                                 }}
                             >Save Change</div>
                             <div className="cancel-change-button">Cancel</div>
-                            <div className="logout-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                {/* <Link to="/"
-                                    onClick={() => {
-                                        localStorage.removeItem("user-info")
-                                    }}
-                                > */}
+                            <div className="logout-button" data-bs-toggle="modal" data-bs-target="#logoutModal">
                                 Log Out
-                                {/* </Link> */}
                             </div>
                         </div>
                         <div className="form-card">
@@ -153,7 +147,7 @@ export default class Profile extends Component {
                                 </div>
                                 <div className="form-row">
                                     <div className="label-input">
-                                        <label for="email">Email Address:</label>
+                                        <label htmlFor="email">Email Address:</label>
                                         <input type="text" name="email" id="email" className="input-left profile-input"
                                             placeholder={"Enter email address"}
                                             value={this.state.isEdit ? null : this.state.profile.email}
@@ -166,7 +160,7 @@ export default class Profile extends Component {
                                         />
                                     </div>
                                     <div className="label-input">
-                                        <label for="phone">Mobile number:</label>
+                                        <label htmlFor="phone">Mobile number:</label>
                                         <input type="text" name="phone" id="phone" className="input-right profile-input"
                                             placeholder={this.state.profile.mobile_number ? this.state.profile.mobile_number : "Enter number"}
                                             value={this.state.isEdit ? null : this.state.profile.mobile_number}
@@ -180,7 +174,7 @@ export default class Profile extends Component {
                                     </div>
                                 </div>
                                 <div className="label-input">
-                                    <label for="address">Delivery Address:</label>
+                                    <label htmlFor="address">Delivery Address:</label>
                                     <input type="text" name="address" id="address"
                                         className="input-left profile-input"
                                         placeholder={"Enter delivery address"}
@@ -198,7 +192,7 @@ export default class Profile extends Component {
                                 </div>
                                 <div className="form-row">
                                     <div className="label-input">
-                                        <label for="display-name">Display Name:</label>
+                                        <label htmlFor="display-name">Display Name:</label>
                                         <input type="text" name="display-name" id="display-name" className="input-left profile-input"
                                             value={this.state.isEdit ? null : this.state.profile.display_name}
                                             disabled={this.state.isEdit ? false : true}
@@ -211,7 +205,7 @@ export default class Profile extends Component {
                                         />
                                     </div>
                                     <div className="label-input">
-                                        <label for="date">Birthday</label>
+                                        <label htmlFor="date">Birthday</label>
                                         <input type="date" name="date" id="date" className="input-right profile-input"
                                             placeholder={"Enter birth date"}
                                             // value={"1995-04-15"} 
@@ -226,7 +220,7 @@ export default class Profile extends Component {
                                     </div>
                                 </div>
                                 <div className="label-input">
-                                    <label for="first-name">First Name:</label>
+                                    <label htmlFor="first-name">First Name:</label>
                                     <input type="text" name="first-name" id="first-name" className="input-left profile-input"
                                         placeholder={"Enter first name"}
                                         value={this.state.isEdit ? null : this.state.profile.first_name}
@@ -239,7 +233,7 @@ export default class Profile extends Component {
                                     />
                                 </div>
                                 <div className="label-input">
-                                    <label for="last-name">Last Name:</label>
+                                    <label htmlFor="last-name">Last Name:</label>
                                     <input type="text" name="last-name" id="last-name" className="input-left profile-input"
                                         placeholder={"Enter last name"}
                                         value={this.state.isEdit ? null : this.state.profile.last_name}
@@ -254,6 +248,7 @@ export default class Profile extends Component {
                                 <div className="malefemale">
                                     <label className="radio-container">Male
                                         <input type="radio" name="radio"
+                                            disabled={this.state.isEdit ? false : true}
                                             onChange={() => {
                                                 this.setState({
                                                     gender: "male"
@@ -264,6 +259,7 @@ export default class Profile extends Component {
                                     </label>
                                     <label className="radio-container">Female
                                         <input type="radio" name="radio"
+                                            disabled={this.state.isEdit ? false : true}
                                             onChange={() => {
                                                 this.setState({
                                                     gender: "female"
@@ -278,23 +274,43 @@ export default class Profile extends Component {
                     </div>
                 </main >
                 <Footer />
-                {/* MODAL */}
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title profile-modal-title" id="exampleModalLabel">Are You Sure?</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                {/* LOGOUT MODAL */}
+                <div className="modal fade" id="logoutModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title profile-modal-title" id="exampleModalLabel">Are You Sure?</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                 <Link to="/"
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <Link to="/"
                                     onClick={() => {
                                         localStorage.removeItem("user-info")
                                     }}
                                 >
-                                <button type="button" class="btn btn-primary profile-btn-primary" data-bs-dismiss="modal">Log Out</button>
+                                    <button type="button" className="btn btn-primary profile-btn-primary" data-bs-dismiss="modal">Log Out</button>
                                 </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* UPDATE MODAL */}
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title profile-modal-title" id="exampleModalLabel">Update Success</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-primary profile-btn-primary" data-bs-dismiss="modal"
+                                    onClick={() => {
+                                        this.setState({
+                                            isRegistered: true
+                                        })
+                                    }}
+                                >Proceed</button>
                             </div>
                         </div>
                     </div>

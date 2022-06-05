@@ -19,12 +19,13 @@ class ProductDetail extends Component {
 
     componentDidMount() {
         const { params } = this.props
+        console.log(`props ${params}`)
         axios
             .get(`http://localhost:8080/products/${params.id}`)
             .then(result => {
                 console.log(this.state.product)
                 this.setState({
-                    product: result.data.data[0]
+                    product: result.data.data[0],
                 })
             })
             .catch(error => {
@@ -37,7 +38,7 @@ class ProductDetail extends Component {
             <div>
                 <Header />
                 <section className="pd-main-container">
-                    <div className="pd-title-menu">Favorite {'&'} Promo <span>{`> ${this.state.product.name}`}</span></div>
+                    <div className="pd-title-menu">{`${this.state.product.category}   `}<span>{`>  ${this.state.product.name}`}</span></div>
                     <section className="pd-main-content">
                         <div className="pd-left-content">
                             <div className="pd-main-img-container">
@@ -63,9 +64,15 @@ class ProductDetail extends Component {
                                 <div className="pd-choose-size">
                                     <h4 className="pd-size-title">Choose a size</h4>
                                     <div className="pd-size-container">
-                                        <div className="pd-size-vector">R</div>
-                                        <div className="pd-size-vector">L</div>
-                                        <div className="pd-size-vector">XL</div>
+                                        <label className="pd-size-vector">R
+                                            <input type="radio" className='pd-size-input' name='pd-size-input' /><span className='pd-size-checkmark'></span>
+                                        </label>
+                                        <label className="pd-size-vector">L
+                                            <input type="radio" className='pd-size-input' name='pd-size-input' /><span className='pd-size-checkmark'></span>
+                                        </label>
+                                        <label className="pd-size-vector">XL
+                                            <input type="radio" className='pd-size-input' name='pd-size-input' /><span className='pd-size-checkmark'></span>
+                                        </label>
                                     </div>
                                 </div>
                             </div>

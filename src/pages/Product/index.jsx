@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import { Link } from 'react-router-dom'
+import withSearchParam from '../../Helper/withSearchParam'
 // import { Routes, Route, Link } from 'react-router-dom'
 
 
@@ -16,7 +17,7 @@ import Check from "../../assets/img/Vectorcheck.png"
 
 // import ColdBrew from "../../assets/img/coldbrew.png"
 
-export default class Product extends Component {
+class Product extends Component {
     constructor() {
         super();
         this.state = {
@@ -219,6 +220,7 @@ export default class Product extends Component {
     }
 
     render() {
+        // const { searchParam } = this.props
         return (
             <div>
                 <Header />
@@ -388,7 +390,9 @@ export default class Product extends Component {
                                                 </div>
                                                 <div className="custom-product-promo">0%</div>
                                                 <div className="card-body custom-product-info">
-                                                    <h5 className="card-title custom-product-name">{product.name}</h5>
+                                                    <h5 className="card-title custom-product-name">
+                                                        {product.name}
+                                                    </h5>
                                                     <p className="card-text custom-product-price">IDR. {product.price}</p>
                                                 </div>
                                             </div>
@@ -405,3 +409,5 @@ export default class Product extends Component {
         )
     }
 }
+
+export default withSearchParam(Product)
