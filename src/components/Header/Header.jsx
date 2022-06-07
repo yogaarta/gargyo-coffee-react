@@ -88,7 +88,7 @@ export default class Header extends Component {
                             </div>
                             <div className="col">
                                 <Link to="/profile">
-                                    <img src={MiniPict} alt="mini-pict" className="mini-photo" />
+                                    <img src={this.props.profile_picture ? `http://localhost:8080${this.props.profile_picture}` : MiniPict} alt="mini-pict" className="mini-photo" />
                                 </Link>
                             </div>
                         </div>

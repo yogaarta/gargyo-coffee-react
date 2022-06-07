@@ -32,6 +32,18 @@ export default class Profile extends Component {
         }
     }
 
+    dateFormat = () =>{
+        let date = new Date(this.state.profile.birthday)
+        let year = date.getFullYear()
+        let month = date.getMonth() + 1
+        if(month.length < 2) month = '0' + month.toString()
+        let day = date.getDate()
+        if(day.length < 2) day = '0' + day.toString()
+        let newDate = `${year}-${month}-${day}`
+        // let newDate = date.toISOString().split('T')[0]
+        return newDate
+    }
+
     componentDidMount() {
         document.title = "Profile"
         const { token } = JSON.parse(localStorage.getItem("user-info"))
@@ -44,12 +56,6 @@ export default class Profile extends Component {
                 this.setState({
                     profile: result.data.data[0],
                 })
-                this.setState({
-                    getBirthday: this.state.profile.birthday
-
-                })
-                // console.log(this.state.profile.birthday)
-                // console.log(this.state.getBirthday)
 
             })
             .catch(error => {
@@ -89,14 +95,14 @@ export default class Profile extends Component {
         }
         return (
             <div>
-                <Header />
+                <Header profile_picture={this.state.profile.profile_picture}/>
                 <main className="main">
                     <div>
                         <h3 className="user-profile">User Profile</h3>
                     </div>
                     <div className="main-card">
                         <div className="profile-card">
-                            <div><img src={Profpic} alt="profile_photo" className="profile-picture" />
+                            <div className='profile-picture-container'><img src={this.state.profile.profile_picture ? `http://localhost:8080${this.state.profile.profile_picture}`: Profpic} alt="profile_photo" className="profile-picture" />
                             </div>
                             <div className="profile-text">
                                 <h4 className="profile-name">{this.state.profile.display_name ? this.state.profile.display_name : "Display Name"}</h4>
@@ -159,6 +165,7 @@ export default class Profile extends Component {
                                     <h4 className="form-title">Contacts</h4>
                                     <div className="edit-bullet"
                                         onClick={() => {
+                                            console.log(this.dateFormat())
                                             this.state.isEdit ?
                                                 this.setState({
                                                     isEdit: false
@@ -233,8 +240,9 @@ export default class Profile extends Component {
                                         <label htmlFor="date">Birthday</label>
                                         <input type="date" name="date" id="date" className="input-right profile-input"
                                             placeholder={"Enter birth date"}
-                                            // value={"1995-04-15"} 
-                                            //{this.state.isEdit ? null : new Date("1995-04-15")}
+                                            value=
+                                            // {"1995-04-15"}
+                                            {this.state.isEdit ? null : this.state.profile.birthday}
                                             disabled={this.state.isEdit ? false : true}
                                             onChange={(e) => {
                                                 this.setState({
