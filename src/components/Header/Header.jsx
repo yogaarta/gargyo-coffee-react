@@ -14,7 +14,8 @@ export default class Header extends Component {
         this.state = {
             isLoggedIn: localStorage.getItem("user-info") ? true : false,
             isSearch: true,
-            setSearchName: props
+            setSearchName: props,
+            pageActive: "home"
         }
     }
     render() {
@@ -27,10 +28,34 @@ export default class Header extends Component {
                     </div>
                     <div className="custom-nav-list col-6">
                         <ul>
-                            <li><Link to="/" className="custom-inactive-nav">Home</Link></li>
-                            <li><Link to="/product" className="custom-inactive-nav">Product</Link></li>
-                            <li><Link to="/payment" className="custom-inactive-nav">Your Cart</Link></li>
-                            <li><Link to="/history" className="custom-inactive-nav">History</Link></li>
+                            <li><Link to="/" className={this.state.pageActive === "home" ? "custom-active-nav" :"custom-inactive-nav"} 
+                            onClick={()=>{
+                                this.setState({
+                                    pageActive: "home"
+                                })
+                            }}
+                            >Home</Link></li>
+                            <li><Link to="/product" className={this.state.pageActive === "product" ? "custom-active-nav" :"custom-inactive-nav"}
+                            onClick={()=>{
+                                this.setState({
+                                    pageActive: "product"
+                                })
+                            }}
+                            >Product</Link></li>
+                            <li><Link to="/payment" className={this.state.pageActive === "cart" ? "custom-active-nav" :"custom-inactive-nav"}
+                            onClick={()=>{
+                                this.setState({
+                                    pageActive: "cart"
+                                })
+                            }}
+                            >Your Cart</Link></li>
+                            <li><Link to="/history" className={this.state.pageActive === "history" ? "custom-active-nav" :"custom-inactive-nav"}
+                            onClick={()=>{
+                                this.setState({
+                                    pageActive: "history"
+                                })
+                            }}
+                            >History</Link></li>
                         </ul>
                     </div>
                     {this.state.isLoggedIn ?

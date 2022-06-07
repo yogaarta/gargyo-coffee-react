@@ -4,6 +4,7 @@ import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import { Link } from 'react-router-dom'
 import withSearchParam from '../../Helper/withSearchParam'
+import withLocation from '../../Helper/withLocation'
 // import { Routes, Route, Link } from 'react-router-dom'
 
 
@@ -23,16 +24,11 @@ class Product extends Component {
         this.state = {
             product: [],
             categoryActive: "all",
-            isFavorite: false,
-            isCoffee: false,
-            isNonCoffee: false,
-            isFood: false,
-            isAll: true,
             isFilter: false,
             sort: "category",
             order: "asc",
             searchName: "",
-            go: true
+            pageActive: "product"
 
         };
     }
@@ -284,4 +280,4 @@ class Product extends Component {
     }
 }
 
-export default withSearchParam(Product)
+export default withLocation(withSearchParam(Product))

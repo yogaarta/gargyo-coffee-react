@@ -26,6 +26,7 @@ export default class Profile extends Component {
             address: "",
             birthday: "",
             gender: "",
+            file: null,
             isUpdated: false,
             isEdit: false
         }
@@ -81,6 +82,7 @@ export default class Profile extends Component {
             })
         }
     }
+
     render() {
         if (this.state.isLoggedIn === false) {
             return <Navigate to="/" />
@@ -100,7 +102,16 @@ export default class Profile extends Component {
                                 <h4 className="profile-name">{this.state.profile.display_name ? this.state.profile.display_name : "Display Name"}</h4>
                                 <p className="profile-name">{this.state.profile.email}</p>
                             </div>
-                            <div className="choose-button">Choose photo</div>
+                            <label className="choose-button">
+                                <input type="file" name='image-upload' className='profile-input-img'
+                                    onChange={(e) => {
+                                        console.log(e.target.files[0])
+                                        this.setState({
+                                            file: e.target.files[0],
+                                        })
+                                    }}
+                                />
+                                Choose photo</label>
                             <div className="remove-button">Remove photo</div>
                             <div className="editpass-button">Edit Password</div>
                             <div className="save-change-text">Do you want to save the change?</div>
@@ -108,12 +119,26 @@ export default class Profile extends Component {
                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 onClick={() => {
                                     const { email, mobile_number, display_name, first_name, last_name, address, birthday, gender } = this.state;
-                                    const body = { email, mobile_number, display_name, first_name, last_name, address, birthday, gender };
+                                    // const formData = new FormData()
+                                    let body = new FormData()
+                                    body.append('profile_picture', this.state.file);
+                                    body.append('email', email);
+                                    body.append('mobile_number', mobile_number);
+                                    body.append('display_name', display_name);
+                                    body.append('first_name', first_name);
+                                    body.append('last_name', last_name);
+                                    body.append('address', address);
+                                    body.append('birthday', birthday);
+                                    body.append('gender', gender);
+                                    
+                                    // const body = { email, mobile_number, display_name, first_name, last_name, address, birthday, gender, file};
+                                    
                                     const { token } = JSON.parse(localStorage.getItem("user-info"))
-                                    const config = { headers: { Authorization: `Bearer ${token}` } }
+                                    const config = { headers: { Authorization: `Bearer ${token}`, "content-type": "multipart/form-data" } }
                                     axios
                                         .patch('http://localhost:8080/users', body, config)
                                         .then(result => {
+                                            console.log(result)
                                             this.setState({
                                                 isUpdated: true
                                             })

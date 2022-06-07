@@ -31,7 +31,7 @@ class ProductDetail extends Component {
 
     componentDidMount() {
         const { params } = this.props
-        console.log(`props ${params}`)
+        console.log(`props ${this.props}`)
         axios
             .get(`http://localhost:8080/products/${params.id}`)
             .then(result => {
