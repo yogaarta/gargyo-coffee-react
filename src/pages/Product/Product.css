@@ -329,6 +329,33 @@
     color: #6A4029;
 }
 
+.product-page-button-container{
+    display: flex;
+    justify-content: center;
+    column-gap: 100px;
+    margin-bottom: 20px;
+}
+
+.product-page-button-prev, .product-page-button-next{
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #6A4029;
+    border: 2px #6A4029 solid;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
 .custom-notes {
     font-family: Poppins;
     font-size: 17px;

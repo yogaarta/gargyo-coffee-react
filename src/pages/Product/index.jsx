@@ -269,6 +269,10 @@ class Product extends Component {
                                         </div>
                                     ))}
                             </div>
+                            <div className='product-page-button-container'>
+                                <div className="product-page-button-prev">Prev Page</div>
+                                <div className="product-page-button-next">Next Page</div>
+                            </div>
                             <div className="custom-notes">*the price has been cutted by discount appears</div>
                         </div>
                     </main>

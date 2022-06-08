@@ -32,17 +32,17 @@ export default class Profile extends Component {
         }
     }
 
-    dateFormat = () =>{
-        let date = new Date(this.state.profile.birthday)
-        let year = date.getFullYear()
-        let month = date.getMonth() + 1
-        if(month.length < 2) month = '0' + month.toString()
-        let day = date.getDate()
-        if(day.length < 2) day = '0' + day.toString()
-        let newDate = `${year}-${month}-${day}`
-        // let newDate = date.toISOString().split('T')[0]
-        return newDate
-    }
+    // dateFormat = () =>{
+    //     let date = new Date(this.state.profile.birthday)
+    //     let year = date.getFullYear()
+    //     let month = date.getMonth() + 1
+    //     if(month.length < 2) month = '0' + month.toString()
+    //     let day = date.getDate()
+    //     if(day.length < 2) day = '0' + day.toString()
+    //     let newDate = `${year}-${month}-${day}`
+    //     // let newDate = date.toISOString().split('T')[0]
+    //     return newDate
+    // }
 
     componentDidMount() {
         document.title = "Profile"
@@ -108,7 +108,7 @@ export default class Profile extends Component {
                                 <h4 className="profile-name">{this.state.profile.display_name ? this.state.profile.display_name : "Display Name"}</h4>
                                 <p className="profile-name">{this.state.profile.email}</p>
                             </div>
-                            <label className="choose-button">
+                            <label htmlFor='image-upload' className="choose-button">
                                 <input type="file" name='image-upload' className='profile-input-img'
                                     onChange={(e) => {
                                         console.log(e.target.files[0])
@@ -125,7 +125,7 @@ export default class Profile extends Component {
                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 onClick={() => {
                                     const { email, mobile_number, display_name, first_name, last_name, address, birthday, gender } = this.state;
-                                    // const formData = new FormData()
+                                    
                                     let body = new FormData()
                                     body.append('profile_picture', this.state.file);
                                     body.append('email', email);
@@ -137,7 +137,6 @@ export default class Profile extends Component {
                                     body.append('birthday', birthday);
                                     body.append('gender', gender);
                                     
-                                    // const body = { email, mobile_number, display_name, first_name, last_name, address, birthday, gender, file};
                                     
                                     const { token } = JSON.parse(localStorage.getItem("user-info"))
                                     const config = { headers: { Authorization: `Bearer ${token}`, "content-type": "multipart/form-data" } }

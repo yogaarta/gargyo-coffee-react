@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import './ProductDetail.css'
 import withParams from '../../Helper/withParams'
+import { counterUp, counterDown } from '../../redux/actionCreator/counter'
 
 // import img
 import axios from 'axios'
@@ -20,7 +22,7 @@ class ProductDetail extends Component {
         }
     }
 
-    cartHandle = (e) =>{
+    cartHandle = (e) => {
         e.preventDefault();
         // this.setState({
         //     allSize: this.state.allSize.push(this.state.size),
@@ -46,6 +48,8 @@ class ProductDetail extends Component {
     }
 
     render() {
+        const { counter, dispatch } = this.props
+        console.log(counter)
         return (
             <div>
                 <Header />
@@ -139,7 +143,7 @@ class ProductDetail extends Component {
                             <div className="pd-checkout-info">
                                 <h4 className="pd-checkout-name">{this.state.product.name}</h4>
                                 <div className="pd-checkout-details">
-                                    {this.state.allSize.map((size)=>(
+                                    {this.state.allSize.map((size) => (
                                         <p>x1 {size === "R" ? "Regular" : size === "L" ? "Large" : "Extra Large"}</p>
                                     ))}
                                     {/* <p>{this.state.allSize}</p>
@@ -148,9 +152,9 @@ class ProductDetail extends Component {
                                 </div>
                             </div>
                             <div className="pd-checkout-quantity">
-                                <div className="pd-minus-button">-</div>
-                                <div className="pd-quantity">2</div>
-                                <div className="pd-plus-button">+</div>
+                                <div className="pd-minus-button" onClick={() => dispatch(counterDown())}>-</div>
+                                <div className="pd-quantity">{counter.counter} </div>
+                                <div className="pd-plus-button" onClick={() => dispatch(counterUp())}>+</div>
                             </div>
                         </div>
                         <div className="pd-checkout-button">CHECKOUT</div>
@@ -162,4 +166,11 @@ class ProductDetail extends Component {
     }
 }
 
-export default withParams(ProductDetail)
+const mapStateToProps = (reduxState) => {
+    const { counter } = reduxState
+    return {
+        counter
+    }
+}
+
+export default connect(mapStateToProps)(withParams(ProductDetail))
