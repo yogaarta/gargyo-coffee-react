@@ -11,9 +11,12 @@ import ClosedEye from "../../assets/img/closed-eye.png"
 
 
 import "./Login.css"
-import axios from 'axios'
+// import axios from 'axios'
+// import { doLogin } from '../../utility/auth'
+import { connect } from 'react-redux'
+import { loginAction } from '../../redux/actionCreator/login'
 
-export default class Login extends Component {
+class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -34,6 +37,7 @@ export default class Login extends Component {
         if (this.state.isSuccess === true) {
             return <Navigate to="/" />
         }
+        // console.log(this.props.)
         return (
             <div>
                 <div className="global-container">
@@ -91,22 +95,23 @@ export default class Login extends Component {
                                         onClick={() => {
                                             const { email, pass } = this.state;
                                             const body = { email, pass };
-                                            axios
-                                                .post("http://localhost:8080/auth", body)
-                                                .then(result => {
-                                                    console.log(result.data);
-                                                    localStorage.setItem("user-info", JSON.stringify(result.data.data));
-                                                    this.setState({
-                                                        isSuccess: true
-                                                    })
-                                                })
-                                                .catch(error => {
-                                                    console.log(error.response.data);
-                                                    this.setState({
-                                                        isError: true,
-                                                        errorMsg: `${error.response.data.err.msg}`
-                                                    })
-                                                })
+                                            this.props.dispatch(loginAction(body))
+                                            // axios
+                                            //     .post("http://localhost:8080/auth", body)
+                                            //     .then(result => {
+                                            //         console.log(result.data);
+                                            //         localStorage.setItem("user-info", JSON.stringify(result.data.data));
+                                            //         this.setState({
+                                            //             isSuccess: true
+                                            //         })
+                                            //     })
+                                            //     .catch(error => {
+                                            //         console.log(error.response.data);
+                                            //         this.setState({
+                                            //             isError: true,
+                                            //             errorMsg: `${error.response.data.err.msg}`
+                                            //         })
+                                            //     })
                                         }}
                                     >Login</div>
                                 </form>
@@ -178,3 +183,5 @@ export default class Login extends Component {
         )
     }
 }
+
+export default connect()(Login)

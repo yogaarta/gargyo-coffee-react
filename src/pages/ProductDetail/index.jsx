@@ -33,7 +33,6 @@ class ProductDetail extends Component {
 
     componentDidMount() {
         const { params } = this.props
-        console.log(`props ${this.props}`)
         axios
             .get(`http://localhost:8080/products/${params.id}`)
             .then(result => {
@@ -48,8 +47,7 @@ class ProductDetail extends Component {
     }
 
     render() {
-        const { counter, dispatch } = this.props
-        console.log(counter)
+        const { counter, doCounterUp, doCounterDown } = this.props
         return (
             <div>
                 <Header />
@@ -112,21 +110,21 @@ class ProductDetail extends Component {
                             <div className="pd-delivery-container">
                                 <h4 className="pd-delivery-title">Choose Delivery Methods</h4>
                                 <div className="pd-delivery-button">
-                                    {/* <label className="radio-container">Dine in
-                                        <input type="radio" name="radio" />
-                                        <span className="checkmark"></span>
+                                    <label className="pd-dm-button-inactive">
+                                        <input type="radio" name="pd-dm-input" className='pd-dm-input' />
+                                        <span className="pd-dm-checkmark">Dine in</span>
                                     </label>
-                                    <label className="radio-container">Door Delivery
-                                        <input type="radio" name="radio" />
-                                        <span className="checkmark"></span>
+                                    <label className="pd-dm-button-inactive">
+                                        <input type="radio" name="pd-dm-input" className='pd-dm-input' />
+                                        <span className="pd-dm-checkmark">Door Delivery</span>
                                     </label>
-                                    <label className="radio-container">Pick up
-                                        <input type="radio" name="radio" />
-                                        <span className="checkmark"></span>
-                                    </label> */}
-                                    <div className="pd-delivery-dinein-button">Dine in</div>
+                                    <label className="pd-dm-button-inactive">
+                                        <input type="radio" name="pd-dm-input" className='pd-dm-input' />
+                                        <span className="pd-dm-checkmark">Pick up</span>
+                                    </label>
+                                    {/* <div className="pd-delivery-dinein-button">Dine in</div>
                                     <div className="pd-delivery-door-button">Door Delivery</div>
-                                    <div className="pd-delivery-pickup-button">Pick up</div>
+                                    <div className="pd-delivery-pickup-button">Pick up</div> */}
                                 </div>
                                 <form className="pd-settime">
                                     <label htmlFor="settime">Set time:</label>
@@ -152,9 +150,9 @@ class ProductDetail extends Component {
                                 </div>
                             </div>
                             <div className="pd-checkout-quantity">
-                                <div className="pd-minus-button" onClick={() => dispatch(counterDown())}>-</div>
+                                <div className="pd-minus-button" onClick={() => doCounterDown()}>-</div>
                                 <div className="pd-quantity">{counter.counter} </div>
-                                <div className="pd-plus-button" onClick={() => dispatch(counterUp())}>+</div>
+                                <div className="pd-plus-button" onClick={() => doCounterUp()}>+</div>
                             </div>
                         </div>
                         <div className="pd-checkout-button">CHECKOUT</div>
@@ -173,4 +171,15 @@ const mapStateToProps = (reduxState) => {
     }
 }
 
-export default connect(mapStateToProps)(withParams(ProductDetail))
+const mapDispatchToProps = (dispatch) => {
+    return {
+        doCounterUp: () => {
+            dispatch(counterUp())
+        },
+        doCounterDown: () => {
+            dispatch(counterDown())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withParams(ProductDetail))

@@ -9,7 +9,7 @@ const counterReducers = (prevState = initialState, action) => {
         case counterUpAction:
             return { ...prevState, counter: prevState.counter + 1 }
         case counterDownAction:
-            return { ...prevState, counter: prevState.counter - 1 }
+            return { ...prevState, counter: prevState.counter === 0 ? prevState.counter = 0 : prevState.counter - 1 }
         default:
             return prevState
     }

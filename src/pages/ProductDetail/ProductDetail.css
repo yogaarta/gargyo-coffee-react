@@ -18,9 +18,9 @@
     color: #4F5665;
 }
 
-.pd-title-menu a{
+.pd-title-menu a {
     text-decoration: none;
-    
+
     color: #4F5665;
 }
 
@@ -270,14 +270,14 @@
     border-radius: 50%;
     position: absolute;
     background-color: #F4F4F8;
-  }
+}
 
 
-.pd-size-vector:hover input ~ .pd-size-checkmark{
+.pd-size-vector:hover input~.pd-size-checkmark {
     background-color: #fcaf16;
 }
 
-.pd-size-vector input:checked ~ .pd-size-checkmark{
+.pd-size-vector input:checked~.pd-size-checkmark {
     background-color: #FFBA33;
 }
 
@@ -293,6 +293,7 @@
     -o-user-select: none;
 }
 
+
 .pd-delivery-container {
     display: flex;
     flex-direction: column;
@@ -303,6 +304,100 @@
 
 .pd-delivery-button {
     display: flex;
+}
+
+.pd-dm-button-active {
+    width: 120px;
+    height: 40px;
+    margin: 20px 10px;
+
+    background: #6A4029;
+    box-shadow: 0px 6px 20px rgba(137, 85, 55, 0.4);
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.pd-dm-button-inactive {
+    width: 120px;
+    height: 40px;
+    margin: 20px 10px;
+
+    background: #F4F4F8;
+    border-radius: 10px;
+    border: 1px solid #BABABA59;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #9F9F9F;
+
+}
+
+.pd-dm-input {
+    position: absolute;
+    /* opacity: 0; */
+}
+
+.pd-dm-checkmark{
+    position: absolute;
+    width: 130px;
+    height: 40px;
+    margin: 20px 10px;
+
+    background: #F4F4F8;
+    border-radius: 10px;
+    border: 1px solid #BABABA59;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #9F9F9F;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.pd-dm-button-inactive:hover input~.pd-dm-checkmark {
+    background: #6A4029;
+    box-shadow: 0px 6px 20px rgba(137, 85, 55, 0.4);
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.pd-dm-button-inactive input:checked~.pd-dm-checkmark {
+    background: #6A4029;
+    box-shadow: 0px 6px 20px rgba(137, 85, 55, 0.4);
+    color: #FFFFFF;
+    font-weight: 700;
 }
 
 .pd-delivery-dinein-button {
