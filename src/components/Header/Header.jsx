@@ -7,12 +7,14 @@ import Logo from "../../assets/img/coffee logo.png"
 import MagnGlass from "../../assets/img/Magn Glass Vector.png"
 import ChatLogo from "../../assets/img/chat logo.png"
 import MiniPict from "../../assets/img/profile photo.png"
+import { connect } from 'react-redux';
 
-export default class Header extends Component {
+class Header extends Component {
     constructor(props) {
         super(props);
+        const { isSuccess } = this.props
         this.state = {
-            isLoggedIn: localStorage.getItem("user-info") ? true : false,
+            isLoggedIn: isSuccess ? true : false,
             isSearch: true,
             setSearchName: props,
             pageActive: "home"
@@ -28,58 +30,58 @@ export default class Header extends Component {
                     </div>
                     <div className="custom-nav-list col-6">
                         <ul>
-                            <li><Link to="/" className={this.state.pageActive === "home" ? "custom-active-nav" :"custom-inactive-nav"} 
-                            onClick={()=>{
-                                this.setState({
-                                    pageActive: "home"
-                                })
-                            }}
+                            <li><Link to="/" className={this.state.pageActive === "home" ? "custom-active-nav" : "custom-inactive-nav"}
+                                onClick={() => {
+                                    this.setState({
+                                        pageActive: "home"
+                                    })
+                                }}
                             >Home</Link></li>
-                            <li><Link to="/product" className={this.state.pageActive === "product" ? "custom-active-nav" :"custom-inactive-nav"}
-                            onClick={()=>{
-                                this.setState({
-                                    pageActive: "product"
-                                })
-                            }}
+                            <li><Link to="/product" className={this.state.pageActive === "product" ? "custom-active-nav" : "custom-inactive-nav"}
+                                onClick={() => {
+                                    this.setState({
+                                        pageActive: "product"
+                                    })
+                                }}
                             >Product</Link></li>
-                            <li><Link to="/payment" className={this.state.pageActive === "cart" ? "custom-active-nav" :"custom-inactive-nav"}
-                            onClick={()=>{
-                                this.setState({
-                                    pageActive: "cart"
-                                })
-                            }}
+                            <li><Link to="/payment" className={this.state.pageActive === "cart" ? "custom-active-nav" : "custom-inactive-nav"}
+                                onClick={() => {
+                                    this.setState({
+                                        pageActive: "cart"
+                                    })
+                                }}
                             >Your Cart</Link></li>
-                            <li><Link to="/history" className={this.state.pageActive === "history" ? "custom-active-nav" :"custom-inactive-nav"}
-                            onClick={()=>{
-                                this.setState({
-                                    pageActive: "history"
-                                })
-                            }}
+                            <li><Link to="/history" className={this.state.pageActive === "history" ? "custom-active-nav" : "custom-inactive-nav"}
+                                onClick={() => {
+                                    this.setState({
+                                        pageActive: "history"
+                                    })
+                                }}
                             >History</Link></li>
                         </ul>
                     </div>
                     {this.state.isLoggedIn ?
                         <div className="custom-nav-icon col-3 row">
                             <div className="col header-search-container">
-                                { this.state.isSearch ? 
+                                {this.state.isSearch ?
 
                                     <img src={MagnGlass} alt="magnifying-glass" className='magn-glass'
-                                    onClick={() => {
-                                        this.setState({
-                                            isSearch: false
-                                        })
-                                    }}
+                                        onClick={() => {
+                                            this.setState({
+                                                isSearch: false
+                                            })
+                                        }}
                                     />
-                                :
-                                <input type="text" id="header-search" name="search" className='header-search' placeholder="Search" 
-                                // onKeyUp={(e)=>{
-                                //     if(e.key === 'Enter'){
-                                //         console.log(this.state.searchName)
-                                //     }
-                                // }} onChange={e=>{
-                                //     this.props.setSearchName(e.target.value)
-                                // }}
-                                />
+                                    :
+                                    <input type="text" id="header-search" name="search" className='header-search' placeholder="Search"
+                                    // onKeyUp={(e)=>{
+                                    //     if(e.key === 'Enter'){
+                                    //         console.log(this.state.searchName)
+                                    //     }
+                                    // }} onChange={e=>{
+                                    //     this.props.setSearchName(e.target.value)
+                                    // }}
+                                    />
                                 }
 
                             </div>
@@ -103,3 +105,10 @@ export default class Header extends Component {
         )
     }
 }
+
+const mapStateToProps = (reduxState) => {
+    const { auth: { isSuccess } } = reduxState
+    return { isSuccess }
+}
+
+export default connect(mapStateToProps)(Header)

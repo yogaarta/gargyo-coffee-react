@@ -1,5 +1,5 @@
 .main {
-    background-image: url(https://s3-alpha-sig.figma.com/img/9e15/a72e/b94b169a2b3bf7010f10c4fce8c1d0a1?Expires=1654473600&Signature=SzxirS4qSS7fGIC1bBjQqznDY2N-rW5tvopCQKE8wQJeGfU6nbbRKS0JobChTmwiev4p1V-WEOrUP6ZWc~12MmWArB3vc-Irhpc7H9RYAc05eImeAn2NY3ulzPSM7Qpm7FprlL-0hnLI10QrdXJyj7LreS8OrhPmXfr5kOxdvI7t3VNLbKKEibLObENJY57hb-RadzehE-hKqCocbUmlOQtGh1kWnKEQmN1IgGNLXNCWpNX8LX7Zy~-smy5muGC96OB5Fhfz5LuCqXwq1HQ~PhKcOwFt-PFihuzmaHESBznSyon53prj-I5oaE0bcnrgH9CVs-QacCYZoYaPhUNZww__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
+    background-image: url("../../assets/img/profile-bg.jpg");
     display: flex;
     flex-direction: column;
     padding-bottom: 100px;
@@ -40,6 +40,9 @@
 .profile-picture-container{
     width: 185px;
     height: 185px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-picture {
@@ -517,8 +520,8 @@ label {
     }
 
     .profile-picture {
-        width: 150px;
-        height: 150px;
+        max-width: 150px;
+        max-height: 150px;
     }
 
     .form-row {

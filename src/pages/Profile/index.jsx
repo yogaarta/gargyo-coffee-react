@@ -9,13 +9,16 @@ import "./Profile.css"
 import Profpic from "../../assets/img/profile photo.png"
 import EditIcon from "../../assets/img/Vectoredit.png"
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { logoutAction } from '../../redux/actionCreator/login'
 
 
-export default class Profile extends Component {
+class Profile extends Component {
     constructor() {
         super();
+        // const { isSuccess } = this.props
         this.state = {
-            isLoggedIn: localStorage.getItem("user-info") ? true : false,
+            // isLoggedIn: isSuccess ? true : false,
             profile: [],
             getBirthday: "",
             email: "",
@@ -46,8 +49,8 @@ export default class Profile extends Component {
 
     componentDidMount() {
         document.title = "Profile"
-        const { token } = JSON.parse(localStorage.getItem("user-info"))
-
+        const { token = null } = this.props.userInfo || {}
+        console.log(this.props)
         const config = { headers: { Authorization: `Bearer ${token}` } }
         axios
             .get('http://localhost:8080/users', config)
@@ -67,9 +70,8 @@ export default class Profile extends Component {
     }
 
     componentDidUpdate() {
+        const { token } = this.props.userInfo
         if (this.state.isUpdated) {
-            const { token } = JSON.parse(localStorage.getItem("user-info"))
-
             const config = { headers: { Authorization: `Bearer ${token}` } }
             axios
                 .get('http://localhost:8080/users', config)
@@ -90,26 +92,27 @@ export default class Profile extends Component {
     }
 
     render() {
-        if (this.state.isLoggedIn === false) {
+        const { isLoggedOut } = this.props
+        if (isLoggedOut === false) {
             return <Navigate to="/" />
         }
         return (
             <div>
-                <Header profile_picture={this.state.profile.profile_picture}/>
+                <Header profile_picture={this.state.profile.profile_picture} />
                 <main className="main">
                     <div>
                         <h3 className="user-profile">User Profile</h3>
                     </div>
                     <div className="main-card">
                         <div className="profile-card">
-                            <div className='profile-picture-container'><img src={this.state.profile.profile_picture ? `http://localhost:8080${this.state.profile.profile_picture}`: Profpic} alt="profile_photo" className="profile-picture" />
+                            <div className='profile-picture-container'><img src={this.state.profile.profile_picture ? `http://localhost:8080${this.state.profile.profile_picture}` : Profpic} alt="profile_photo" className="profile-picture" />
                             </div>
                             <div className="profile-text">
                                 <h4 className="profile-name">{this.state.profile.display_name ? this.state.profile.display_name : "Display Name"}</h4>
                                 <p className="profile-name">{this.state.profile.email}</p>
                             </div>
                             <label htmlFor='image-upload' className="choose-button">
-                                <input type="file" name='image-upload' className='profile-input-img'
+                                <input type="file" name='image-upload' id='image-upload' className='profile-input-img'
                                     onChange={(e) => {
                                         console.log(e.target.files[0])
                                         this.setState({
@@ -125,7 +128,7 @@ export default class Profile extends Component {
                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 onClick={() => {
                                     const { email, mobile_number, display_name, first_name, last_name, address, birthday, gender } = this.state;
-                                    
+
                                     let body = new FormData()
                                     body.append('profile_picture', this.state.file);
                                     body.append('email', email);
@@ -136,9 +139,9 @@ export default class Profile extends Component {
                                     body.append('address', address);
                                     body.append('birthday', birthday);
                                     body.append('gender', gender);
-                                    
-                                    
-                                    const { token } = JSON.parse(localStorage.getItem("user-info"))
+
+
+                                    const { token } = this.props.userInfo
                                     const config = { headers: { Authorization: `Bearer ${token}`, "content-type": "multipart/form-data" } }
                                     axios
                                         .patch('http://localhost:8080/users', body, config)
@@ -164,7 +167,7 @@ export default class Profile extends Component {
                                     <h4 className="form-title">Contacts</h4>
                                     <div className="edit-bullet"
                                         onClick={() => {
-                                            console.log(this.dateFormat())
+                                            // console.log(this.dateFormat())
                                             this.state.isEdit ?
                                                 this.setState({
                                                     isEdit: false
@@ -318,7 +321,7 @@ export default class Profile extends Component {
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                 <Link to="/"
                                     onClick={() => {
-                                        localStorage.removeItem("user-info")
+                                        this.props.dispatch(logoutAction())
                                     }}
                                 >
                                     <button type="button" className="btn btn-primary profile-btn-primary" data-bs-dismiss="modal">Log Out</button>
@@ -352,3 +355,10 @@ export default class Profile extends Component {
         )
     }
 }
+
+const mapStateToProps = (reduxState) => {
+    const { auth: { userInfo, isSuccess, isLoggedOut } } = reduxState
+    return { userInfo, isSuccess, isLoggedOut }
+}
+
+export default connect(mapStateToProps)(Profile)

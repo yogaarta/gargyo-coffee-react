@@ -7,12 +7,13 @@ import HistoryTransactionCard from '../../components/HistoryTransactionCard'
 
 import 'react-bootstrap'
 import './History.css'
+import { connect } from 'react-redux'
 
 // import img
 // import Coldbrew from "../../assets/img/tomatomix.png"
 
 
-export default class History extends Component {
+class History extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -20,10 +21,10 @@ export default class History extends Component {
         }
     }
 
-    componentDidMount(){
-        document.title="History"
+    componentDidMount() {
+        document.title = "History"
 
-        const { token } = JSON.parse(localStorage.getItem("user-info"))
+        const { token = null } = this.props.userInfo || {}
 
         const config = { headers: { Authorization: `Bearer ${token}` } }
         axios
@@ -70,7 +71,7 @@ export default class History extends Component {
                             </div>
                         </div> */}
                         {this.state.transactions.map((item) => (
-                            <HistoryTransactionCard key={item.id} name={item.name} price={item.total_price}/>
+                            <HistoryTransactionCard key={item.id} name={item.name} price={item.total_price} />
                         ))}
                     </section>
                 </main>
@@ -79,3 +80,10 @@ export default class History extends Component {
         )
     }
 }
+
+const mapStateToProps = (reduxState) => {
+    const { auth: { userInfo } } = reduxState
+    return { userInfo }
+}
+
+export default connect(mapStateToProps)(History)

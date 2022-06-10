@@ -17,7 +17,8 @@ import Forgot from "./pages/Forgot";
 import ProductDetail from "./pages/ProductDetail";
 import Payment from "./pages/Payment";
 import History from "./pages/History";
-import { PrivateNotLoggedIn, PrivateLoggedIn } from "./components/privateRoute";
+import PrivateLoggedIn from "./components/privateRoute/PrivateLoggedIn";
+import PrivateNotLoggedIn from "./components/privateRoute/PrivateNotLoggedIn";
 
 
 function App() {

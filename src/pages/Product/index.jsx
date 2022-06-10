@@ -11,10 +11,9 @@ import withLocation from '../../Helper/withLocation'
 import "./Product.css"
 
 import Check from "../../assets/img/Vectorcheck.png"
-// import ProductsFavorite from '../../components/Product/ProductsFavorite'
-// import ProductsAll from '../../components/Product/ProductAll'
-// import ProductsCoffee from '../../components/Product/ProductCoffee'
-// import ProductsNonCoffee from '../../components/Product/ProductNonCoffee'
+import Promo1 from "../../assets/img/promo1.png"
+import Promo2 from "../../assets/img/promo2.png"
+import Promo3 from "../../assets/img/promo3.png"
 
 // import ColdBrew from "../../assets/img/coldbrew.png"
 
@@ -113,7 +112,7 @@ class Product extends Component {
                         </div>
                         <div className="custom-promo-card row mother-day-card">
                             <div className="col-4 custom-promo-pict"><img
-                                src="https://s3-alpha-sig.figma.com/img/5272/76a9/8d88c62a29339c6f83f29e8f40c20178?Expires=1654473600&Signature=TUEQjdAA87kU1ApBgKY2V0FaD4FWNpaQjMyDhuKbLnyDH9DYhBxDrJV-SvgEq~pwZarvV6mQab17UL5Xva-StgGbmHaVcdQ0~7s4i-VYb66f9yrEXaMVz07UIoqOI~gc-NUV0TZVbxpIYOLfcaD8Sx9P5RqiqrjA-heWLoxqB7mkVbUyiI0bBnHhJQD5m03B51dZYRLjm3HT~Sd3yteUjjopTH6Kv0-jDBLznj0AeNxxYvhOUV~26EFJgqUQMEh-hk748c2lbbOGJOIWfNyR6rnzux9ce0nYlJ1MSI25bZENllkaJwFDQFPaTsN2HJX~UUIhbKEUjCHWHwG0BT3Z0A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                                src={Promo1}
                                 alt="mother's-day-promo" className="custom-promo-img" /></div>
                             <div className="col custom-card-text">
                                 <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
@@ -121,7 +120,7 @@ class Product extends Component {
                         </div>
                         <div className="custom-promo-card row sunday-morning-card">
                             <div className="col-4 custom-promo-pict"><img
-                                src="https://s3-alpha-sig.figma.com/img/ed87/b600/bcd624c9cdfab5f48a586cfe014785b0?Expires=1654473600&Signature=VgMpH8i1ujdkr0-GHAsvmHjvLuB8ByLAipCa4MgqaCMHvP7jjW0K49zCH0OIw4J9FAoOviSusT~blS-3LNfYJKC3pHauuFbjpV7jcNF5--4IvRaR7Dqw0xlDF5PNYXvGzSmotv-BMsKZpMRc2wixLWWplepKX3Q47CRJW7z5uLmM52wmVKDrT4cP5AAWybEoaKFHMNXykNZUQkmj68jtTehNjvctVjv04N-y2IiMbRCxYqGfcxU52hg68xyA8eD~Ix7i6meCHxtrFibC7bac2aMMs9cGnzCxxi8GlCpwcnNfyw~bI36Pu48mVOK23eUySOHYdu0VnKNdGNVf7GftzQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                                src={Promo2}
                                 alt="free-sunday-morning" className="custom-promo-img" /></div>
                             <div className="col custom-card-text">
                                 <p className="custom-card-info"><b>Get a cup of coffee for free on sunday morning</b><br />Only at 7 to 9
@@ -131,7 +130,7 @@ class Product extends Component {
                         </div>
                         <div className="custom-promo-card row mother-day-card">
                             <div className="col-4 custom-promo-pict"><img
-                                src="https://s3-alpha-sig.figma.com/img/5272/76a9/8d88c62a29339c6f83f29e8f40c20178?Expires=1654473600&Signature=TUEQjdAA87kU1ApBgKY2V0FaD4FWNpaQjMyDhuKbLnyDH9DYhBxDrJV-SvgEq~pwZarvV6mQab17UL5Xva-StgGbmHaVcdQ0~7s4i-VYb66f9yrEXaMVz07UIoqOI~gc-NUV0TZVbxpIYOLfcaD8Sx9P5RqiqrjA-heWLoxqB7mkVbUyiI0bBnHhJQD5m03B51dZYRLjm3HT~Sd3yteUjjopTH6Kv0-jDBLznj0AeNxxYvhOUV~26EFJgqUQMEh-hk748c2lbbOGJOIWfNyR6rnzux9ce0nYlJ1MSI25bZENllkaJwFDQFPaTsN2HJX~UUIhbKEUjCHWHwG0BT3Z0A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                                src={Promo1}
                                 alt="mother's-day-promo" className="custom-promo-img" /></div>
                             <div className="col custom-card-text">
                                 <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
@@ -139,7 +138,7 @@ class Product extends Component {
                         </div>
                         <div className="custom-promo-card row halloween-card">
                             <div className="col-4 custom-promo-pict"><img
-                                src="https://s3-alpha-sig.figma.com/img/e25b/8a97/346f786692a9f23c7fc959db9981ae5c?Expires=1654473600&Signature=fgAWcrLTmjq9ftQX3iF552Pr1tRRcYDAniWJ7DiVMtsyQqSuhgSVLgiBP7bBrgItb1Np66Zfv0EsWIoj7zD6teZbiXFhw8PE2a9grc1aOnLBdkjW7tT01jLyUuC-hgVfmT7x2a-TT25sC71jBJQJ9dFgYr4SCp70PQE4k9mBLaw3XViIpZlOuh~9qWLv5G30YsBnc8uzOgaBs5S8ZAtiTvf3ngm4ecIabKKTbKfllTkFJd-mStMTGBmaRQo-TYZBSSHJ~iDHOO8sogjRvl08r-dKubkIZ1LaR1KZd5o2Vnpky40dnMo-3gxMmXUyWRRY66iL7j0lPu-0GGQ0QBBGJQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                                src={Promo3}
                                 alt="halloween-promo" className="custom-promo-img" /></div>
                             <div className="col custom-card-text">
                                 <p className="custom-card-info"><b>HAPPY HALLOWEEN!

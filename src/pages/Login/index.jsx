@@ -34,9 +34,12 @@ class Login extends Component {
     }
 
     render() {
-        if (this.state.isSuccess === true) {
+        const { isSuccess, err } = this.props
+        if (isSuccess === true)
             return <Navigate to="/" />
-        }
+        // if (this.state.isSuccess === true) {
+        //     return <Navigate to="/" />
+        // }
         // console.log(this.props.)
         return (
             <div>
@@ -78,17 +81,17 @@ class Login extends Component {
                                             }}
                                         />
                                         <div className="icon-pass-container"
-                                        onClick={()=>{
-                                            this.setState({
-                                                isPasswordShown: !this.state.isPasswordShown
-                                            })
-                                        }}>
-                                        {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon'/> : <img src={ClosedEye} alt="closed-eye" className='pass-icon'/>}
+                                            onClick={() => {
+                                                this.setState({
+                                                    isPasswordShown: !this.state.isPasswordShown
+                                                })
+                                            }}>
+                                            {this.state.isPasswordShown ? <img src={OpenEye} alt="open-eye" className='pass-icon' /> : <img src={ClosedEye} alt="closed-eye" className='pass-icon' />}
                                         </div>
                                     </div>
                                     <Link to={"/forgot"}><p className="forgot">Forgot Password?</p></Link>
 
-                                    {this.state.isError ? <div className='signup-error'>{this.state.errorMsg}</div> : <></>}
+                                    {isSuccess === false ? <div className='signup-error'>{err.err.msg || {}}</div> : <></>}
 
 
                                     <div className="signup"
@@ -184,4 +187,9 @@ class Login extends Component {
     }
 }
 
-export default connect()(Login)
+const mapStateToProps = (reduxState) => {
+    const { auth: { userInfo, err, isSuccess } } = reduxState
+    return { userInfo, err, isSuccess }
+}
+
+export default connect(mapStateToProps)(Login)
