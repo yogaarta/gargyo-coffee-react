@@ -14,7 +14,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducers)
 
-// redux-logger
+// redux-logger middleware
 const logger = createLogger();
 const middlewares = applyMiddleware(rpm, logger)
 

@@ -8,6 +8,7 @@ import MagnGlass from "../../assets/img/Magn Glass Vector.png"
 import ChatLogo from "../../assets/img/chat logo.png"
 import MiniPict from "../../assets/img/profile photo.png"
 import { connect } from 'react-redux';
+import { searchProductAction } from '../../redux/actionCreator/searchProduct';
 
 class Header extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class Header extends Component {
         }
     }
     render() {
+        const {dispatch} = this.props
         return (
             <header>
                 <nav className="custom-nav-container row">
@@ -74,6 +76,7 @@ class Header extends Component {
                                     />
                                     :
                                     <input type="text" id="header-search" name="search" className='header-search' placeholder="Search"
+                                    onChange={(e)=> dispatch(searchProductAction(e.target.value))}
                                     // onKeyUp={(e)=>{
                                     //     if(e.key === 'Enter'){
                                     //         console.log(this.state.searchName)

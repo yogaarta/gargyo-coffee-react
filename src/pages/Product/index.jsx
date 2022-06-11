@@ -14,20 +14,23 @@ import Check from "../../assets/img/Vectorcheck.png"
 import Promo1 from "../../assets/img/promo1.png"
 import Promo2 from "../../assets/img/promo2.png"
 import Promo3 from "../../assets/img/promo3.png"
+import { connect } from 'react-redux'
 
 // import ColdBrew from "../../assets/img/coldbrew.png"
 
 class Product extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             product: [],
             categoryActive: "all",
             isFilter: false,
             sort: "category",
             order: "asc",
-            searchName: "",
-            pageActive: "product"
+            page: "1",
+            searchProduct: this.props.searchProduct,
+            pageActive: "product",
+            setSearchParams: this.props.setSearchParams.bind(this)
 
         };
     }
@@ -40,6 +43,8 @@ class Product extends Component {
 
     componentDidMount() {
         document.title = "Product"
+        console.log(this.state.searchProduct)
+        this.state.setSearchParams('')
         axios
             .get('http://localhost:8080/products')
             .then(result => {
@@ -54,17 +59,27 @@ class Product extends Component {
 
     componentDidUpdate() {
         if (this.state.isFilter) {
+            let params = ''
             let url = `http://localhost:8080/products`
             if (this.state.categoryActive === "all") {
                 url += `?`
             }
             if (this.state.categoryActive === "favorite") {
                 url += `/favorite?`
+                params += 'category=favorite&'
             }
             if (this.state.categoryActive !== "all" && this.state.categoryActive !== "favorite") {
                 url += `?category=${this.state.categoryActive}&`
+                params += `category=${this.state.categoryActive}&`
             }
-            url += `sort=${this.state.sort}&order=${this.state.order}`
+            
+            // if(this.props.searchProduct){
+            //     url += `name=${this.state.searchProduct}&`
+            //     params += `name=${this.state.searchProduct}&`
+            // }
+            url += `sort=${this.state.sort}&order=${this.state.order}&page=${this.state.page}`
+            params += `sort=${this.state.sort}&order=${this.state.order}`
+            this.state.setSearchParams(params)
 
             axios
                 .get(url)
@@ -283,4 +298,9 @@ class Product extends Component {
     }
 }
 
-export default withLocation(withSearchParam(Product))
+const mapStateToProps = (reduxState) => {
+    const { searchProduct: { searchProduct } } = reduxState
+    return { searchProduct }
+}
+
+export default connect(mapStateToProps)(withLocation(withSearchParam(Product)))
