@@ -73,10 +73,10 @@ class Product extends Component {
                 params += `category=${this.state.categoryActive}&`
             }
             
-            // if(this.props.searchProduct){
-            //     url += `name=${this.state.searchProduct}&`
-            //     params += `name=${this.state.searchProduct}&`
-            // }
+            if(this.props.searchProduct){
+                url += `name=${this.state.searchProduct}&`
+                params += `name=${this.state.searchProduct}&`
+            }
             url += `sort=${this.state.sort}&order=${this.state.order}&page=${this.state.page}`
             params += `sort=${this.state.sort}&order=${this.state.order}`
             this.state.setSearchParams(params)
