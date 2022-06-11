@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import withSearchParam from '../../Helper/withSearchParam'
 import withLocation from '../../Helper/withLocation'
 // import { Routes, Route, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { currencyFormatter } from '../../Helper/formater'
 
 
 import "./Product.css"
@@ -14,7 +16,6 @@ import Check from "../../assets/img/Vectorcheck.png"
 import Promo1 from "../../assets/img/promo1.png"
 import Promo2 from "../../assets/img/promo2.png"
 import Promo3 from "../../assets/img/promo3.png"
-import { connect } from 'react-redux'
 
 // import ColdBrew from "../../assets/img/coldbrew.png"
 
@@ -24,11 +25,14 @@ class Product extends Component {
         this.state = {
             product: [],
             categoryActive: "all",
-            isFilter: false,
+            doAxios: false,
             sort: "category",
             order: "asc",
-            page: "1",
+            page: 1,
+            limit: "12",
+            totalPage: "1",
             searchProduct: this.props.searchProduct,
+            meta: null,
             pageActive: "product",
             setSearchParams: this.props.setSearchParams.bind(this)
 
@@ -50,49 +54,51 @@ class Product extends Component {
             .then(result => {
                 this.setState({
                     product: result.data.data,
+                    totalPage: result.data.meta.totalPage
                 });
-                console.log(result)
             }).catch(error => {
                 console.log(error)
             })
     }
 
     componentDidUpdate() {
-        if (this.state.isFilter) {
+        if (this.state.doAxios) {
             let params = ''
             let url = `http://localhost:8080/products`
             if (this.state.categoryActive === "all") {
-                url += `?`
+                url += `?page=${this.state.page}&limit=${this.state.limit}&`
+                params += `page=${this.state.page}&limit=${this.state.limit}&`
             }
             if (this.state.categoryActive === "favorite") {
                 url += `/favorite?`
                 params += 'category=favorite&'
             }
             if (this.state.categoryActive !== "all" && this.state.categoryActive !== "favorite") {
-                url += `?category=${this.state.categoryActive}&`
-                params += `category=${this.state.categoryActive}&`
+                url += `?category=${this.state.categoryActive}&page=${this.state.page}&limit=${this.state.limit}&`
+                params += `category=${this.state.categoryActive}&page=${this.state.page}&limit=${this.state.limit}&`
             }
-            
-            if(this.props.searchProduct){
+
+            if (this.props.searchProduct) {
                 url += `name=${this.state.searchProduct}&`
                 params += `name=${this.state.searchProduct}&`
             }
-            url += `sort=${this.state.sort}&order=${this.state.order}&page=${this.state.page}`
+            url += `sort=${this.state.sort}&order=${this.state.order}`
             params += `sort=${this.state.sort}&order=${this.state.order}`
             this.state.setSearchParams(params)
 
             axios
                 .get(url)
                 .then(result => {
+                    console.log(result)
                     this.setState({
                         product: result.data.data,
+                        totalPage: !result.data.meta ? "1" : result.data.meta.totalPage
                     });
-
                 }).catch(error => {
                     console.log(error)
                 })
             this.setState({
-                isFilter: false
+                doAxios: false
             })
         }
 
@@ -177,7 +183,7 @@ class Product extends Component {
                                         onClick={
                                             () => {
                                                 this.setState({
-                                                    isFilter: true,
+                                                    doAxios: true,
                                                     categoryActive: "favorite"
                                                 })
                                             }
@@ -189,7 +195,7 @@ class Product extends Component {
                                         onClick={
                                             () => {
                                                 this.setState({
-                                                    isFilter: true,
+                                                    doAxios: true,
                                                     categoryActive: "coffee"
                                                 })
                                             }
@@ -200,7 +206,7 @@ class Product extends Component {
                                     <div className={this.state.categoryActive === "noncoffee" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
-                                                isFilter: true,
+                                                doAxios: true,
                                                 categoryActive: "noncoffee"
                                             })
                                         }}
@@ -210,7 +216,7 @@ class Product extends Component {
                                     <div className={this.state.categoryActive === "food" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
-                                                isFilter: true,
+                                                doAxios: true,
                                                 categoryActive: "food"
                                             })
                                         }}
@@ -220,7 +226,7 @@ class Product extends Component {
                                     <div className={this.state.categoryActive === "all" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
-                                                isFilter: true,
+                                                doAxios: true,
                                                 categoryActive: "all"
                                             })
 
@@ -255,7 +261,7 @@ class Product extends Component {
                                 <div className="confirm-button"
                                     onClick={() => {
                                         this.setState({
-                                            isFilter: true
+                                            doAxios: true
                                         })
                                     }}
                                 ><img src={Check} alt="check" /></div>
@@ -277,15 +283,38 @@ class Product extends Component {
                                                     <h5 className="card-title custom-product-name">
                                                         {product.name}
                                                     </h5>
-                                                    <p className="card-text custom-product-price">IDR. {product.price}</p>
+                                                    <p className="card-text custom-product-price"> {currencyFormatter.format(product.price)}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     ))}
                             </div>
                             <div className='product-page-button-container'>
-                                <div className="product-page-button-prev">Prev Page</div>
-                                <div className="product-page-button-next">Next Page</div>
+                                <div>
+                                    {this.state.page === 1 ?
+                                        <div className='product-page-button-empty'></div> :
+                                        <div className="product-page-button-prev"
+                                            onClick={() => {
+                                                this.setState({
+                                                    page: this.state.page - 1,
+                                                    doAxios: true
+                                                })
+                                            }}
+                                        >Prev Page</div>}
+                                </div>
+                                <div className='product-page-number'>{this.state.page}</div>
+                                <div>
+                                    {this.state.page === Number(this.state.totalPage) ?
+                                        <div className='product-page-button-empty'></div> :
+                                        <div className="product-page-button-next"
+                                            onClick={() => {
+                                                this.setState({
+                                                    page: this.state.page + 1,
+                                                    doAxios: true
+                                                })
+                                            }}
+                                        >Next Page</div>}
+                                </div>
                             </div>
                             <div className="custom-notes">*the price has been cutted by discount appears</div>
                         </div>

@@ -2,12 +2,12 @@ import { combineReducers } from "redux";
 import addToCartReducer from "./addToCart";
 
 import counterReducers from "./counter";
-import loginReducer from "./login";
+import authReducer from "./auth";
 import searchProductReducer from "./searchProduct";
 
 const reducers = combineReducers({
     counter: counterReducers,
-    auth: loginReducer,
+    auth: authReducer,
     searchProduct: searchProductReducer,
     addToCart: addToCartReducer
 });

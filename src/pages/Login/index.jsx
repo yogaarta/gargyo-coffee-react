@@ -14,7 +14,7 @@ import "./Login.css"
 // import axios from 'axios'
 // import { doLogin } from '../../utility/auth'
 import { connect } from 'react-redux'
-import { loginAction } from '../../redux/actionCreator/login'
+import { loginAction } from '../../redux/actionCreator/auth'
 
 class Login extends Component {
     constructor() {

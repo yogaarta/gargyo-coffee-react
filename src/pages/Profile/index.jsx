@@ -10,7 +10,7 @@ import Profpic from "../../assets/img/profile photo.png"
 import EditIcon from "../../assets/img/Vectoredit.png"
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { logoutAction } from '../../redux/actionCreator/login'
+import { logoutAction } from '../../redux/actionCreator/auth'
 
 
 class Profile extends Component {
@@ -35,17 +35,20 @@ class Profile extends Component {
         }
     }
 
-    // dateFormat = () =>{
-    //     let date = new Date(this.state.profile.birthday)
-    //     let year = date.getFullYear()
-    //     let month = date.getMonth() + 1
-    //     if(month.length < 2) month = '0' + month.toString()
-    //     let day = date.getDate()
-    //     if(day.length < 2) day = '0' + day.toString()
-    //     let newDate = `${year}-${month}-${day}`
-    //     // let newDate = date.toISOString().split('T')[0]
-    //     return newDate
-    // }
+    dateFormat = (date) => {
+        const newDate = new Date(date);
+        new Intl.DateTimeFormat(['ban', 'id']).format(newDate)
+        return 
+        // let date = new Date(this.state.profile.birthday)
+        // let year = date.getFullYear()
+        // let month = date.getMonth() + 1
+        // if(month.length < 2) month = '0' + month.toString()
+        // let day = date.getDate()
+        // if(day.length < 2) day = '0' + day.toString()
+        // let newDate = `${year}-${month}-${day}`
+        // // let newDate = date.toISOString().split('T')[0]
+        // return newDate
+    }
 
     componentDidMount() {
         document.title = "Profile"
@@ -243,7 +246,7 @@ class Profile extends Component {
                                         <input type="date" name="date" id="date" className="input-right profile-input"
                                             placeholder={"Enter birth date"}
                                             value=
-                                            // {"1995-04-15"}
+                                            // {this.dateFormat(this.state.profile.birthday)}
                                             {this.state.isEdit ? null : this.state.profile.birthday}
                                             disabled={this.state.isEdit ? false : true}
                                             onChange={(e) => {

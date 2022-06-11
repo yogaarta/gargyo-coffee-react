@@ -332,8 +332,26 @@
 .product-page-button-container{
     display: flex;
     justify-content: center;
-    column-gap: 100px;
+    column-gap: 50px;
     margin-bottom: 20px;
+}
+
+.product-page-button-empty, .product-page-button-next, .product-page-button-prev{
+    width: 100px;
+}
+
+.product-page-number{
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #6A4029;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 20px;
 }
 
 .product-page-button-prev, .product-page-button-next{

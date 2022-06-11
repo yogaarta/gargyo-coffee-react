@@ -19,6 +19,7 @@ import Payment from "./pages/Payment";
 import History from "./pages/History";
 import PrivateLoggedIn from "./components/privateRoute/PrivateLoggedIn";
 import PrivateNotLoggedIn from "./components/privateRoute/PrivateNotLoggedIn";
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -56,7 +57,7 @@ function App() {
                 <History />
               </PrivateNotLoggedIn>
             } />
-
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route
               path="*"
               element={

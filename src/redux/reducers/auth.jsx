@@ -8,7 +8,7 @@ const initialState = {
     isLoggedIn: false
 }
 
-const loginReducer = (prevState = initialState, action) => {
+const authReducer = (prevState = initialState, action) => {
     switch (action.type) {
         case loginString + PENDING:
             return { ...prevState, err: null, isLoading: true }
@@ -27,4 +27,4 @@ const loginReducer = (prevState = initialState, action) => {
     }
 }
 
-export default loginReducer
+export default authReducer
