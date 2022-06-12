@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header'
+import Header from '../../components/Header/Header' 
+// import axios from 'axios'
 
 // import Header from './components/Header/Header';
 import "./Home.css"
@@ -16,12 +18,17 @@ import WorldMap from "../../assets/img/world-map.PNG"
 import LeftArrow from "../../assets/img/Vectorleftarrow.png"
 import RightArrow from "../../assets/img/Vectorrightarrow.png"
 import Star from "../../assets/img/Vectorstar.png"
+import { getUserDataAction } from '../../redux/actionCreator/userData'
 
-export default class Home extends Component {
-    componentDidMount(){
-        document.title="Gargyo Coffee"
+class Home extends Component {
+    componentDidMount() {
+        document.title = "Gargyo Coffee"
+        const { isLoggedIn, dispatch } = this.props
+        if (isLoggedIn) {
+            const { token = null } = this.props.userInfo || {}
+            dispatch(getUserDataAction(token))
+        }
     }
-
     render() {
         return (
             <div>
@@ -250,3 +257,11 @@ export default class Home extends Component {
         )
     }
 }
+
+const mapStateToProps = (reduxState) => {
+    const { auth: { isLoggedIn, userInfo } } = reduxState
+    return { isLoggedIn, userInfo }
+}
+
+
+export default connect(mapStateToProps)(Home)

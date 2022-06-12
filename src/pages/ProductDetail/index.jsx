@@ -11,6 +11,7 @@ import { counterUp, counterDown } from '../../redux/actionCreator/counter'
 // import img
 import axios from 'axios'
 import { addToCartAction } from '../../redux/actionCreator/addToCart'
+import { currencyFormatter } from '../../Helper/formater'
 
 class ProductDetail extends Component {
     constructor() {
@@ -62,7 +63,7 @@ class ProductDetail extends Component {
                             </div>
                             <div className="pd-main-product-name">
                                 <h2>{this.state.product.name}</h2>
-                                <p>IDR. {this.state.product.price}</p>
+                                <p>{currencyFormatter.format(this.state.product.price)}</p>
                             </div>
                             <div className="pd-addcart-button"
                                 onClick={() => {
@@ -118,25 +119,25 @@ class ProductDetail extends Component {
                                     <label className="pd-dm-button-inactive">
                                         <input type="radio" name="pd-dm-input" className='pd-dm-input' />
                                         <span className="pd-dm-checkmark"
-                                        onClick={()=>{
-                                            this.setState({delivery: "Dine In"})
-                                        }}
+                                            onClick={() => {
+                                                this.setState({ delivery: "Dine In" })
+                                            }}
                                         >Dine in</span>
                                     </label>
                                     <label className="pd-dm-button-inactive">
                                         <input type="radio" name="pd-dm-input" className='pd-dm-input' />
-                                        <span className="pd-dm-checkmark" 
-                                        onClick={()=>{
-                                            this.setState({delivery: "Door Delivery"})
-                                        }}
+                                        <span className="pd-dm-checkmark"
+                                            onClick={() => {
+                                                this.setState({ delivery: "Door Delivery" })
+                                            }}
                                         >Door Delivery</span>
                                     </label>
                                     <label className="pd-dm-button-inactive">
                                         <input type="radio" name="pd-dm-input" className='pd-dm-input' />
                                         <span className="pd-dm-checkmark"
-                                        onClick={()=>{
-                                            this.setState({delivery: "Pick Up"})
-                                        }}
+                                            onClick={() => {
+                                                this.setState({ delivery: "Pick Up" })
+                                            }}
                                         >Pick up</span>
                                     </label>
                                     {/* <div className="pd-delivery-dinein-button">Dine in</div>
@@ -164,7 +165,7 @@ class ProductDetail extends Component {
                                     {this.state.allSize.map((size) => (
                                         <p>x1
                                             {/* {size === "R" ? "Regular" : size === "L" ? "Large" : "Extra Large"} */}
-                                            
+
                                         </p>
                                     ))}
                                     {/* <p>{this.state.allSize}</p>

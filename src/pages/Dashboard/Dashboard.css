@@ -1,4 +1,4 @@
-main {
+.db-global-container {
     background-color: #F8F8F8;
     border-bottom: 1px solid #9F9F9F;
     padding: 20px 7.5%
@@ -69,6 +69,7 @@ main {
 .db-main-card-container {
     display: flex;
     justify-content: space-between;
+    margin: 20px 0;
 }
 
 .db-main-card {
@@ -167,16 +168,24 @@ main {
 .db-aside-card-bottom {
     background: #FFFFFF;
     border-radius: 20px;
+    padding: 15px 5%;
     filter: drop-shadow(0px 6px 20px rgba(0, 0, 0, 0.4));
 }
 
 .db-aside-card-top {
-    height: 45%;
-    padding: 15px 5%;
+    height: 47.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
 
 .db-aside-card-bottom {
-    height: 50%;
+    height: 47.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .db-admin-profile {
@@ -222,9 +231,9 @@ main {
 
 .db-staff-performa-title {
     font-family: Poppins;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    line-height: 27px;
+    line-height: 20px;
     letter-spacing: 0px;
     text-align: left;
 
@@ -234,22 +243,147 @@ main {
     font-family: Poppins;
     font-size: 22px;
     font-weight: 700;
-    line-height: 33px;
+    line-height: 26px;
     letter-spacing: 0px;
     text-align: center;
 
     width: 75px;
-    height: 75%;background: #7388A95A;
+    height: 75px;
+    background: #FFFFFF;
+    border: 5px solid #4A8E07;
+    border-radius: 50%;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
 
 }
 
 .db-staff-performa-note {
     font-family: Poppins;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #7C828A;
+
+}
+
+.db-goals-title {
+
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
     letter-spacing: 0px;
     text-align: center;
 
+}
+
+.db-goals-subtitle {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #7C828A;
+}
+
+.db-goals-donut {
+    font-family: Poppins;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: 0px;
+    text-align: center;
+
+    width: 120px;
+    height: 120px;
+    background: #FFFFFF;
+    border: 12px solid #FFBA33;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+
+}
+
+.db-goals-tridot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.goals-dot-active {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #147AD6;
+    margin: 5px;
+}
+
+.goals-dot-inactive {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #7388A9;
+    opacity: 35%;
+    margin: 5px;
+}
+
+.db-button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.db-download-button {
+    width: 67.5%;
+}
+
+.db-share-button {
+    width: 30%;
+}
+
+.db-download-button,
+.db-share-button {
+    height: 75px;
+    background: #6A4029;
+    box-shadow: 0px 6px 20px rgba(106, 64, 41, 0.6);
+    border-radius: 20px;
+    margin: 20px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #FFFFFF;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+
+}
+
+.db-download-button:hover,
+.db-share-button:hover {
+    background-color: #552d17;
+}
+
+.db-download-button:active,
+.db-share-button:active {
+    background-color: #6A4029;
 }

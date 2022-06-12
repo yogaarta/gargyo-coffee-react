@@ -12,7 +12,7 @@ export default class Dashboard extends Component {
         return (
             <>
                 <Header />
-                <main className='db-global-container'>
+                <div className='db-global-container'>
                     <div className="db-title">See how your store progress so far</div>
                     <div className="db-bullet-title-container">
                         <div className="db-inactive-bullet-title-container">
@@ -57,14 +57,23 @@ export default class Dashboard extends Component {
                                     <div className="db-staff-performa-note">Achieved 3.5M of total 478 Customer</div>
                                 </div>
                             </div>
-                            <div className="db-aside-card-bottom">bawah</div>
+                            <div className="db-aside-card-bottom">
+                                <div className="db-goals-title">Goals</div>
+                                <div className="db-goals-subtitle">Your goals is still on 76%. Keep up the good work!</div>
+                                <div className="db-goals-donut">76%</div>
+                                <div className="db-goals-tridot">
+                                    <div className="goals-dot-active"></div>
+                                    <div className="goals-dot-inactive"></div>
+                                    <div className="goals-dot-inactive"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="db-button-container">
-                        <div className="db-download-button"></div>
-                        <div className="db-share-button"></div>
+                        <div className="db-download-button">Download Report</div>
+                        <div className="db-share-button">Share Report</div>
                     </div>
-                </main>
+                </div>
                 <Footer />
             </>
         )

@@ -22,7 +22,7 @@ class Header extends Component {
         }
     }
     render() {
-        const {dispatch} = this.props
+        const { dispatch, roles } = this.props
         return (
             <header>
                 <nav className="custom-nav-container row">
@@ -31,36 +31,68 @@ class Header extends Component {
                             Coffee Shop</h6>
                     </div>
                     <div className="custom-nav-list col-6">
-                        <ul>
-                            <li><Link to="/" className={this.state.pageActive === "home" ? "custom-active-nav" : "custom-inactive-nav"}
-                                onClick={() => {
-                                    this.setState({
-                                        pageActive: "home"
-                                    })
-                                }}
-                            >Home</Link></li>
-                            <li><Link to="/product" className={this.state.pageActive === "product" ? "custom-active-nav" : "custom-inactive-nav"}
-                                onClick={() => {
-                                    this.setState({
-                                        pageActive: "product"
-                                    })
-                                }}
-                            >Product</Link></li>
-                            <li><Link to="/payment" className={this.state.pageActive === "cart" ? "custom-active-nav" : "custom-inactive-nav"}
-                                onClick={() => {
-                                    this.setState({
-                                        pageActive: "cart"
-                                    })
-                                }}
-                            >Your Cart</Link></li>
-                            <li><Link to="/history" className={this.state.pageActive === "history" ? "custom-active-nav" : "custom-inactive-nav"}
-                                onClick={() => {
-                                    this.setState({
-                                        pageActive: "history"
-                                    })
-                                }}
-                            >History</Link></li>
-                        </ul>
+                        {roles !== "admin" ?
+                            <ul>
+                                <li><Link to="/" className={this.state.pageActive === "home" ? "custom-active-nav" : "custom-inactive-nav"}
+                                    onClick={() => {
+                                        this.setState({
+                                            pageActive: "home"
+                                        })
+                                    }}
+                                >Home</Link></li>
+                                <li><Link to="/product" className={this.state.pageActive === "product" ? "custom-active-nav" : "custom-inactive-nav"}
+                                    onClick={() => {
+                                        this.setState({
+                                            pageActive: "product"
+                                        })
+                                    }}
+                                >Product</Link></li>
+                                <li><Link to="/payment" className={this.state.pageActive === "cart" ? "custom-active-nav" : "custom-inactive-nav"}
+                                    onClick={() => {
+                                        this.setState({
+                                            pageActive: "cart"
+                                        })
+                                    }}
+                                >Your Cart</Link></li>
+                                <li><Link to="/history" className={this.state.pageActive === "history" ? "custom-active-nav" : "custom-inactive-nav"}
+                                    onClick={() => {
+                                        this.setState({
+                                            pageActive: "history"
+                                        })
+                                    }}
+                                >History</Link></li>
+                            </ul>
+                            : <ul>
+                                <li><Link to="/" className={this.state.pageActive === "home" ? "custom-active-nav" : "custom-inactive-nav"}
+                                    onClick={() => {
+                                        this.setState({
+                                            pageActive: "home"
+                                        })
+                                    }}
+                                >Home</Link></li>
+                                <li><Link to="/product" className={this.state.pageActive === "product" ? "custom-active-nav" : "custom-inactive-nav"}
+                                    onClick={() => {
+                                        this.setState({
+                                            pageActive: "product"
+                                        })
+                                    }}
+                                >Product</Link></li>
+                                <li><Link to="/payment" className={this.state.pageActive === "cart" ? "custom-active-nav" : "custom-inactive-nav"}
+                                    onClick={() => {
+                                        this.setState({
+                                            pageActive: "cart"
+                                        })
+                                    }}
+                                >Order</Link></li>
+                                <li><Link to="/dashboard" className={this.state.pageActive === "history" ? "custom-active-nav" : "custom-inactive-nav"}
+                                    onClick={() => {
+                                        this.setState({
+                                            pageActive: "history"
+                                        })
+                                    }}
+                                >Dashboard</Link></li>
+                            </ul>
+                        }
                     </div>
                     {this.state.isLoggedIn ?
                         <div className="custom-nav-icon col-3 row">
@@ -76,7 +108,7 @@ class Header extends Component {
                                     />
                                     :
                                     <input type="text" id="header-search" name="search" className='header-search' placeholder="Search"
-                                    onChange={(e)=> dispatch(searchProductAction(e.target.value))}
+                                        onChange={(e) => dispatch(searchProductAction(e.target.value))}
                                     // onKeyUp={(e)=>{
                                     //     if(e.key === 'Enter'){
                                     //         console.log(this.state.searchName)
@@ -110,8 +142,8 @@ class Header extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { auth: { isSuccess } } = reduxState
-    return { isSuccess }
+    const { auth: { isSuccess }, userData: { data: { roles } } } = reduxState
+    return { isSuccess, roles }
 }
 
 export default connect(mapStateToProps)(Header)
