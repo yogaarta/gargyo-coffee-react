@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header' 
+import Header from '../../components/Header/Header'
 // import axios from 'axios'
 
 // import Header from './components/Header/Header';

@@ -75,6 +75,7 @@
     justify-content: center;
     align-items: center;
     margin-right: 2%;
+    flex: 1;
 }
 
 .h-product-img {
@@ -83,7 +84,9 @@
 
 .h-product-info {
     display: flex;
+    flex: 2;
     flex-direction: column;
+    padding: 0 5%;
 }
 
 .h-product-name {
@@ -92,7 +95,7 @@
     font-weight: 700;
     line-height: 38px;
     letter-spacing: 0em;
-    text-align: center;
+    text-align: left;
     color: #000000;
 
 }

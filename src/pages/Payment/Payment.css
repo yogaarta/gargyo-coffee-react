@@ -132,6 +132,7 @@
 
 .pm-price {
     width: 30%;
+    text-align: right;
 }
 
 .pm-total-order-price {

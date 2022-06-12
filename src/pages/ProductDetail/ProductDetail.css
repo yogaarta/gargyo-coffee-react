@@ -151,12 +151,49 @@
     -o-user-select: none;
 }
 
+
 .pd-askstaff-button:hover {
     background-color: #fcaf16;
 }
 
 .pd-askstaff-button:active {
     background-color: #FFBA33;
+}
+
+.pd-delete-button {
+    width: 80%;
+    height: 60px;
+    margin: 10px 0;
+
+    background: #000000;
+    border-radius: 20px;
+
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #FFFFFF;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+}
+
+.pd-delete-button:hover {
+    background-color: #363636;
+}
+
+.pd-delete-button:active {
+    background-color: #000000;
 }
 
 .pd-right-content {
@@ -356,7 +393,7 @@
     /* opacity: 0; */
 }
 
-.pd-dm-checkmark{
+.pd-dm-checkmark {
     position: absolute;
     width: 130px;
     height: 40px;
@@ -656,6 +693,11 @@
     -ms-user-select: none;
     user-select: none;
     -o-user-select: none;
+}
+
+.pd-checkout-button a {
+    color: #6A4029;
+    text-decoration: none;
 }
 
 .pd-checkout-button:hover {

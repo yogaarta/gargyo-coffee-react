@@ -1,6 +1,7 @@
 import { addToCartString } from "../actionCreator/actionString";
 
 const initialState = {
+    productId: "",
     size: "",
     delivery: ""
 }
@@ -8,7 +9,7 @@ const initialState = {
 const addToCartReducer = (prevState = initialState, action) => {
     switch (action.type) {
         case addToCartString:
-            return { ...prevState, size: action.size, delivery: action.delivery}
+            return { ...prevState, size: action.size, delivery: action.delivery, productId: action.productId}
 
         default:
             return { ...prevState }

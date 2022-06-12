@@ -11,6 +11,7 @@ import { counterUp, counterDown } from '../../redux/actionCreator/counter'
 // import img
 import axios from 'axios'
 import { addToCartAction } from '../../redux/actionCreator/addToCart'
+import { headerAction } from '../../redux/actionCreator/header';
 import { currencyFormatter } from '../../Helper/formater'
 
 class ProductDetail extends Component {
@@ -18,8 +19,10 @@ class ProductDetail extends Component {
         super();
         this.state = {
             product: [],
+            productId: "",
             size: "",
             delivery: "",
+            counter: "",
             allSize: [],
             cart: [],
         }
@@ -50,7 +53,7 @@ class ProductDetail extends Component {
     }
 
     render() {
-        const { counter, doCounterUp, doCounterDown, doAddToCart, addToCart } = this.props
+        const { params, counter, doCounterUp, doCounterDown, doAddToCart, addToCart, doChangePage, roles } = this.props
         return (
             <div>
                 <Header />
@@ -67,11 +70,18 @@ class ProductDetail extends Component {
                             </div>
                             <div className="pd-addcart-button"
                                 onClick={() => {
-                                    doAddToCart(this.state.size, this.state.delivery)
+                                    doAddToCart(this.state.size, this.state.delivery, params.id)
                                     // console.log(this.state.size)
                                 }}
                             >Add to Cart</div>
-                            <div className="pd-askstaff-button">Ask a Staff</div>
+                            {roles !== "admin" ?
+                                <div className="pd-askstaff-button">Ask a Staff</div>
+                                :
+                                <>
+                                    <div className="pd-askstaff-button">Edit Product</div>
+                                    <div className="pd-delete-button">Delete Menu</div>
+                                </>
+                            }
                         </div>
                         <div className="pd-right-content">
                             <div className="pd-desc-card">
@@ -89,7 +99,7 @@ class ProductDetail extends Component {
                                         <label className="pd-size-vector">R
                                             <input type="radio" className='pd-size-input' name='pd-size-input'
                                                 onClick={() => {
-                                                    this.setState({ size: "Reguler" })
+                                                    this.setState({ size: "Regular" })
                                                 }
                                                 }
                                             /><span className='pd-size-checkmark'></span>
@@ -160,26 +170,38 @@ class ProductDetail extends Component {
                                 <h4 className="pd-checkout-name">{this.state.product.name}</h4>
                                 <div className="pd-checkout-details">
                                     <p>
-                                        x1 {addToCart.size} <br />{addToCart.delivery}
+                                        x{counter} {addToCart.size} <br />{addToCart.delivery}
                                     </p>
-                                    {this.state.allSize.map((size) => (
-                                        <p>x1
-                                            {/* {size === "R" ? "Regular" : size === "L" ? "Large" : "Extra Large"} */}
-
-                                        </p>
-                                    ))}
-                                    {/* <p>{this.state.allSize}</p>
-                                    <p>x1 (Large)</p>
-                                    <p>x1 (Regular)</p> */}
                                 </div>
                             </div>
                             <div className="pd-checkout-quantity">
-                                <div className="pd-minus-button" onClick={() => doCounterDown()}>-</div>
-                                <div className="pd-quantity">{counter.counter} </div>
-                                <div className="pd-plus-button" onClick={() => doCounterUp()}>+</div>
+                                <div className="pd-minus-button"
+                                    onClick={() => {
+                                        doCounterDown()
+                                        this.setState({
+                                            counter: this.props.counter
+                                        })
+                                    }}
+                                >-</div>
+                                <div className="pd-quantity">{counter} </div>
+                                <div className="pd-plus-button"
+                                    onClick={() => {
+                                        doCounterUp()
+                                        this.setState({
+                                            counter: this.props.counter
+                                        })
+                                    }}
+                                >+</div>
                             </div>
                         </div>
-                        <div className="pd-checkout-button">CHECKOUT</div>
+                        <div className="pd-checkout-button">
+                            <Link to="/payment"
+                                onClick={() => {
+                                    doChangePage("cart")
+                                }}>
+                                CHECKOUT
+                            </Link>
+                        </div>
                     </section>
                 </section>
                 <Footer />
@@ -189,9 +211,9 @@ class ProductDetail extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { counter, addToCart } = reduxState
+    const { counter: { counter }, addToCart, userData: { data: { roles } } } = reduxState
     return {
-        counter, addToCart
+        counter, addToCart, roles
     }
 }
 
@@ -203,9 +225,12 @@ const mapDispatchToProps = (dispatch) => {
         doCounterDown: () => {
             dispatch(counterDown())
         },
-        doAddToCart: (size, delivery) => {
-            dispatch(addToCartAction(size, delivery))
-        }
+        doAddToCart: (size, delivery, id) => {
+            dispatch(addToCartAction(size, delivery, id))
+        },
+        doChangePage: (page) => {
+            dispatch(headerAction(page))
+        },
     }
 }
 

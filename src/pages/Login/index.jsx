@@ -34,7 +34,7 @@ class Login extends Component {
     }
 
     render() {
-        const { isSuccess, err } = this.props
+        const { isSuccess } = this.props
         if (isSuccess === true)
             return <Navigate to="/" />
         // if (this.state.isSuccess === true) {
@@ -91,7 +91,7 @@ class Login extends Component {
                                     </div>
                                     <Link to={"/forgot"}><p className="forgot">Forgot Password?</p></Link>
 
-                                    {isSuccess === false ? <div className='signup-error'>{err.err.msg || {}}</div> : <></>}
+                                    {/* {isSuccess === false ? <div className='signup-error'>{errorMsg}</div> : <></>} */}
 
 
                                     <div className="signup"
@@ -99,22 +99,6 @@ class Login extends Component {
                                             const { email, pass } = this.state;
                                             const body = { email, pass };
                                             this.props.dispatch(loginAction(body))
-                                            // axios
-                                            //     .post("http://localhost:8080/auth", body)
-                                            //     .then(result => {
-                                            //         console.log(result.data);
-                                            //         localStorage.setItem("user-info", JSON.stringify(result.data.data));
-                                            //         this.setState({
-                                            //             isSuccess: true
-                                            //         })
-                                            //     })
-                                            //     .catch(error => {
-                                            //         console.log(error.response.data);
-                                            //         this.setState({
-                                            //             isError: true,
-                                            //             errorMsg: `${error.response.data.err.msg}`
-                                            //         })
-                                            //     })
                                         }}
                                     >Login</div>
                                 </form>
@@ -188,8 +172,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { auth: { userInfo, err, isSuccess } } = reduxState
-    return { userInfo, err, isSuccess }
+    const { auth: { userInfo, isSuccess } } = reduxState
+    return { userInfo, isSuccess }
 }
 
 export default connect(mapStateToProps)(Login)

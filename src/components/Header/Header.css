@@ -5,17 +5,34 @@
 }
 
 .custom-nav-container {
+    width: 100%;
     height: 100px;
     align-items: center;
     padding: 0% 7.5%;
+    display: flex;
+    justify-content: space-between;
 }
 
+.custom-coffeeshop-logo{
+    width: 20%;
+}
 .coffeeshop-logo {
     font-style: bold;
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
     color: #0B132A;
+}
+
+.custom-nav-list{
+    width: 50%;
+}
+
+.custom-nav-list ul{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
 }
 
 .custom-nav-list li {
@@ -26,6 +43,10 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     color: #4F5665;
 }
@@ -38,7 +59,7 @@
     font-weight: 700;
     line-height: 19px;
     letter-spacing: 0em;
-    text-align: left;
+    text-align: center;
 
 }
 
@@ -48,7 +69,7 @@
     font-weight: 400;
     line-height: 19px;
     letter-spacing: 0em;
-    text-align: left;
+    text-align: center;
 
     text-decoration: none;
     color: #4F5665;
@@ -66,8 +87,15 @@
 
 }
 
+.custom-nav-right{
+    width: 30%;
+}
+
 .custom-nav-icon {
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
 }
 
 .custom-active-nav {
@@ -92,6 +120,7 @@
     color: #0B132A;
     align-items: center;
     cursor: pointer;
+    width: 50%;
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -106,7 +135,7 @@
 }
 
 .custom-signup-button {
-    width: 150px;
+    width: 50%;
     height: 45px;
 
     background: #FFBA33;
@@ -148,10 +177,30 @@
 .magn-glass,
 .chat-logo {
     width: 30px;
+    cursor: pointer;
 }
 
 .header-search-container{
     display: flex;
+    /* width: 50%; */
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-chat-logo{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-profile{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-search{
@@ -164,8 +213,9 @@
     line-height: 50px;
     width: 100%;
     height: 30px;
+    padding-left: 20px;
 
-    /* margin-top: 30px;     */
+    /* margin-top: 30px;*/
     /* or 250% */
     color: #000000;
     border-radius: 30px;
@@ -179,4 +229,28 @@
     border: 2px solid #6A4029;
     border-radius: 50%;
     object-position: 100% 20%;
+}
+
+@media (max-width: 840px) {
+    .custom-nav-container{
+        display: flex;
+        flex-direction: column;
+        height: 170px;
+        padding: 20px;
+    }
+    .custom-coffeeshop-logo{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .custom-nav-right{
+        width: 70%;
+    }
+    .custom-nav-icon{
+        width: 100%;
+    }
+    .custom-nav-list{
+        width: 100%;
+    }
 }

@@ -78,7 +78,7 @@ class Product extends Component {
                 params += `category=${this.state.categoryActive}&page=${this.state.page}&limit=${this.state.limit}&`
             }
 
-            if (this.props.searchProduct) {
+            if (this.props.searchProduct !== '') {
                 url += `name=${this.state.searchProduct}&`
                 params += `name=${this.state.searchProduct}&`
             }
@@ -121,7 +121,7 @@ class Product extends Component {
     }
 
     render() {
-        // const { searchParam } = this.props
+        const { roles } = this.props
         return (
             <div>
                 <Header />
@@ -131,42 +131,44 @@ class Product extends Component {
                             <h3 className="custom-promo-title-head">Promo Today</h3>
                             <p className="custom-promo-paragraph">Coupons will be updated every weeks. Check them out! </p>
                         </div>
-                        <div className="custom-promo-card row mother-day-card">
-                            <div className="col-4 custom-promo-pict"><img
-                                src={Promo1}
-                                alt="mother's-day-promo" className="custom-promo-img" /></div>
-                            <div className="col custom-card-text">
-                                <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
+                        <div className="p-promo-card-container">
+                            <div className="custom-promo-card row mother-day-card">
+                                <div className="col-4 custom-promo-pict"><img
+                                    src={Promo1}
+                                    alt="mother's-day-promo" className="custom-promo-img" /></div>
+                                <div className="col custom-card-text">
+                                    <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="custom-promo-card row sunday-morning-card">
-                            <div className="col-4 custom-promo-pict"><img
-                                src={Promo2}
-                                alt="free-sunday-morning" className="custom-promo-img" /></div>
-                            <div className="col custom-card-text">
-                                <p className="custom-card-info"><b>Get a cup of coffee for free on sunday morning</b><br />Only at 7 to 9
-                                    AM
-                                </p>
+                            <div className="custom-promo-card row sunday-morning-card">
+                                <div className="col-4 custom-promo-pict"><img
+                                    src={Promo2}
+                                    alt="free-sunday-morning" className="custom-promo-img" /></div>
+                                <div className="col custom-card-text">
+                                    <p className="custom-card-info"><b>Get a cup of coffee for free on sunday morning</b><br />Only at 7 to 9
+                                        AM
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="custom-promo-card row mother-day-card">
-                            <div className="col-4 custom-promo-pict"><img
-                                src={Promo1}
-                                alt="mother's-day-promo" className="custom-promo-img" /></div>
-                            <div className="col custom-card-text">
-                                <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
+                            <div className="custom-promo-card row mother-day-card">
+                                <div className="col-4 custom-promo-pict"><img
+                                    src={Promo1}
+                                    alt="mother's-day-promo" className="custom-promo-img" /></div>
+                                <div className="col custom-card-text">
+                                    <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="custom-promo-card row halloween-card">
-                            <div className="col-4 custom-promo-pict"><img
-                                src={Promo3}
-                                alt="halloween-promo" className="custom-promo-img" /></div>
-                            <div className="col custom-card-text">
-                                <p className="custom-card-info"><b>HAPPY HALLOWEEN!
-                                </b><br />Do you like chicken wings? Get 1 free only if you buy pinky promise</p>
+                            <div className="custom-promo-card row halloween-card">
+                                <div className="col-4 custom-promo-pict"><img
+                                    src={Promo3}
+                                    alt="halloween-promo" className="custom-promo-img" /></div>
+                                <div className="col custom-card-text">
+                                    <p className="custom-card-info"><b>HAPPY HALLOWEEN!
+                                    </b><br />Do you like chicken wings? Get 1 free only if you buy pinky promise</p>
+                                </div>
                             </div>
+                            <div className="custom-apply-button">Apply Coupon</div>
                         </div>
-                        <div className="custom-apply-button">Apply Coupon</div>
                         <div className="custom-term">
                             <p className="custom-term-title">Terms and Condition</p>
                             <p>1. You can only apply 1 coupon per day</p>
@@ -174,6 +176,9 @@ class Product extends Component {
                             <p>3. Buy 1 get 1 only for new user</p>
                             <p>4. Should make member card to apply coupon</p>
                         </div>
+                        {roles !== "admin" ? <></> :
+                            <div className="p-add-promo-button">Add new promo</div>
+                        }
                     </aside>
                     <main className="col-8 custom-main-product-column">
                         <nav className="custom-product-nav">
@@ -318,18 +323,20 @@ class Product extends Component {
                             </div>
                             <div className="custom-notes">*the price has been cutted by discount appears</div>
                         </div>
+                        {roles !== "admin" ? <></> :
+                            <div className="p-new-product-button">Add new product</div>
+                        }
                     </main>
                 </main>
                 <Footer />
             </div>
-
         )
     }
 }
 
 const mapStateToProps = (reduxState) => {
-    const { searchProduct: { searchProduct } } = reduxState
-    return { searchProduct }
+    const { searchProduct: { searchProduct }, userData: { data: { roles } } } = reduxState
+    return { searchProduct, roles }
 }
 
 export default connect(mapStateToProps)(withLocation(withSearchParam(Product)))
