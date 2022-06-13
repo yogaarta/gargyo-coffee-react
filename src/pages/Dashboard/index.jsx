@@ -10,8 +10,13 @@ import Admin from "../../assets/img/adminpict.png"
 export default class Dashboard extends Component {
     componentDidMount(){
         document.title = "Dashboard"
+
     }
     render() {
+        // const today = (new Date())
+        // today.setDate(today.getDate()+3)
+        // today.toDateString()
+        // console.log(today)
         return (
             <>
                 <Header />
@@ -40,10 +45,10 @@ export default class Dashboard extends Component {
                             <div className="db-main-subtitle">Last 7 Days</div>
                             <div className="db-chart-container">
                                 <div className="db-chart-left-label">
-                                    <div className="db-chart-left-item">IDR 5M</div>
-                                    <div className="db-chart-left-item">IDR 3M</div>
-                                    <div className="db-chart-left-item">IDR 0K</div>
-                                    <div className="db-chart-left-item">IDR 2M</div>
+                                    <div className="db-chart-left-item">1M</div>
+                                    <div className="db-chart-left-item">0.5M</div>
+                                    <div className="db-chart-left-item">0K</div>
+                                    <div className="db-chart-left-item">1M</div>
                                     <div className="db-chart-left-item"></div>
                                 </div>
                                 <div className="db-mainchart">
@@ -54,7 +59,7 @@ export default class Dashboard extends Component {
                                         <div className="db-chart-column-negative">
                                             <div className="db-chart-column-negative-bar" style={{height:"80%"}}></div>
                                         </div>
-                                        <div className="db-chart-column-bottom-label">Mon</div>
+                                        <div className="db-chart-column-bottom-label">Mon <br />13/06</div>
                                     </div>
                                     <div className="db-chart-column">
                                         <div className="db-chart-column-positive">

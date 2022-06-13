@@ -5,7 +5,6 @@ import Header from '../../components/Header/Header'
 import { Link } from 'react-router-dom'
 import withSearchParam from '../../Helper/withSearchParam'
 import withLocation from '../../Helper/withLocation'
-// import { Routes, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { currencyFormatter } from '../../Helper/formater'
 
@@ -17,7 +16,6 @@ import Promo1 from "../../assets/img/promo1.png"
 import Promo2 from "../../assets/img/promo2.png"
 import Promo3 from "../../assets/img/promo3.png"
 
-// import ColdBrew from "../../assets/img/coldbrew.png"
 
 class Product extends Component {
     constructor(props) {
@@ -31,7 +29,7 @@ class Product extends Component {
             page: 1,
             limit: "12",
             totalPage: "1",
-            searchProduct: this.props.searchProduct,
+            searchName: "",
             meta: null,
             pageActive: "product",
             setSearchParams: this.props.setSearchParams.bind(this)
@@ -39,15 +37,14 @@ class Product extends Component {
         };
     }
 
-    // setSearchName = (props) => {
-    //     this.setState({
-    //         searchName: props
-    //     })
-    // }
+    setSearchName = (props) => {
+        this.setState({
+            searchName: props
+        })
+    }
 
     componentDidMount() {
         document.title = "Product"
-        console.log(this.state.searchProduct)
         this.state.setSearchParams('')
         axios
             .get('http://localhost:8080/products')
@@ -78,9 +75,9 @@ class Product extends Component {
                 params += `category=${this.state.categoryActive}&page=${this.state.page}&limit=${this.state.limit}&`
             }
 
-            if (this.props.searchProduct !== '') {
-                url += `name=${this.state.searchProduct}&`
-                params += `name=${this.state.searchProduct}&`
+            if (this.state.searchName !== '') {
+                url += `name=${this.state.searchName}&`
+                params += `name=${this.state.searchName}&`
             }
             url += `sort=${this.state.sort}&order=${this.state.order}`
             params += `sort=${this.state.sort}&order=${this.state.order}`
@@ -102,29 +99,13 @@ class Product extends Component {
             })
         }
 
-
-        // if(this.state.searchName !== ''){
-        //     axios
-        //         .get(`http://localhost:8080/products?name=${this.state.searchName}`)
-        //         .then(result=>{
-        //             this.setState({
-        //                 product: result.data.data
-        //             })
-        //             this.setState({
-        //                 searchName: ''
-        //             })
-        //         })
-        //         .catch(error=>{
-        //             console.log(error)
-        //         })
-        // }
     }
 
     render() {
         const { roles } = this.props
         return (
             <div>
-                <Header />
+                <Header setSearchName={this.setSearchName.bind(this)}/>
                 <main className="row custom-main-container">
                     <aside className="col-4 custom-promo-column">
                         <div className="custom-promo-title">
@@ -276,8 +257,8 @@ class Product extends Component {
                             <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
                                 {this.state.product.length === 0 ? <div>DATA NOT FOUND</div> :
                                     this.state.product.map((product) => (
-                                        <div className="col custom-product-card-container">
-                                            <div key={product.id} className="card custom-product-card">
+                                        <div key={product.id} className="col custom-product-card-container">
+                                            <div className="card custom-product-card">
                                                 <div className="custom-card-img-container">
                                                     <Link to={`/product/${product.id}`}>
                                                         <img src={`http://localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
@@ -335,8 +316,8 @@ class Product extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { searchProduct: { searchProduct }, userData: { data: { roles } } } = reduxState
-    return { searchProduct, roles }
+    const { userData: { data: { roles } } } = reduxState
+    return { roles }
 }
 
 export default connect(mapStateToProps)(withLocation(withSearchParam(Product)))

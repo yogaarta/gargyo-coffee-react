@@ -108,16 +108,14 @@ class ProductDetail extends Component {
                                             <input type="radio" className='pd-size-input' name='pd-size-input'
                                                 onClick={() => {
                                                     this.setState({ size: "Large" })
-                                                }
-                                                }
+                                                }}
                                             /><span className='pd-size-checkmark'></span>
                                         </label>
                                         <label className="pd-size-vector">XL
                                             <input type="radio" className='pd-size-input' name='pd-size-input'
                                                 onClick={() => {
                                                     this.setState({ size: "Extra Large" })
-                                                }
-                                                }
+                                                }}
                                             /><span className='pd-size-checkmark'></span>
                                         </label>
                                     </div>

@@ -9,6 +9,7 @@ export const changePageString = "CHANGE_PAGE"
 export const searchProductString = "SEARCH_PRODUCT"
 
 export const addToCartString = "ADD_TO_CART"
+export const resetCartString = "RESET_CART"
 
 export const PENDING = "_PENDING";
 export const FULFILLED = "_FULFILLED";

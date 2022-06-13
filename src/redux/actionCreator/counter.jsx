@@ -6,4 +6,4 @@ export const counterUp = () => ({
 
 export const counterDown = () => ({
     type: counterDownAction
-})
+});

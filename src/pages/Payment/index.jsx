@@ -12,6 +12,7 @@ import Bank from "../../assets/img/bank.png"
 import Cod from "../../assets/img/cod.png"
 import { connect } from 'react-redux'
 import { currencyFormatter } from '../../Helper/formater'
+import { resetCartAction } from '../../redux/actionCreator/addToCart'
 
 class Payment extends Component {
     constructor() {
@@ -23,7 +24,7 @@ class Payment extends Component {
     }
 
     confirmAndPay = () => {
-        const { counter, addToCart: { delivery, productId }, id } = this.props
+        const { counter, addToCart: { delivery, productId }, id, dispatch } = this.props
         const product_id = productId
         const total_price = (this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0)
         const quantity = counter
@@ -32,7 +33,7 @@ class Payment extends Component {
         const delivery_method = delivery
 
         const { token } = this.props.userInfo
-        const config = { headers: { Authorization: `Bearer ${token}`} }
+        const config = { headers: { Authorization: `Bearer ${token}` } }
 
         const body = { product_id, total_price, quantity, user_id, payment_method, delivery_method }
         axios
@@ -43,6 +44,7 @@ class Payment extends Component {
             .catch(error => {
                 console.log(error)
             })
+        dispatch(resetCartAction())
     }
 
     componentDidMount() {
@@ -202,7 +204,7 @@ class Payment extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { addToCart, auth: {userInfo}, counter: { counter }, userData: { data: { address, mobile_number, id } } } = reduxState
+    const { addToCart, auth: { userInfo }, counter: { counter }, userData: { data: { address, mobile_number, id } } } = reduxState
     return { addToCart, counter, address, mobile_number, id, userInfo }
 }
 

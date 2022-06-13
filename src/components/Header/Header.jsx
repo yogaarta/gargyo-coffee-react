@@ -21,8 +21,11 @@ class Header extends Component {
             setSearchName: props,
         }
     }
+
+
+
     render() {
-        const { roles, profile_picture, pageActive, doChangePage, doSearch } = this.props
+        const { roles, profile_picture, pageActive, doChangePage } = this.props
         return (
             <header>
                 <nav className="custom-nav-container ">
@@ -35,7 +38,7 @@ class Header extends Component {
                             <ul>
                                 <li><Link to="/" className={pageActive === "home" ? "custom-active-nav" : "custom-inactive-nav"}
                                     onClick={() => {
-                                        doChangePage("home")                                        
+                                        doChangePage("home")
                                     }}
                                 >Home</Link></li>
                                 <li><Link to="/product" className={pageActive === "product" ? "custom-active-nav" : "custom-inactive-nav"}
@@ -79,58 +82,51 @@ class Header extends Component {
                         }
                     </div>
                     <div className="custom-nav-right">
-                    {this.state.isLoggedIn ?
-                        <div className="custom-nav-icon">
-                            <div className=" header-search-container">
-                                {this.state.isSearch ?
-                                    <img src={MagnGlass} alt="magnifying-glass" className='magn-glass'
-                                        onClick={() => {
-                                            this.setState({
-                                                isSearch: false
-                                            })
-                                        }}
-                                    />
-                                    :
-                                    <input type="text" id="header-search" name="search" className='header-search' placeholder="Search"
-                                        onChange={(e) => doSearch(e.target.value)}
-                                    // onKeyUp={(e)=>{
-                                    //     if(e.key === 'Enter'){
-                                    //         console.log(this.state.searchName)
-                                    //     }
-                                    // }} onChange={e=>{
-                                    //     this.props.setSearchName(e.target.value)
-                                    // }}
-                                    />
-                                }
+                        {this.state.isLoggedIn ?
+                            <div className="custom-nav-icon">
+                                <div className=" header-search-container">
+                                    {this.state.isSearch ?
+                                        <img src={MagnGlass} alt="magnifying-glass" className='magn-glass'
+                                            onClick={() => {
+                                                this.setState({
+                                                    isSearch: false
+                                                })
+                                            }}
+                                        />
+                                        :
+                                        <input type="text" id="header-search" name="search" className='header-search' placeholder="Search"
+                                            onChange={(e) => this.props.setSearchName(e.target.value)}
+                                        />
+                                    }
 
+                                </div>
+                                <div className="header-chat-logo">
+                                    <img src={ChatLogo} alt="chat-logo" className='chat-logo' />
+                                </div>
+                                <div className="header-profile">
+                                    <Link to="/profile">
+                                        <img src={profile_picture ? `http://localhost:8080${profile_picture}` : MiniPict} alt="mini-pict" className="mini-photo"
+                                            onClick={() => {
+                                                doChangePage("profile")
+                                            }}
+                                        />
+                                    </Link>
+                                </div>
                             </div>
-                            <div className="header-chat-logo">
-                                <img src={ChatLogo} alt="chat-logo" className='chat-logo' />
-                            </div>
-                            <div className="header-profile">
-                                <Link to="/profile">
-                                    <img src={profile_picture ? `http://localhost:8080${profile_picture}` : MiniPict} alt="mini-pict" className="mini-photo" 
+                            :
+                            <div className="custom-nav-icon ">
+                                <div className="custom-login-button"
                                     onClick={() => {
-                                        doChangePage("profile")                                        
+                                        doChangePage("login")
                                     }}
-                                    />
-                                </Link>
+                                ><Link to="/login">Login</Link></div>
+                                <div className="custom-signup-button"
+                                    onClick={() => {
+                                        doChangePage("signup")
+                                    }}
+                                ><Link to="/signup">Sign Up</Link></div>
                             </div>
-                        </div>
-                        :
-                        <div className="custom-nav-icon ">
-                            <div className="custom-login-button"
-                            onClick={() => {
-                                doChangePage("login")                                        
-                            }}
-                            ><Link to="/login">Login</Link></div>
-                            <div className="custom-signup-button"
-                            onClick={() => {
-                                doChangePage("signup")                                        
-                            }}
-                            ><Link to="/signup">Sign Up</Link></div>
-                        </div>
-                    }
+                        }
                     </div>
                 </nav>
             </header>
@@ -139,7 +135,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { auth: { isSuccess }, userData: { data: { roles, profile_picture } }, header: {pageActive} } = reduxState
+    const { auth: { isSuccess }, userData: { data: { roles, profile_picture } }, header: { pageActive } } = reduxState
     return { isSuccess, roles, profile_picture, pageActive }
 }
 

@@ -1,4 +1,4 @@
-import { counterUpAction, counterDownAction } from "../actionCreator/actionString"
+import { counterUpAction, counterDownAction, resetCartString } from "../actionCreator/actionString"
 
 const initialState = {
     counter: 1,
@@ -10,6 +10,8 @@ const counterReducers = (prevState = initialState, action) => {
             return { ...prevState, counter: prevState.counter + 1 }
         case counterDownAction:
             return { ...prevState, counter: prevState.counter === 1 ? prevState.counter = 1 : prevState.counter - 1 }
+        case resetCartString:
+            return {...initialState}
         default:
             return prevState
     }

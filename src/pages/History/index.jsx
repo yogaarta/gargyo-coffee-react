@@ -17,7 +17,8 @@ class History extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            transactions: []
+            transactions: [],
+            history: []
         }
     }
 
@@ -40,6 +41,31 @@ class History extends Component {
                 console.log(error)
             })
     }
+
+    addToDelete = (id) => {
+        let newHistory = [...this.state.history]
+        newHistory.includes(id) ? newHistory.filter(item => item !== id) : newHistory.push(id)
+        this.setState({
+            history: newHistory
+        })
+        console.log(this.state.history)
+        console.log(newHistory)
+    }
+
+    deleteHistory = () => {
+        const { token = null } = this.props.userInfo || {}
+
+        const config = { headers: { Authorization: `Bearer ${token}` } }
+        const body = { id: this.state.history }
+        axios.patch('http://localhost:8080/transactions/user', body, config)
+            .then(result => {
+                console.log(result)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     render() {
         return (
             <div>
@@ -48,7 +74,9 @@ class History extends Component {
                     <section className='h-title'>
                         <h1>Let's see what you have bought!</h1>
                         <p>Select item to delete</p>
-                        <div className="h-select-all">Select All</div>
+                        <div className="h-select-all"
+                        onClick={()=> this.deleteHistory()}
+                        >Delete</div>
                     </section>
                     <section className='h-main-product-container row row-cols-sm-2 row-cols-md-3 row-cols-xs-1'>
                         {/* <div className="col h-product-card-container">
@@ -71,7 +99,7 @@ class History extends Component {
                             </div>
                         </div> */}
                         {this.state.transactions.map((item) => (
-                            <HistoryTransactionCard key={item.id} name={item.name} price={item.total_price} />
+                            <HistoryTransactionCard key={item.id} name={item.name} price={item.total_price} id={item.id} addToDelete={this.addToDelete} />
                         ))}
                     </section>
                 </main>
