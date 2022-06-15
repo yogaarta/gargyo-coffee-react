@@ -6,10 +6,13 @@ import "./Dashboard.css"
 
 import Option from "../../assets/img/option.png"
 import Admin from "../../assets/img/adminpict.png"
+import { headerAction } from '../../redux/actionCreator/header'
+import { connect } from 'react-redux'
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
     componentDidMount(){
         document.title = "Dashboard"
+        this.props.dispatch(headerAction("dashboard"))
 
     }
     render() {
@@ -59,7 +62,7 @@ export default class Dashboard extends Component {
                                         <div className="db-chart-column-negative">
                                             <div className="db-chart-column-negative-bar" style={{height:"80%"}}></div>
                                         </div>
-                                        <div className="db-chart-column-bottom-label">Mon <br />13/06</div>
+                                        <div className="db-chart-column-bottom-label">Mon</div>
                                     </div>
                                     <div className="db-chart-column">
                                         <div className="db-chart-column-positive">
@@ -159,3 +162,5 @@ export default class Dashboard extends Component {
         )
     }
 }
+
+export default connect()(Dashboard)

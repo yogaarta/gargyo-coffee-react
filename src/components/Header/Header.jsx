@@ -64,19 +64,10 @@ class Header extends Component {
                                     }}
                                 >Home</Link></li>
                                 <li><Link to="/product" className={pageActive === "product" ? "custom-active-nav" : "custom-inactive-nav"}
-                                    onClick={() => {
-                                        doChangePage("product")
-                                    }}
                                 >Product</Link></li>
                                 <li><Link to="/payment" className={pageActive === "order" ? "custom-active-nav" : "custom-inactive-nav"}
-                                    onClick={() => {
-                                        doChangePage("order")
-                                    }}
                                 >Order</Link></li>
                                 <li><Link to="/dashboard" className={pageActive === "dashboard" ? "custom-active-nav" : "custom-inactive-nav"}
-                                    onClick={() => {
-                                        doChangePage("dashboard")
-                                    }}
                                 >Dashboard</Link></li>
                             </ul>
                         }
@@ -94,9 +85,14 @@ class Header extends Component {
                                             }}
                                         />
                                         :
-                                        <input type="text" id="header-search" name="search" className='header-search' placeholder="Search"
-                                            onChange={(e) => this.props.setSearchName(e.target.value)}
-                                        />
+                                        <div className='header-search-input-container'>
+                                            <input type="text" id="header-search" name="search" className='header-search' placeholder="Search"
+                                                onChange={(e) => this.props.setSearchName(e.target.value)}
+                                            />
+                                            <img src={MagnGlass} alt="magnifying-glass" className='magn-glass2'
+                                                // onClick={() => { this.props.doAxios() }}
+                                            />
+                                        </div>
                                     }
 
                                 </div>
@@ -105,7 +101,7 @@ class Header extends Component {
                                 </div>
                                 <div className="header-profile">
                                     <Link to="/profile">
-                                        <img src={profile_picture ? `http://localhost:8080${profile_picture}` : MiniPict} alt="mini-pict" className="mini-photo"
+                                        <img src={profile_picture ? `${process.env.REACT_APP_BE_HOST}${profile_picture}` : MiniPict} alt="mini-pict" className="mini-photo"
                                             onClick={() => {
                                                 doChangePage("profile")
                                             }}

@@ -13,18 +13,20 @@ import Cod from "../../assets/img/cod.png"
 import { connect } from 'react-redux'
 import { currencyFormatter } from '../../Helper/formater'
 import { resetCartAction } from '../../redux/actionCreator/addToCart'
+import { Navigate } from 'react-router-dom'
 
 class Payment extends Component {
     constructor() {
         super();
         this.state = {
             product: [],
-            payment: ""
+            payment: "",
+            isSuccess: false
         }
     }
 
     confirmAndPay = () => {
-        const { counter, addToCart: { delivery, productId }, id, dispatch } = this.props
+        const { counter, addToCart: { delivery, productId }, id } = this.props
         const product_id = productId
         const total_price = (this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0)
         const quantity = counter
@@ -37,21 +39,21 @@ class Payment extends Component {
 
         const body = { product_id, total_price, quantity, user_id, payment_method, delivery_method }
         axios
-            .post('http://localhost:8080/transactions', body, config)
+            .post(`${process.env.REACT_APP_BE_HOST}/transactions`, body, config)
             .then(result => {
                 console.log(result)
             })
             .catch(error => {
                 console.log(error)
             })
-        dispatch(resetCartAction())
+        // dispatch(resetCartAction())
     }
 
     componentDidMount() {
         document.title = "Payment"
         const { addToCart: { productId } } = this.props
         axios
-            .get(`http://localhost:8080/products/${productId}`)
+            .get(`${process.env.REACT_APP_BE_HOST}/products/${productId}`)
             .then(result => {
                 console.log(this.state.product)
                 this.setState({
@@ -63,7 +65,10 @@ class Payment extends Component {
             })
     }
     render() {
-        const { counter, addToCart: { size, delivery }, address, mobile_number } = this.props
+        const { counter, addToCart: { size, delivery }, address, mobile_number, display_name, email } = this.props
+        if(this.state.isSuccess === true){
+            return <Navigate to="/product"/>
+        }
         return (
             <div>
                 <Header />
@@ -74,7 +79,7 @@ class Payment extends Component {
                             <div className="pm-order-summary">Order Summary</div>
                             <div className="pm-all-order">
                                 <div className="pm-order-item">
-                                    <div className="pm-item-img"><img src={`http://localhost:8080${this.state.product.picture}`} alt="" className="pm-product-img" /></div>
+                                    <div className="pm-item-img"><img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="product-info" className="pm-product-img" /></div>
                                     <div className="pm-item-detail">
                                         <p>{this.state.product.name}</p>
                                         <p>x{counter}</p>
@@ -124,7 +129,7 @@ class Payment extends Component {
                                     </div>
                                     <div className="address-detail-card">
                                         <div className="pm-address-detail">
-                                            <span>{delivery === "Door Delivery" ? "Delivery to" : delivery}</span>
+                                            <span>{delivery === "Door Delivery" ? "Delivery to" : delivery} </span> {display_name ? display_name : email}
                                         </div>
                                         <div className="pm-border"></div>
                                         <div className="pm-address-detail">
@@ -191,21 +196,44 @@ class Payment extends Component {
                                 </div>
 
                             </div>
-                            <div className="pm-confirm-button"
+                            <div className="pm-confirm-button" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 onClick={() => this.confirmAndPay()}
                             >Confirm and Pay</div>
                         </section>
                     </section>
                 </main>
                 <Footer />
+                {/* MODAL */}
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title profile-modal-title" id="exampleModalLabel">
+                                    Transaction Success
+                                </h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-primary profile-btn-primary" data-bs-dismiss="modal"
+                                    onClick={() => {
+                                        this.props.dispatch(resetCartAction())
+                                        this.setState({
+                                            isSuccess: true
+                                        })
+                                    }}
+                                >Proceed</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = (reduxState) => {
-    const { addToCart, auth: { userInfo }, counter: { counter }, userData: { data: { address, mobile_number, id } } } = reduxState
-    return { addToCart, counter, address, mobile_number, id, userInfo }
+    const { addToCart, auth: { userInfo }, counter: { counter }, userData: { data: { address, mobile_number, id, display_name, email } } } = reduxState
+    return { addToCart, counter, address, mobile_number, id, userInfo, display_name, email }
 }
 
 export default connect(mapStateToProps)(Payment)

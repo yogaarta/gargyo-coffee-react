@@ -40,7 +40,7 @@ class ProductDetail extends Component {
     componentDidMount() {
         const { params } = this.props
         axios
-            .get(`http://localhost:8080/products/${params.id}`)
+            .get(`${process.env.REACT_APP_BE_HOST}/products/${params.id}`)
             .then(result => {
                 console.log(this.state.product)
                 this.setState({
@@ -62,7 +62,7 @@ class ProductDetail extends Component {
                     <section className="pd-main-content">
                         <div className="pd-left-content">
                             <div className="pd-main-img-container">
-                                <img src={`http://localhost:8080${this.state.product.picture}`} alt="coldbrew" className="pd-main-img" />
+                                <img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="coldbrew" className="pd-main-img" />
                             </div>
                             <div className="pd-main-product-name">
                                 <h2>{this.state.product.name}</h2>
@@ -162,7 +162,7 @@ class ProductDetail extends Component {
                     <section className="pd-checkout-container">
                         <div className="pd-product-checkout">
                             <div className="pd-checkout-img">
-                                <img src={`http://localhost:8080${this.state.product.picture}`} alt="coldbrew" className='pd-check-out-img' />
+                                <img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="coldbrew" className='pd-check-out-img' />
                             </div>
                             <div className="pd-checkout-info">
                                 <h4 className="pd-checkout-name">{this.state.product.name}</h4>

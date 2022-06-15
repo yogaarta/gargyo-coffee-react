@@ -23,6 +23,7 @@ import { getUserDataAction } from '../../redux/actionCreator/userData'
 class Home extends Component {
     componentDidMount() {
         document.title = "Gargyo Coffee"
+        window.scrollTo(0, 0);
         const { isLoggedIn, dispatch } = this.props
         if (isLoggedIn) {
             const { token = null } = this.props.userInfo || {}

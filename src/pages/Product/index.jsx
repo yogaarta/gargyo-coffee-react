@@ -15,6 +15,7 @@ import Check from "../../assets/img/Vectorcheck.png"
 import Promo1 from "../../assets/img/promo1.png"
 import Promo2 from "../../assets/img/promo2.png"
 import Promo3 from "../../assets/img/promo3.png"
+import { headerAction } from '../../redux/actionCreator/header'
 
 
 class Product extends Component {
@@ -32,7 +33,9 @@ class Product extends Component {
             searchName: "",
             meta: null,
             pageActive: "product",
-            setSearchParams: this.props.setSearchParams.bind(this)
+            setSearchParams: this.props.setSearchParams.bind(this),
+            error: false,
+            errMsg: ""
 
         };
     }
@@ -46,8 +49,9 @@ class Product extends Component {
     componentDidMount() {
         document.title = "Product"
         this.state.setSearchParams('')
+        this.props.dispatch(headerAction("product"))
         axios
-            .get('http://localhost:8080/products')
+            .get(`${process.env.REACT_APP_BE_HOST}/products`)
             .then(result => {
                 this.setState({
                     product: result.data.data,
@@ -58,10 +62,16 @@ class Product extends Component {
             })
     }
 
+    // doAxios = () => {
+    //     this.setState({
+    //         doAxios: true
+    //     })
+    // }
+
     componentDidUpdate() {
         if (this.state.doAxios) {
             let params = ''
-            let url = `http://localhost:8080/products`
+            let url = `${process.env.REACT_APP_BE_HOST}/products`
             if (this.state.categoryActive === "all") {
                 url += `?page=${this.state.page}&limit=${this.state.limit}&`
                 params += `page=${this.state.page}&limit=${this.state.limit}&`
@@ -86,13 +96,18 @@ class Product extends Component {
             axios
                 .get(url)
                 .then(result => {
-                    console.log(result)
                     this.setState({
                         product: result.data.data,
-                        totalPage: !result.data.meta ? "1" : result.data.meta.totalPage
+                        totalPage: !result.data.meta ? "1" : result.data.meta.totalPage,
+                        error: false,
+                        errMsg: ""
                     });
                 }).catch(error => {
                     console.log(error)
+                    this.setState({
+                        error: true,
+                        errMsg: error.response.data.err
+                    })
                 })
             this.setState({
                 doAxios: false
@@ -105,7 +120,9 @@ class Product extends Component {
         const { roles } = this.props
         return (
             <div>
-                <Header setSearchName={this.setSearchName.bind(this)}/>
+                <Header setSearchName={this.setSearchName.bind(this)} 
+                // doAxios={this.doAxios()}
+                />
                 <main className="row custom-main-container">
                     <aside className="col-4 custom-promo-column">
                         <div className="custom-promo-title">
@@ -255,13 +272,13 @@ class Product extends Component {
                         </nav>
                         <div className="custom-food-container">
                             <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
-                                {this.state.product.length === 0 ? <div>DATA NOT FOUND</div> :
+                                {this.state.error === true ? <div>DATA NOT FOUND</div> :
                                     this.state.product.map((product) => (
                                         <div key={product.id} className="col custom-product-card-container">
                                             <div className="card custom-product-card">
                                                 <div className="custom-card-img-container">
                                                     <Link to={`/product/${product.id}`}>
-                                                        <img src={`http://localhost:8080${product.picture}`} className="card-img-top" alt={product.name} />
+                                                        <img src={`${process.env.REACT_APP_BE_HOST}${product.picture}`} className="card-img-top" alt={product.name} />
                                                     </Link>
                                                 </div>
                                                 <div className="custom-product-promo">0%</div>

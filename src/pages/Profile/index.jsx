@@ -53,12 +53,10 @@ class Profile extends Component {
     componentDidMount() {
         document.title = "Profile"
         const { token = null } = this.props.userInfo || {}
-        console.log(this.props)
         const config = { headers: { Authorization: `Bearer ${token}` } }
         axios
-            .get('http://localhost:8080/users', config)
+            .get(`${process.env.REACT_APP_BE_HOST}/users`, config)
             .then(result => {
-                console.log(result.data.data[0])
                 this.setState({
                     profile: result.data.data[0],
                 })
@@ -77,9 +75,8 @@ class Profile extends Component {
         if (this.state.isUpdated) {
             const config = { headers: { Authorization: `Bearer ${token}` } }
             axios
-                .get('http://localhost:8080/users', config)
+                .get(`${process.env.REACT_APP_BE_HOST}/users`, config)
                 .then(result => {
-                    console.log(result.data.data[0])
                     this.setState({
                         profile: result.data.data[0]
                     })
@@ -108,7 +105,7 @@ class Profile extends Component {
                     </div>
                     <div className="main-card">
                         <div className="profile-card">
-                            <div className='profile-picture-container'><img src={this.state.profile.profile_picture ? `http://localhost:8080${this.state.profile.profile_picture}` : Profpic} alt="profile_photo" className="profile-picture" />
+                            <div className='profile-picture-container'><img src={this.state.profile.profile_picture ? `${process.env.REACT_APP_BE_HOST}${this.state.profile.profile_picture}` : Profpic} alt="profile_photo" className="profile-picture" />
                             </div>
                             <div className="profile-text">
                                 <h4 className="profile-name">{this.state.profile.display_name ? this.state.profile.display_name : "Display Name"}</h4>
@@ -147,7 +144,7 @@ class Profile extends Component {
                                     const { token } = this.props.userInfo
                                     const config = { headers: { Authorization: `Bearer ${token}`, "content-type": "multipart/form-data" } }
                                     axios
-                                        .patch('http://localhost:8080/users', body, config)
+                                        .patch(`${process.env.REACT_APP_BE_HOST}/users`, body, config)
                                         .then(result => {
                                             console.log(result)
                                             this.setState({

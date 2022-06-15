@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Coldbrew from "../../assets/img/tomatomix.png"
 
 
 export default class HistoryTransactionCard extends Component {
@@ -15,7 +14,7 @@ export default class HistoryTransactionCard extends Component {
                 <label htmlFor={this.props.id} className="h-product-card"
                     onClick={() => this.props.addToDelete(this.props.id)}>
                     <div className="h-product-img-container">
-                        <img src={Coldbrew} alt="coldbrew" className='h-product-img' />
+                        <img src={`${process.env.REACT_APP_BE_HOST}${this.props.picture}`} alt={this.props.name} className='h-product-img' />
                     </div>
                     <div className="h-product-info">
                         <div className="h-product-name">{this.props.name}</div>

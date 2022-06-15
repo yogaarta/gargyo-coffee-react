@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Link, Navigate } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { loginAction } from '../../redux/actionCreator/auth'
+import { headerAction } from '../../redux/actionCreator/header'
 // import img
 import Logo from "../../assets/img/coffee logo.png"
 import Google from "../../assets/img/google logo.png"
@@ -13,8 +16,6 @@ import ClosedEye from "../../assets/img/closed-eye.png"
 import "./Login.css"
 // import axios from 'axios'
 // import { doLogin } from '../../utility/auth'
-import { connect } from 'react-redux'
-import { loginAction } from '../../redux/actionCreator/auth'
 
 class Login extends Component {
     constructor() {
@@ -31,6 +32,7 @@ class Login extends Component {
     };
     componentDidMount() {
         document.title = "Login"
+        this.props.dispatch(headerAction("login"))
     }
 
     render() {
