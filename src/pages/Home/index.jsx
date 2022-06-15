@@ -18,6 +18,19 @@ import WorldMap from "../../assets/img/world-map.PNG"
 import LeftArrow from "../../assets/img/Vectorleftarrow.png"
 import RightArrow from "../../assets/img/Vectorrightarrow.png"
 import Star from "../../assets/img/Vectorstar.png"
+import Teamwork from "../../assets/img/teamwork.jpg"
+import Favorite1 from "../../assets/img/creamyice.png"
+import Favorite2 from "../../assets/img/pinkypromise.png"
+import Favorite3 from "../../assets/img/chickenwing.png"
+import Netflix from "../../assets/img/netflix.png"
+import Reddit from "../../assets/img/reddit.png"
+import Amazon from "../../assets/img/amazon.png"
+import Discord from "../../assets/img/discord.png"
+import Spotify from "../../assets/img/spotify.png"
+import Profil1 from "../../assets/img/profil1.png"
+import Profil2 from "../../assets/img/profil2.png"
+import Profil3 from "../../assets/img/profil3.png"
+
 import { getUserDataAction } from '../../redux/actionCreator/userData'
 
 class Home extends Component {
@@ -83,7 +96,7 @@ class Home extends Component {
                     </div>
                     <div className="custom-teamwork row">
                         <div className="custom-teamwork-left col"><img
-                            src="https://s3-alpha-sig.figma.com/img/8f54/38af/1614e4f251061e5ddda15a8106a888d0?Expires=1655078400&Signature=f9aLA4rFvWnBb5-ojH4iPiWw8u6T6slhRoPC~KjwiF9zAdwSTkNjVTOpUzM3lkxI2qfxo~izBtzeb5aqpngZNXhwCwxFFrAnq293BxhE3XU3CFvSYm7MtVJz0QKzmqVljIKcqcE4nsL4MOR8VJU2uwH0bSGhMHZKjqg7DhVTy1e1ZNsNDtxBiO5CLrmLcLyW4WnAPS5plsoCTgIdU7B9pNnuPWLsGvYTTSeuYkv09AKD-7r0vKqOQiBenlaJP23mAn2OpT5jU4rI0Z7XdMBy-h45-EzKM4yBocAzqEh0Lcw3pSmZZK~hVseHlHXdDHt9LAB4og1HOEVCJ5DYxo9Sfw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                            src={Teamwork}
                             alt="teamwork" className='teamwork-pict' /></div>
                         <div className="custom-teamwork-right col">
                             <h3 className="custom-teamwork-header">We Provide Good Coffee and Healthy Meals</h3>
@@ -106,7 +119,7 @@ class Home extends Component {
                         <div className="custom-favorite-menu row">
                             <div className="custom-favorite-menu-card col">
                                 <div className="custom-favorite-picture"><img
-                                    src="https://s3-alpha-sig.figma.com/img/b8f7/0e2a/0d98dd6a1ea259209e5b715734ee5a22?Expires=1655078400&Signature=Ku5NwlHq7DY42~Gf49T-6vE75VbqmAlctzuxIAyFuBJOYarY7nY-qKLqe5OB~RDnJ~6Wzf1PHnJyE-l-drIUFxKxoY~tBRHNWAxk21bxNZ8PYJZvJDK5drHUEo05g7LGW-PhLOCYo~nLqBMbpqwrV2Frglh4Zu7QvmDB1kyH8StAEhjSGPlEmVYaQaBl4eyCilzQ0b-1PqB-P47oy4OFd8RQbu1DajDODy5CbIH9~C8wycytHd~gqS4TOSHpl~8Jfunx2p9yob-GopL-qzZRgOt2bwGlwh7eW~wmPE5he5MxaVQyrnoSGEhbuHbescHb7i1EZ7ZRZ7yAU9QyYLKfCg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                                    src={Favorite1}
                                     alt="hazelnut-latte" className="hazelnut-latte-pict" /></div>
                                 <div className="custom-favorite-name">Hazelnut Latte</div>
                                 <div className="custom-favorite-list">
@@ -120,7 +133,7 @@ class Home extends Component {
                             </div>
                             <div className="custom-favorite-menu-card col">
                                 <div className="custom-favorite-picture"><img
-                                    src="https://s3-alpha-sig.figma.com/img/1195/e3b7/a63f096d3edcb57b0bc937039acae071?Expires=1655078400&Signature=PllLg0cxmf16Ywhe21EYuZ~AgXZYelBK4qIsRMhP47E1dYbs7P0uJrAJIFvLl~ccwGhF~2zVFMoU9lq0dHlsBM7S5OGQXQyLu1yktpyAI8jz3aDoqypdxe2H9NHtjKUcxDpAlHsqQDeGdLWKgnYajrz9exSaUWPoVXfO2zA4~c81X8bdnC~IjOshDGtlyDOc38~CkcRvtLxU3jJdhjxE6Ck9Te3MOCXlLiHobZGclLlaVZFRlFLmxNbvE47pFB46ZwRe4zAkcQni9WXJHGsut8Mc8w3gxxwngTLAPcXgdQcwhVO9GWWcbLVhXju8OnMqlHlT43HZg1ldpsky6kyNaQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                                    src={Favorite2}
                                     alt="pinky-promise" className="pinky-promise-pict" /></div>
                                 <div className="custom-favorite-name">Pinky Promise</div>
                                 <div className="custom-favorite-list">
@@ -136,7 +149,7 @@ class Home extends Component {
                             </div>
                             <div className="custom-favorite-menu-card-selected col">
                                 <div className="custom-favorite-picture"><img
-                                    src="https://s3-alpha-sig.figma.com/img/01c2/516d/130f4255d3fd6c5a42948d74ac2a14f4?Expires=1655078400&Signature=JOuvq4K-bHg4GIiQvqfcc6ys~J3ItwbJS1dOp81ah6UxrsJEG5uWQNeAdh6P8r7zfQ7Spk~Fi9AEBeDF9GKXQp7uRkH2g9rNmL6klaAd1qVIYe7HJkLQyulHuK5x9OQZ9wrucOTIFgxqapPJhMMFSI0YUB84sDPvhESCTS10~N~ziCPsL2l1B1CxQ6fvdfPuQ~FRYlxwWOzhhZi9-vRu1DIFqJCTivjQzbCIL3clPR6RiQ7qthuVmcAtMoHsC2JUxDmoBpBPD8MlxqltzsBTlzUizl7Sj2ZHNXXVnuisI3t4Lc~DMebFP8Sg35gb0dwI0Yw0Z--AFlBqZJMdUKDnmg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                                    src={Favorite3}
                                     alt="chicken-wings" className="chicken-wings-pict" /></div>
                                 <div className="custom-favorite-name">Chicken Wings</div>
                                 <div className="custom-favorite-list">
@@ -161,19 +174,19 @@ class Home extends Component {
                     <div className="custom-main-title">Our Partner</div>
                     <div className="row custom-partner-logo">
                         <div className="col"><img
-                            src="https://s3-alpha-sig.figma.com/img/fbb6/95dd/8c01553b064b0be13807f8af91e5941b?Expires=1655078400&Signature=ecWx5rByJl2tMKr5UlKzcEm8HzrQt2J21PGt0vVoHL-0yzZawTTzL8YJTXaKo8Q0LtH8A1MhKKHiQSMBCS2KHvlnJs4YHLLcT4GCQtaPh4ZXdandTjjQogLLhcNQ25dLTZfz0swVXie1h2fcxqFu0N1gDdBneIgbBBwmHw2VpI~6EkSCIviO5XduYjLUDjmkhGeDqOOCOYgpj1ZeYr6iCk1CurAnaUzC9~SLGapnqs2MpkLKz4lBiJYSV3F~dLkPDgX2tF4qCQlAGWKwsRLibyKbx25QOloK9QU6GFSVQyZ1ZsLLLYLNxTOOA4xrSJWiO4bewREorXQelP0ws3HO8A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                            src={Netflix}
                             alt="netflix" className="custom-partner-logo-netflix" /></div>
                         <div className="col custom-partner-logo-img"><img
-                            src="https://s3-alpha-sig.figma.com/img/e7e9/7f2a/15a82cbac8fde655da7a0b48b4a0d093?Expires=1655078400&Signature=TLvJ3r4H6Yggda-elRsRGMWf9tuBeU~XqANJJU2JCJnPE12RwnKADi-EukFxfKZFdaI6uWN0UKOwW8Z4v16XN00z2UdupzE~~uVOPnVHsCJ~KQeuWMZs2wylWO8mdRPUJckxAAaSFSAzteavFQLps6wV4-IAr6vuAymTGB2cIYH-CD66x4k7KUHIY2PauIKcIOvax2sA9nDS0l67Am1rozeXAIpsPbuEp2cYALdE96goaearfBBnjtmTQFlp2Ks-cXdi3ZhFadKkG3nFWJ6CzJWfwvY6RUtVzaARQBWfG2rjx8YOJD6cdaP08RlE95hodoXfe862S0k452DBUwgygA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                            src={Reddit}
                             alt="reddit" className="custom-partner-logo-reddit" /></div>
                         <div className="col"><img
-                            src="https://s3-alpha-sig.figma.com/img/9b3d/1bce/29eea1a4afb6e717243bc96076cc6750?Expires=1655078400&Signature=YNOPd~f5UoXt9ZnqUEkicyiNvv-y2~2LM8gZoYXC151WRMR21Zyg4PtYbHkuqPoPslUux1Se3IDw202zPpN6J4kJwI0RbZdOwjO2Q~jZ56crKff2hOkvUvI~loBSfkd7WQ7ImNp21D66klm924S8Pzj3eOHWq28qhK2somBbTptv-7T0etHTwsPPQCwla7VCaqMGVV6BrcjRJooAVlM37cVFgfzKUtpCJqyU0N5WWiwmZ6wriGX0jnt~-9hkyGv~PB3LpabrHlAtPxaUdPcMNUPr2H6BuqQUe5sx1BuF3~8tChKdEZM08o0b8A2~KZ6xx4GTpS6WAVugnftDVKQ9Dg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                            src={Amazon}
                             alt="amazon" className="custom-partner-logo-amazon" /></div>
                         <div className="col custom-partner-logo-img"><img
-                            src="https://s3-alpha-sig.figma.com/img/2607/51ed/f193c9a610ba070a7eab9958624aa513?Expires=1655078400&Signature=RI0~nvb7tJJc0UMMvvQ48FlhOLyY7H8Ke5p~cjmY7HtRadJb6rwmzBdvHVs~1~fhExzZiT6MhCoqG1ILZRoSbbVpTKwouSrkFQm0EGwucoxjbq-C2twYLHMdnFEbMXCMaeuzUBqm8KL0IWuiaLR-rasi9fTCJp4TXOGtgWScmWBGkHFywwLzo5OSO5~d9UR2fSZWs07jceCtzKA~4I1RMgnMq68u5wtvzqk3PQZmOmyGHbADQ1UGAeS0t~HJXpEfQaq9tQkXvgNXQkwjW1PAXcpYOTl7Y6c9jTy6fsQXOFY2cftiVzfwl~9VD4ym~IVneXp9C02gwgiyawcea~~SWw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                            src={Discord}
                             alt="discord" className="custom-partner-logo-discord" /></div>
                         <div className="col custom-partner-logo-img"><img
-                            src="https://s3-alpha-sig.figma.com/img/0b7c/a72d/624c77047ed5c2b5194caf5e5e1a00f2?Expires=1655078400&Signature=Y8D7z9xnclrx0lN-pt6v3ldlVZg-rkNtm2-yW-W3pwhWXrsfnSLzsjrBf-lulCuyxsDOneX1-cDk8HXM6X6nO4QhH1BA8Dsp~3tVb7letrZPvslC6qqLXiVk~bLiP4tekI2qU-kV9KB9V-vE0-lYGA-0nXk0h8p~IyDrBz5h4bGGD4FCf5N7KiijCmU3FNO~Jmlqg7bYGHJPNKjm1c0qpkgVrDVz8Ciik-te0Rg4edzIltZv2u8i4nBQ2m-vEGP8RQ~Ys0qm8aaa9s4lNcqSc-88n1BFJlujadpP2Wx7qEG0DTgcInuLMgSfdCIAVs3lIcD6Yjq-TeaJ4VWHbrzQ9Q__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                            src={Spotify}
                             alt="spotify" className="custom-partner-logo-spotify" /></div>
                     </div>
                     <div className="custom-testimony">
@@ -186,7 +199,7 @@ class Home extends Component {
                         <div className="col custom-review-card-selected">
                             <div className="row custom-review-identity">
                                 <div className="col-2 custom-review-profpict"><img
-                                    src="https://s3-alpha-sig.figma.com/img/7b52/c50d/64efec4c75c3e34f6408021730b20d9a?Expires=1655078400&Signature=HMmN8qXtMVy0q4LUjl7HiMXTYtVnIjw4s4x2kG-grHIFf1ZSqf7Qnn4C7q1H6sAjF56m0lhFXal1hiove~yeHgjpx1LhJlPoYOz~yBfwLsEjcbG5yn2LGMfPr5PE~6nrogcXHmSKG4HqS9gWy9yHGBgvuf1vxJI61QckOfXCDelyZkbTu6VWBHQHWAO4mrQsQWYPXSzyJ8fPuo4ZsXKh9YjySw7B0fkzSOoOf0YbrjNk2ocxdbhC2F9O9TMP~0O2KSovBherypes0JPvvL0oiLoV7nGus~AmKcT9sS-coxg-cDI4O0tzz-S~pBnpq2cZjS76qSce1lC5yvfpqb~z0g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                                    src={Profil1}
                                     alt="viezh-robert" className="custom-review-profpict-viezh" /></div>
                                 <div className="col-7">
                                     <div className="custom-review-name">Viezh Robert</div>
@@ -200,7 +213,7 @@ class Home extends Component {
                         <div className="col custom-review-card">
                             <div className="row custom-review-identity">
                                 <div className="col-2 custom-review-profpict"><img
-                                    src="https://s3-alpha-sig.figma.com/img/4efc/2b65/3098956f84b1822f2eb7e8ed84a31750?Expires=1655078400&Signature=ZQk5SGSmoJmHUmWnkAlOdMgandg1oSvVqAEEaeEexOvBU1s8AjxevylfHGSnrrY9oYtS5s6FPplD2ojF-lcuQCV22-fGJuus2uhVRrHipT7NwYvSYI56Fe7C4ReAOz~6It8qAodX03BX9h1zevug5xXjRNxrVcIYiRrR-oOoSm84QSfEI1aD1WqTdcyYiZtLXEfzh0IidOoyZ~vYR3GrIwfSZ168Fyc4QeAzygPnXX0q~GTtfFapEQyS~SCLhGOBFrA0R9HF1bI~F~cMExCQ~dEm1so59eU0IBvMMRSjc5SC95nYWyUG5l1VoQbI4RMOt1nV-ifrTMSUOAx8zEsfrA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                                    src={Profil2}
                                     alt="yessica" className="custom-review-profpict-viezh" /></div>
                                 <div className="col-7">
                                     <div className="custom-review-name">Yessica Christy</div>
@@ -214,7 +227,7 @@ class Home extends Component {
                         <div className="col custom-review-card">
                             <div className="row custom-review-identity">
                                 <div className="col-2 custom-review-profpict"><img
-                                    src="https://s3-alpha-sig.figma.com/img/b0e0/b9a7/2a3108aed3c607327c6c1eb79c47366c?Expires=1655078400&Signature=hCOkCNoUQOgAupph~gOHdS8lKfe4K~VhEk0G8~hewN5jqrrlEExJWuSMU9Um6NXbpF4GsCDpDSR0A9fFZgRCxk0uOdgnUIkOGipUVecHkphDfnEvahbcpfzX8ve3Aym5Iuu0VC-h~8bsV-80B-gK9NgaakOccdz2mGGnzulqJ4bt0S1k2vIoaqYdwpgvuMVO4JwI3oTp-MBUMO54QT5QHYHLXvrQEZkv7MVT-PWk0C9SqaDRXWGzUsUkxOglroiFdCDpndMVp-tJftJj4v3MWrqX106a9sBQwEcwbFML4IvoGyFPi4PHrhdnaZL~IyULFiZKwAQ2O8YWVo6EHRwd0g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                                    src={Profil3}
                                     alt="yessica" className="custom-review-profpict-viezh" /></div>
                                 <div className="col-7">
                                     <div className="custom-review-name">Kim Young Jou</div>
