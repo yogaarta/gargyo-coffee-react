@@ -1,0 +1,492 @@
+.new-global-container {
+  padding: 5% 7.5%;
+}
+
+.new-title {
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+
+}
+
+.new-title span {
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #6A4029
+}
+
+.new-main-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-left-container {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  padding: 20px 2.5%;
+}
+
+.new-pict-default {
+  width: 200px;
+  height: 200px;
+
+  background-color: #dbdbdb;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin: 20px 0;
+}
+
+.new-pict {
+  width: 70px;
+}
+
+.new-take-pict-button {
+  background: #0B132A;
+  border-radius: 20px;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-gallery-button {
+  background: #FFBA33;
+  border-radius: 20px;
+  color: #6A4029;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-save-button {
+  background: #6A4029;
+  border-radius: 20px;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-cancel-button {
+  background: #dbdbdb;
+  border-radius: 20px;
+  color: #4F5665;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-gallery-button,
+.new-save-button,
+.new-cancel-button,
+.new-take-pict-button {
+  font-family: Rubik;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  height: 65px;
+  width: 100%;
+  align-self: center;
+
+  margin: 15px 0;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.new-right-container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 20px 5%;
+  justify-content: space-between;
+}
+
+.new-label {
+  font-family: Rubik;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  color: #6A4029;
+  margin-top: 15px;
+}
+
+.new-text-input {
+  font-family: Rubik;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  width: 100%;
+
+  border: none;
+  border-bottom: 1px solid #4F5665;
+  padding: 15px 10px;
+  margin-bottom: 25px;
+}
+
+.new-date {
+  display: flex;
+}
+
+.new-start-date{
+  width: 50%;
+}
+
+.new-date-input{
+  font-family: Rubik;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  width: 100%;
+
+  border: none;
+  border-bottom: 1px solid #4F5665;
+  padding: 15px 10px;
+  margin-bottom: 25px;
+}
+
+.new-text-input:focus {
+  outline: none;
+}
+
+/* SIZE */
+.new-choose-size {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.new-size-title {
+  font-family: Poppins;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 38px;
+  letter-spacing: 0em;
+  text-align: center;
+
+}
+
+.new-size-container {
+  display: flex;
+  margin-top: 30px;
+}
+
+
+.new-size-vector {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  z-index: 2;
+
+  margin-left: 25px;
+  margin-right: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Poppins;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 45px;
+  letter-spacing: 0em;
+  color: #000000;
+  text-align: center;
+  cursor: pointer;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+
+}
+
+.new-size-checkmark {
+  width: 70px;
+  height: 70px;
+  z-index: -1;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #F4F4F8;
+}
+
+
+.new-size-vector:hover input~.new-size-checkmark {
+  background-color: #fcaf16;
+}
+
+.new-size-vector input:checked~.new-size-checkmark {
+  background-color: #FFBA33;
+}
+
+.new-size-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+/* CATEGORY */
+
+.new-category-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 50px;
+}
+
+.new-category-title {
+  font-family: Rubik;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  color: #6A4029;
+}
+
+.new-category-button {
+  display: flex;
+}
+
+.new-category-button-active {
+  width: 120px;
+  height: 40px;
+  margin: 20px 10px;
+
+  background: #6A4029;
+  box-shadow: 0px 6px 20px rgba(137, 85, 55, 0.4);
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+}
+
+.new-category-button-inactive {
+  width: 120px;
+  height: 40px;
+  margin: 20px 10px;
+
+  background: #F4F4F8;
+  border-radius: 10px;
+  border: 1px solid #BABABA59;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #9F9F9F;
+
+}
+
+.new-category-input {
+  position: absolute;
+  /* opacity: 0; */
+}
+
+.new-category-checkmark {
+  position: absolute;
+  width: 130px;
+  height: 40px;
+  margin: 20px 10px;
+
+  background: #F4F4F8;
+  border-radius: 10px;
+  border: 1px solid #BABABA59;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #9F9F9F;
+  cursor: pointer;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.new-category-button-inactive:hover input~.new-category-checkmark {
+  background: #FFBA33;
+  box-shadow: 0px 6px 20px rgba(137, 85, 55, 0.4);
+  color: #6A4029;
+  font-weight: 700;
+}
+
+.new-category-button-inactive input:checked~.new-category-checkmark {
+  background: #FFBA33;
+  box-shadow: 0px 6px 20px rgba(137, 85, 55, 0.4);
+  color: #6A4029;
+  font-weight: 700;
+}
+
+.new-category-dinein-button {
+  width: 90px;
+  height: 40px;
+  margin: 20px 10px;
+
+  background: #6A4029;
+  box-shadow: 0px 6px 20px rgba(137, 85, 55, 0.4);
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+
+}
+
+.new-category-door-button {
+  width: 120px;
+  height: 40px;
+  margin: 20px 10px;
+
+  background: #F4F4F8;
+  border-radius: 10px;
+  border: 1px solid #BABABA59;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #9F9F9F;
+
+}
+
+.new-category-pickup-button {
+  width: 90px;
+  height: 40px;
+  margin: 20px 10px;
+
+  background: #F4F4F8;
+  border-radius: 10px;
+  border: 1px solid #BABABA59;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #9F9F9F;
+
+}
+
+
+@media (max-width: 840px) {
+  .new-global-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .new-main-container {
+    flex-direction: column;
+  }
+
+  .new-left-container {
+    padding: 20px 5%;
+    padding-bottom: 0px;
+    width: 100%;
+  }
+
+  .new-gallery-button,
+  .new-save-button,
+  .new-cancel-button,
+  .new-take-pict-button {
+    width: 80%;
+  }
+
+  .new-right-container {
+    width: 100%;
+    padding: 20px 5%;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 460px) {
+  .new-category-button {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .new-category-checkmark,
+  .new-category-button-inactive {
+    margin: 10px;
+  }
+}

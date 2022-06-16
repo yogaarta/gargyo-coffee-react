@@ -20,6 +20,8 @@ import History from "./pages/History";
 import PrivateLoggedIn from "./components/privateRoute/PrivateLoggedIn";
 import PrivateNotLoggedIn from "./components/privateRoute/PrivateNotLoggedIn";
 import Dashboard from "./pages/Dashboard";
+import NewProduct from './pages/NewProduct';
+import NewPromo from './pages/NewProduct/NewPromo';
 
 
 function App() {
@@ -58,6 +60,8 @@ function App() {
               </PrivateNotLoggedIn>
             } />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/product/new" element={<NewProduct />} />
+            <Route path="/promo/new" element={<NewPromo />} />
             <Route
               path="*"
               element={
