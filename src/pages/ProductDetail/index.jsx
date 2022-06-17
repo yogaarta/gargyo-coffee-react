@@ -7,11 +7,11 @@ import { connect } from 'react-redux'
 import './ProductDetail.css'
 import withParams from '../../Helper/withParams'
 import { counterUp, counterDown } from '../../redux/actionCreator/counter'
+import { Modal } from "react-bootstrap";
 
 // import img
 import axios from 'axios'
 import { addToCartAction } from '../../redux/actionCreator/addToCart'
-import { headerAction } from '../../redux/actionCreator/header';
 import { currencyFormatter } from '../../Helper/formater'
 
 class ProductDetail extends Component {
@@ -25,6 +25,7 @@ class ProductDetail extends Component {
             counter: "",
             allSize: [],
             cart: [],
+            isShow: false
         }
     }
 
@@ -53,7 +54,7 @@ class ProductDetail extends Component {
     }
 
     render() {
-        const { params, counter, doCounterUp, doCounterDown, doAddToCart, addToCart, doChangePage, roles } = this.props
+        const { params, counter, doCounterUp, doCounterDown, doAddToCart, addToCart, roles } = this.props
         return (
             <div>
                 <Header />
@@ -72,7 +73,13 @@ class ProductDetail extends Component {
                                 <>
                                     <div className="pd-addcart-button"
                                         onClick={() => {
-                                            doAddToCart(this.state.size, this.state.delivery, params.id)
+                                            const addSize = this.state.size !== "" ? this.state.size : null
+                                            const addDeliv = this.state.delivery !== "" ? this.state.delivery : null
+                                            addSize !== null && addDeliv !== null ?
+                                                doAddToCart(addSize, addDeliv, params.id) :
+                                                this.setState({
+                                                    isShow: true
+                                                })
                                             // console.log(this.state.size)
                                         }}
                                     >Add to Cart</div>
@@ -170,43 +177,47 @@ class ProductDetail extends Component {
                     </section>
                     {roles !== "admin" ?
                         <section className="pd-checkout-container">
-                            <div className="pd-product-checkout">
-                                <div className="pd-checkout-img">
-                                    <img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="coldbrew" className='pd-check-out-img' />
+
+                            {addToCart.productId === "" ?
+                                <div className='pd-product-empty-checkout'>
+                                    Your Cart is Empty,<br /><span> please add product to cart</span>
                                 </div>
-                                <div className="pd-checkout-info">
-                                    <h4 className="pd-checkout-name">{this.state.product.name}</h4>
-                                    <div className="pd-checkout-details">
-                                        <p>
-                                            x{counter} {addToCart.size} <br />{addToCart.delivery}
-                                        </p>
+                                :
+                                <div className="pd-product-checkout">
+                                    <div className="pd-checkout-img">
+                                        <img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="coldbrew" className='pd-check-out-img' />
+                                    </div>
+                                    <div className="pd-checkout-info">
+                                        <h4 className="pd-checkout-name">{this.state.product.name}</h4>
+                                        <div className="pd-checkout-details">
+                                            <p>
+                                                x{counter} {addToCart.size} <br />{addToCart.delivery}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="pd-checkout-quantity">
+                                        <div className="pd-minus-button"
+                                            onClick={() => {
+                                                doCounterDown()
+                                                this.setState({
+                                                    counter: this.props.counter
+                                                })
+                                            }}
+                                        >-</div>
+                                        <div className="pd-quantity">{counter} </div>
+                                        <div className="pd-plus-button"
+                                            onClick={() => {
+                                                doCounterUp()
+                                                this.setState({
+                                                    counter: this.props.counter
+                                                })
+                                            }}
+                                        >+</div>
                                     </div>
                                 </div>
-                                <div className="pd-checkout-quantity">
-                                    <div className="pd-minus-button"
-                                        onClick={() => {
-                                            doCounterDown()
-                                            this.setState({
-                                                counter: this.props.counter
-                                            })
-                                        }}
-                                    >-</div>
-                                    <div className="pd-quantity">{counter} </div>
-                                    <div className="pd-plus-button"
-                                        onClick={() => {
-                                            doCounterUp()
-                                            this.setState({
-                                                counter: this.props.counter
-                                            })
-                                        }}
-                                    >+</div>
-                                </div>
-                            </div>
+                            }
                             <div className="pd-checkout-button">
-                                <Link to="/payment"
-                                    onClick={() => {
-                                        doChangePage("cart")
-                                    }}>
+                                <Link to="/payment">
                                     CHECKOUT
                                 </Link>
                             </div>
@@ -215,6 +226,20 @@ class ProductDetail extends Component {
                     }
                 </section>
                 <Footer />
+                <Modal
+                    show={this.state.isShow}
+                    onHide={() => {
+                        this.setState({ isShow: false },
+                        );
+                    }}>
+                    <Modal.Header>
+                        <Modal.Title className='profile-modal-title'>Please Insert Size and Delivery Method</Modal.Title>
+                    </Modal.Header>
+                    {/* <Modal.Body></Modal.Body> */}
+                    <Modal.Footer>
+                        {/* <Button></Button> */}
+                    </Modal.Footer>
+                </Modal>
             </div>
         )
     }
@@ -237,9 +262,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         doAddToCart: (size, delivery, id) => {
             dispatch(addToCartAction(size, delivery, id))
-        },
-        doChangePage: (page) => {
-            dispatch(headerAction(page))
         },
     }
 }

@@ -32,6 +32,16 @@
     border-radius: 20px;
 }
 
+.pm-empty-left-content{
+    font-family: Poppins;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 53px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
 .pm-order-summary {
     font-family: Poppins;
     font-size: 35px;

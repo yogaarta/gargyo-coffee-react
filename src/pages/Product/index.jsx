@@ -15,7 +15,6 @@ import Check from "../../assets/img/Vectorcheck.png"
 import Promo1 from "../../assets/img/promo1.png"
 import Promo2 from "../../assets/img/promo2.png"
 import Promo3 from "../../assets/img/promo3.png"
-import { headerAction } from '../../redux/actionCreator/header'
 
 
 class Product extends Component {
@@ -49,7 +48,6 @@ class Product extends Component {
     componentDidMount() {
         document.title = "Product"
         this.state.setSearchParams('')
-        this.props.dispatch(headerAction("product"))
         axios
             .get(`${process.env.REACT_APP_BE_HOST}/products`)
             .then(result => {

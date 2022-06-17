@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+// import { useLocation, useNavigate } from "react-router-dom";
 import { Link, Navigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loginAction } from '../../redux/actionCreator/auth'
-import { headerAction } from '../../redux/actionCreator/header'
+import { Modal } from "react-bootstrap";
 // import img
 import Logo from "../../assets/img/coffee logo.png"
 import Google from "../../assets/img/google logo.png"
@@ -14,6 +15,7 @@ import ClosedEye from "../../assets/img/closed-eye.png"
 
 
 import "./Login.css"
+import withLocation from '../../Helper/withLocation';
 // import axios from 'axios'
 // import { doLogin } from '../../utility/auth'
 
@@ -27,12 +29,19 @@ class Login extends Component {
             isPasswordShown: false,
             isError: false,
             errorMsg: "",
-            isLoggedin: false
+            isLoggedin: false,
+            isShow: false
         };
     };
     componentDidMount() {
         document.title = "Login"
-        this.props.dispatch(headerAction("login"))
+        // this.props.dispatch(headerAction("login"))
+        const { state = null } = this.props.location;
+        if (state !== null && !state.isAuthenticated) {
+            this.setState({
+                isShow: true,
+            });
+        }
     }
 
     render() {
@@ -167,15 +176,39 @@ class Login extends Component {
                         </footer>
                     </div>
                 </div>
+                <Modal
+                    show={this.state.isShow}
+                    onHide={() => {
+                        this.setState({ isShow: false },
+                        );
+                    }}
+                >
+                    <Modal.Header>
+                        <Modal.Title className='profile-modal-title'>Please Login</Modal.Title>
+                    </Modal.Header>
+                    {/* <Modal.Body></Modal.Body> */}
+                    <Modal.Footer>
+                        {/* <Button></Button> */}
+                    </Modal.Footer>
+                </Modal>
             </div>
 
         )
     }
 }
 
+// const withLocationAndNavigate = (Component) => {
+//     const WithLocationAndNavigate = (props) => {
+//         const location = useLocation();
+//         const navigate = useNavigate();
+//         return <Component location={location} navigate={navigate} {...props} />;
+//     };
+//     return WithLocationAndNavigate;
+// };
+
 const mapStateToProps = (reduxState) => {
     const { auth: { userInfo, isSuccess } } = reduxState
     return { userInfo, isSuccess }
 }
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps)(withLocation(Login))

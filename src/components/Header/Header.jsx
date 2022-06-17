@@ -9,7 +9,6 @@ import ChatLogo from "../../assets/img/chat logo.png"
 import MiniPict from "../../assets/img/profile photo.png"
 import { connect } from 'react-redux';
 import { searchProductAction } from '../../redux/actionCreator/searchProduct';
-import { headerAction } from '../../redux/actionCreator/header';
 
 class Header extends Component {
     constructor(props) {
@@ -22,7 +21,7 @@ class Header extends Component {
     }
 
     render() {
-        const { roles, profile_picture, pageActive, doChangePage } = this.props
+        const { roles, profile_picture, pageActive } = this.props
         return (
             <header>
                 <nav className="custom-nav-container ">
@@ -34,31 +33,16 @@ class Header extends Component {
                         {roles !== "admin" ?
                             <ul>
                                 <li><Link to="/" className={pageActive === "home" ? "custom-active-nav" : "custom-inactive-nav"}
-                                    onClick={() => {
-                                        doChangePage("home")
-                                    }}
                                 >Home</Link></li>
                                 <li><Link to="/product" className={pageActive === "product" ? "custom-active-nav" : "custom-inactive-nav"}
-                                    onClick={() => {
-                                        doChangePage("product")
-                                    }}
                                 >Product</Link></li>
                                 <li><Link to="/payment" className={pageActive === "cart" ? "custom-active-nav" : "custom-inactive-nav"}
-                                    onClick={() => {
-                                        doChangePage("cart")
-                                    }}
                                 >Your Cart</Link></li>
                                 <li><Link to="/history" className={pageActive === "history" ? "custom-active-nav" : "custom-inactive-nav"}
-                                    onClick={() => {
-                                        doChangePage("history")
-                                    }}
                                 >History</Link></li>
                             </ul>
                             : <ul>
                                 <li><Link to="/" className={pageActive === "home" ? "custom-active-nav" : "custom-inactive-nav"}
-                                    onClick={() => {
-                                        doChangePage("home")
-                                    }}
                                 >Home</Link></li>
                                 <li><Link to="/product" className={pageActive === "product" ? "custom-active-nav" : "custom-inactive-nav"}
                                 >Product</Link></li>
@@ -95,25 +79,14 @@ class Header extends Component {
                                 <div className="header-profile">
                                     <Link to="/profile">
                                         <img src={profile_picture ? `${process.env.REACT_APP_BE_HOST}${profile_picture}` : MiniPict} alt="mini-pict" className="mini-photo"
-                                            onClick={() => {
-                                                doChangePage("profile")
-                                            }}
                                         />
                                     </Link>
                                 </div>
                             </div>
                             :
                             <div className="custom-nav-icon ">
-                                <div className="custom-login-button"
-                                    onClick={() => {
-                                        doChangePage("login")
-                                    }}
-                                ><Link to="/login">Login</Link></div>
-                                <div className="custom-signup-button"
-                                    onClick={() => {
-                                        doChangePage("signup")
-                                    }}
-                                ><Link to="/signup">Sign Up</Link></div>
+                                <div className="custom-login-button" ><Link to="/login">Login</Link></div>
+                                <div className="custom-signup-button"><Link to="/signup">Sign Up</Link></div>
                             </div>
                         }
                     </div>
@@ -130,9 +103,6 @@ const mapStateToProps = (reduxState) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        doChangePage: (page) => {
-            dispatch(headerAction(page))
-        },
         doSearch: (element) => {
             dispatch(searchProductAction(element))
         }

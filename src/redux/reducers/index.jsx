@@ -5,7 +5,6 @@ import counterReducers from "./counter";
 import authReducer from "./auth";
 import searchProductReducer from "./searchProduct";
 import { getUserDataReducer } from "./userData";
-import headerReducer from "./header";
 
 const reducers = combineReducers({
     counter: counterReducers,
@@ -13,7 +12,6 @@ const reducers = combineReducers({
     searchProduct: searchProductReducer,
     addToCart: addToCartReducer,
     userData: getUserDataReducer,
-    header: headerReducer
 });
 
 export default reducers

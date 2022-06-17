@@ -8,8 +8,6 @@ import HistoryTransactionCard from '../../components/HistoryTransactionCard'
 import 'react-bootstrap'
 import './History.css'
 import { connect } from 'react-redux'
-import { headerAction } from '../../redux/actionCreator/header'
-
 // import img
 // import Coldbrew from "../../assets/img/tomatomix.png"
 
@@ -28,7 +26,6 @@ class History extends Component {
     componentDidMount() {
         document.title = "History"
         window.scrollTo(0, 0);
-        this.props.dispatch(headerAction("history"))
         const { token = null } = this.props.userInfo || {}
 
         const config = { headers: { Authorization: `Bearer ${token}` } }

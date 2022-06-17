@@ -6,13 +6,11 @@ import "./Dashboard.css"
 
 import Option from "../../assets/img/option.png"
 import Admin from "../../assets/img/adminpict.png"
-import { headerAction } from '../../redux/actionCreator/header'
 import { connect } from 'react-redux'
 
 class Dashboard extends Component {
     componentDidMount(){
         document.title = "Dashboard"
-        this.props.dispatch(headerAction("dashboard"))
 
     }
     render() {

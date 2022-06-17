@@ -4,7 +4,6 @@ export const counterDownAction = "COUNTER_DOWN"
 export const loginString = "LOGIN"
 export const logoutString = "LOGOUT"
 export const getUserDataString = "GET_USER_DATA"
-export const changePageString = "CHANGE_PAGE"
 
 export const searchProductString = "SEARCH_PRODUCT"
 

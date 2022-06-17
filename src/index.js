@@ -43,7 +43,7 @@ function App() {
               </PrivateLoggedIn>
             } />
             <Route path="/profile" element={
-              <PrivateNotLoggedIn redirectedTo="/login">
+              <PrivateNotLoggedIn redirectedTo="/login" extraData={{ isAuthenticated: false }}>
                 <Profile />
               </PrivateNotLoggedIn>
             } />
@@ -52,12 +52,12 @@ function App() {
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/forgot" element={<Forgot />} />
             <Route path="/payment" element={
-              <PrivateNotLoggedIn redirectedTo="/login">
+              <PrivateNotLoggedIn redirectedTo="/login" extraData={{ isAuthenticated: false }}>
                 <Payment />
               </PrivateNotLoggedIn>
             } />
             <Route path="/history" element={
-              <PrivateNotLoggedIn redirectedTo="/login">
+              <PrivateNotLoggedIn redirectedTo="/login" extraData={{ isAuthenticated: false }}>
                 <History />
               </PrivateNotLoggedIn>
             } />

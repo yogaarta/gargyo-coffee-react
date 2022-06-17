@@ -53,43 +53,46 @@ class Payment extends Component {
     componentDidMount() {
         document.title = "Payment"
         window.scroll(0, 0)
-        const { addToCart: { productId } } = this.props
-        axios
-            .get(`${process.env.REACT_APP_BE_HOST}/products/${productId}`)
-            .then(result => {
-                console.log(this.state.product)
-                this.setState({
-                    product: result.data.data[0],
+        const { addToCart: { productId, delivery, size } } = this.props
+        if (delivery !== "" && size !== "") {
+            axios
+                .get(`${process.env.REACT_APP_BE_HOST}/products/${productId}`)
+                .then(result => {
+                    console.log(this.state.product)
+                    this.setState({
+                        product: result.data.data[0],
+                    })
                 })
-            })
-            .catch(error => {
-                console.log(error)
-            })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
     }
     render() {
         const { counter, addToCart: { size, delivery }, address, mobile_number, display_name, email } = this.props
-        if(this.state.isSuccess === true){
-            return <Navigate to="/product"/>
+        if (this.state.isSuccess === true) {
+            return <Navigate to="/product" />
         }
         return (
             <div>
-                <Header pageActive={this.state.pageActive}/>
+                <Header pageActive={this.state.pageActive} />
                 <main className="pm-main-container">
                     <div className="pm-title">Checkout your item now!</div>
                     <section className="pm-main-content">
-                        <section className="pm-left-content">
-                            <div className="pm-order-summary">Order Summary</div>
-                            <div className="pm-all-order">
-                                <div className="pm-order-item">
-                                    <div className="pm-item-img"><img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="product-info" className="pm-product-img" /></div>
-                                    <div className="pm-item-detail">
-                                        <p>{this.state.product.name}</p>
-                                        <p>x{counter}</p>
-                                        <p>{size}</p>
+                        {delivery !== "" && size !== "" ?
+                            <section className="pm-left-content">
+                                <div className="pm-order-summary">Order Summary</div>
+                                <div className="pm-all-order">
+                                    <div className="pm-order-item">
+                                        <div className="pm-item-img"><img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="product-info" className="pm-product-img" /></div>
+                                        <div className="pm-item-detail">
+                                            <p>{this.state.product.name}</p>
+                                            <p>x{counter}</p>
+                                            <p>{size}</p>
+                                        </div>
+                                        <div className="pm-item-price">{currencyFormatter.format(this.state.product.price)}</div>
                                     </div>
-                                    <div className="pm-item-price">{currencyFormatter.format(this.state.product.price)}</div>
-                                </div>
-                                {/* <div className="pm-order-item">
+                                    {/* <div className="pm-order-item">
                                     <div className="pm-item-img"><img src={Hazelnut} alt="" className="pm-product-img" /></div>
                                     <div className="pm-item-detail">
                                         <p>Hazelnut Latte</p>
@@ -99,29 +102,33 @@ class Payment extends Component {
                                     <div className="pm-item-price">IDR 24.0</div>
                                 </div> */}
 
-                            </div>
-                            <div className="pm-border"></div>
-                            <div className="pm-all-order-info">
-                                <div className="pm-subtotal">
-                                    <div className="pm-info">SUBTOTAL</div>
-                                    <div className="pm-price">{currencyFormatter.format(this.state.product.price * counter)}</div>
                                 </div>
-                                <div className="pm-tax">
-                                    <div className="pm-info">TAX {'&'} FEES</div>
-                                    <div className="pm-price">{currencyFormatter.format(this.state.product.price * counter * 10 / 100)}</div>
+                                <div className="pm-border"></div>
+                                <div className="pm-all-order-info">
+                                    <div className="pm-subtotal">
+                                        <div className="pm-info">SUBTOTAL</div>
+                                        <div className="pm-price">{currencyFormatter.format(this.state.product.price * counter)}</div>
+                                    </div>
+                                    <div className="pm-tax">
+                                        <div className="pm-info">TAX {'&'} FEES</div>
+                                        <div className="pm-price">{currencyFormatter.format(this.state.product.price * counter * 10 / 100)}</div>
+                                    </div>
+                                    <div className="pm-shipping">
+                                        <div className="pm-info">SHIPPING</div>
+                                        <div className="pm-price">{currencyFormatter.format(delivery === "Door Delivery" ? 10000 : 0)}</div>
+                                    </div>
                                 </div>
-                                <div className="pm-shipping">
-                                    <div className="pm-info">SHIPPING</div>
-                                    <div className="pm-price">{currencyFormatter.format(delivery === "Door Delivery" ? 10000 : 0)}</div>
+                                <div className="pm-total-order-price">
+                                    <div className="pm-total-info-title">TOTAL</div>
+                                    <div className="pm-total-info-price">
+                                        {currencyFormatter.format((this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0))}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="pm-total-order-price">
-                                <div className="pm-total-info-title">TOTAL</div>
-                                <div className="pm-total-info-price">
-                                    {currencyFormatter.format((this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0))}
-                                </div>
-                            </div>
-                        </section>
+                            </section>
+                            :
+                            <section className="pm-left-content pm-empty-left-content">Your Cart is Empty
+                            </section>
+                        }
                         <section className="pm-right-content">
                             <div className="pm-right-content-card">
                                 <div className="pm-address-detail-section">
