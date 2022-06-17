@@ -68,18 +68,20 @@ class ProductDetail extends Component {
                                 <h2>{this.state.product.name}</h2>
                                 <p>{currencyFormatter.format(this.state.product.price)}</p>
                             </div>
-                            <div className="pd-addcart-button"
-                                onClick={() => {
-                                    doAddToCart(this.state.size, this.state.delivery, params.id)
-                                    // console.log(this.state.size)
-                                }}
-                            >Add to Cart</div>
                             {roles !== "admin" ?
-                                <div className="pd-askstaff-button">Ask a Staff</div>
+                                <>
+                                    <div className="pd-addcart-button"
+                                        onClick={() => {
+                                            doAddToCart(this.state.size, this.state.delivery, params.id)
+                                            // console.log(this.state.size)
+                                        }}
+                                    >Add to Cart</div>
+                                    <div className="pd-askstaff-button">Ask a Staff</div>
+                                </>
                                 :
                                 <>
-                                    <div className="pd-askstaff-button">Edit Product</div>
-                                    <div className="pd-delete-button">Delete Menu</div>
+                                    <div className="pd-addcart-button">Edit Product</div>
+                                    <div className="pd-delete-button">Delete Product</div>
                                 </>
                             }
                         </div>
@@ -93,114 +95,124 @@ class ProductDetail extends Component {
                                         {this.state.product.description}
                                     </p>
                                 </div>
-                                <div className="pd-choose-size">
-                                    <h4 className="pd-size-title">Choose a size</h4>
-                                    <div className="pd-size-container">
-                                        <label className="pd-size-vector">R
-                                            <input type="radio" className='pd-size-input' name='pd-size-input'
-                                                onClick={() => {
-                                                    this.setState({ size: "Regular" })
-                                                }
-                                                }
-                                            /><span className='pd-size-checkmark'></span>
-                                        </label>
-                                        <label className="pd-size-vector">L
-                                            <input type="radio" className='pd-size-input' name='pd-size-input'
-                                                onClick={() => {
-                                                    this.setState({ size: "Large" })
-                                                }}
-                                            /><span className='pd-size-checkmark'></span>
-                                        </label>
-                                        <label className="pd-size-vector">XL
-                                            <input type="radio" className='pd-size-input' name='pd-size-input'
-                                                onClick={() => {
-                                                    this.setState({ size: "Extra Large" })
-                                                }}
-                                            /><span className='pd-size-checkmark'></span>
-                                        </label>
+                                {roles !== "admin" ?
+
+                                    <div className="pd-choose-size">
+                                        <h4 className="pd-size-title">Choose a size</h4>
+                                        <div className="pd-size-container">
+                                            <label className="pd-size-vector">R
+                                                <input type="radio" className='pd-size-input' name='pd-size-input'
+                                                    onClick={() => {
+                                                        this.setState({ size: "Regular" })
+                                                    }
+                                                    }
+                                                /><span className='pd-size-checkmark'></span>
+                                            </label>
+                                            <label className="pd-size-vector">L
+                                                <input type="radio" className='pd-size-input' name='pd-size-input'
+                                                    onClick={() => {
+                                                        this.setState({ size: "Large" })
+                                                    }}
+                                                /><span className='pd-size-checkmark'></span>
+                                            </label>
+                                            <label className="pd-size-vector">XL
+                                                <input type="radio" className='pd-size-input' name='pd-size-input'
+                                                    onClick={() => {
+                                                        this.setState({ size: "Extra Large" })
+                                                    }}
+                                                /><span className='pd-size-checkmark'></span>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
+                                    : <></>
+                                }
                             </div>
-                            <div className="pd-delivery-container">
-                                <h4 className="pd-delivery-title">Choose Delivery Methods</h4>
-                                <div className="pd-delivery-button">
-                                    <label className="pd-dm-button-inactive">
-                                        <input type="radio" name="pd-dm-input" className='pd-dm-input' />
-                                        <span className="pd-dm-checkmark"
-                                            onClick={() => {
-                                                this.setState({ delivery: "Dine In" })
-                                            }}
-                                        >Dine in</span>
-                                    </label>
-                                    <label className="pd-dm-button-inactive">
-                                        <input type="radio" name="pd-dm-input" className='pd-dm-input' />
-                                        <span className="pd-dm-checkmark"
-                                            onClick={() => {
-                                                this.setState({ delivery: "Door Delivery" })
-                                            }}
-                                        >Door Delivery</span>
-                                    </label>
-                                    <label className="pd-dm-button-inactive">
-                                        <input type="radio" name="pd-dm-input" className='pd-dm-input' />
-                                        <span className="pd-dm-checkmark"
-                                            onClick={() => {
-                                                this.setState({ delivery: "Pick Up" })
-                                            }}
-                                        >Pick up</span>
-                                    </label>
-                                    {/* <div className="pd-delivery-dinein-button">Dine in</div>
+                            {roles !== "admin" ?
+                                <div className="pd-delivery-container">
+                                    <h4 className="pd-delivery-title">Choose Delivery Methods</h4>
+                                    <div className="pd-delivery-button">
+                                        <label className="pd-dm-button-inactive">
+                                            <input type="radio" name="pd-dm-input" className='pd-dm-input' />
+                                            <span className="pd-dm-checkmark"
+                                                onClick={() => {
+                                                    this.setState({ delivery: "Dine In" })
+                                                }}
+                                            >Dine in</span>
+                                        </label>
+                                        <label className="pd-dm-button-inactive">
+                                            <input type="radio" name="pd-dm-input" className='pd-dm-input' />
+                                            <span className="pd-dm-checkmark"
+                                                onClick={() => {
+                                                    this.setState({ delivery: "Door Delivery" })
+                                                }}
+                                            >Door Delivery</span>
+                                        </label>
+                                        <label className="pd-dm-button-inactive">
+                                            <input type="radio" name="pd-dm-input" className='pd-dm-input' />
+                                            <span className="pd-dm-checkmark"
+                                                onClick={() => {
+                                                    this.setState({ delivery: "Pick Up" })
+                                                }}
+                                            >Pick up</span>
+                                        </label>
+                                        {/* <div className="pd-delivery-dinein-button">Dine in</div>
                                     <div className="pd-delivery-door-button">Door Delivery</div>
                                     <div className="pd-delivery-pickup-button">Pick up</div> */}
+                                    </div>
+                                    <form className="pd-settime">
+                                        <label htmlFor="settime">Set time:</label>
+                                        <input type="text" name="settime" id="settime" placeholder="Enter the time you'll arrived" />
+                                    </form>
                                 </div>
-                                <form className="pd-settime">
-                                    <label htmlFor="settime">Set time:</label>
-                                    <input type="text" name="settime" id="settime" placeholder="Enter the time you'll arrived" />
-                                </form>
-                            </div>
+                                : <></>
+                            }
                         </div>
                     </section>
-                    <section className="pd-checkout-container">
-                        <div className="pd-product-checkout">
-                            <div className="pd-checkout-img">
-                                <img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="coldbrew" className='pd-check-out-img' />
-                            </div>
-                            <div className="pd-checkout-info">
-                                <h4 className="pd-checkout-name">{this.state.product.name}</h4>
-                                <div className="pd-checkout-details">
-                                    <p>
-                                        x{counter} {addToCart.size} <br />{addToCart.delivery}
-                                    </p>
+                    {roles !== "admin" ?
+                        <section className="pd-checkout-container">
+                            <div className="pd-product-checkout">
+                                <div className="pd-checkout-img">
+                                    <img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="coldbrew" className='pd-check-out-img' />
+                                </div>
+                                <div className="pd-checkout-info">
+                                    <h4 className="pd-checkout-name">{this.state.product.name}</h4>
+                                    <div className="pd-checkout-details">
+                                        <p>
+                                            x{counter} {addToCart.size} <br />{addToCart.delivery}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="pd-checkout-quantity">
+                                    <div className="pd-minus-button"
+                                        onClick={() => {
+                                            doCounterDown()
+                                            this.setState({
+                                                counter: this.props.counter
+                                            })
+                                        }}
+                                    >-</div>
+                                    <div className="pd-quantity">{counter} </div>
+                                    <div className="pd-plus-button"
+                                        onClick={() => {
+                                            doCounterUp()
+                                            this.setState({
+                                                counter: this.props.counter
+                                            })
+                                        }}
+                                    >+</div>
                                 </div>
                             </div>
-                            <div className="pd-checkout-quantity">
-                                <div className="pd-minus-button"
+                            <div className="pd-checkout-button">
+                                <Link to="/payment"
                                     onClick={() => {
-                                        doCounterDown()
-                                        this.setState({
-                                            counter: this.props.counter
-                                        })
-                                    }}
-                                >-</div>
-                                <div className="pd-quantity">{counter} </div>
-                                <div className="pd-plus-button"
-                                    onClick={() => {
-                                        doCounterUp()
-                                        this.setState({
-                                            counter: this.props.counter
-                                        })
-                                    }}
-                                >+</div>
+                                        doChangePage("cart")
+                                    }}>
+                                    CHECKOUT
+                                </Link>
                             </div>
-                        </div>
-                        <div className="pd-checkout-button">
-                            <Link to="/payment"
-                                onClick={() => {
-                                    doChangePage("cart")
-                                }}>
-                                CHECKOUT
-                            </Link>
-                        </div>
-                    </section>
+                        </section>
+                        : <></>
+                    }
                 </section>
                 <Footer />
             </div>

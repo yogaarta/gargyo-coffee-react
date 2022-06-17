@@ -17,12 +17,9 @@ class Header extends Component {
         const { isSuccess } = this.props
         this.state = {
             isLoggedIn: isSuccess ? true : false,
-            isSearch: true,
             setSearchName: props,
         }
     }
-
-
 
     render() {
         const { roles, profile_picture, pageActive, doChangePage } = this.props
@@ -76,21 +73,17 @@ class Header extends Component {
                         {this.state.isLoggedIn ?
                             <div className="custom-nav-icon">
                                 <div className=" header-search-container">
-                                    {this.state.isSearch ?
-                                        <img src={MagnGlass} alt="magnifying-glass" className='magn-glass'
-                                            onClick={() => {
-                                                this.setState({
-                                                    isSearch: false
-                                                })
-                                            }}
-                                        />
+                                    {this.props.pageActive !== "product" ?
+                                        <Link to="/product">
+                                            <img src={MagnGlass} alt="magnifying-glass" className='magn-glass' />
+                                        </Link>
                                         :
                                         <div className='header-search-input-container'>
                                             <input type="text" id="header-search" name="search" className='header-search' placeholder="Search"
                                                 onChange={(e) => this.props.setSearchName(e.target.value)}
                                             />
                                             <img src={MagnGlass} alt="magnifying-glass" className='magn-glass2'
-                                                // onClick={() => { this.props.doAxios() }}
+                                                onClick={() => { this.props.doAxios() }}
                                             />
                                         </div>
                                     }
@@ -131,8 +124,8 @@ class Header extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { auth: { isSuccess }, userData: { data: { roles, profile_picture } }, header: { pageActive } } = reduxState
-    return { isSuccess, roles, profile_picture, pageActive }
+    const { auth: { isSuccess }, userData: { data: { roles, profile_picture } } } = reduxState
+    return { isSuccess, roles, profile_picture }
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import './NewProduct.css'
@@ -12,12 +13,18 @@ export default class NewPromo extends Component {
       page: "new promo"
     }
   }
+
+  componentDidMount() {
+    document.title = "Add New Promo"
+    window.scrollTo(0, 0);
+  }
+
   render() {
     return (
       <main>
         <Header />
         <div className="new-global-container">
-          <div className='new-title'>Products <span>{'>'} Add New Promo</span></div>
+          <div className='new-title'><Link to={"/product"}>Promo </Link><span>{'>'} Add New Promo</span></div>
           <section className='new-main-container'>
             <div className='new-left-container'>
               <div className="new-pict-default"><img src={Camera} alt="pict" className='new-pict' /></div>
@@ -42,11 +49,11 @@ export default class NewPromo extends Component {
             <div className='new-right-container'>
               <div className="new-right-input">
                 <label htmlFor="name" className='new-label'>Name :</label>
-                <input type="text" name='name' id='name' className='new-text-input' placeholder='Type promo name' />
+                <input type="text" name='name' id='name' className='new-text-input' placeholder='Input promo name' />
                 <label htmlFor="price" className='new-label'>Normal Price :</label>
-                <input type="text" name='price' id='price' className='new-text-input' placeholder='Type the normal price' />
+                <input type="text" name='price' id='price' className='new-text-input' placeholder='Input normal price' />
                 <label htmlFor="description" className='new-label'>Description :</label>
-                <input type="text" name='description' id='description' className='new-text-input' placeholder='Describe the promo' />
+                <input type="text" name='description' id='description' className='new-text-input' placeholder='Describe promo' />
                 {/* <div className="new-choose-size">
                 <h4 className="new-size-title">Choose Product Size</h4>
                 <div className="new-size-container">
@@ -81,7 +88,7 @@ export default class NewPromo extends Component {
                       <input type="radio" name="new-category-input" className='new-category-input' />
                       <span className="new-category-checkmark"
                         onClick={() => {
-                          this.setState({ category: "Dine In" })
+                          this.setState({ category: "1" })
                         }}
                       >Coffee</span>
                     </label>
@@ -89,7 +96,7 @@ export default class NewPromo extends Component {
                       <input type="radio" name="new-category-input" className='new-category-input' />
                       <span className="new-category-checkmark"
                         onClick={() => {
-                          this.setState({ category: "Door category" })
+                          this.setState({ category: "2" })
                         }}
                       >Non Coffee</span>
                     </label>
@@ -97,17 +104,17 @@ export default class NewPromo extends Component {
                       <input type="radio" name="new-category-input" className='new-category-input' />
                       <span className="new-category-checkmark"
                         onClick={() => {
-                          this.setState({ category: "Pick Up" })
+                          this.setState({ category: "4" })
                         }}
                       >Food</span>
                     </label>
                   </div>
                 </div>
               </div>
-                <div className="new-save-button">Save Promo</div>
-                <div className="new-cancel-button">Cancel</div>
-              <div className="new-right-button">
-              </div>
+              <div className="new-save-button">Save Promo</div>
+              <div className="new-cancel-button">Cancel</div>
+              {/* <div className="new-right-button">
+              </div> */}
             </div>
           </section>
         </div>

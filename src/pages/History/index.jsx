@@ -20,7 +20,8 @@ class History extends Component {
         this.state = {
             transactions: [],
             history: [],
-            isDeleted: false
+            isDeleted: false,
+            pageActive: "history"
         }
     }
 
@@ -93,7 +94,7 @@ class History extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header pageActive={this.state.pageActive}/>
                 <main className='h-main-container'>
                     <section className='h-title'>
                         <h1>Let's see what you have bought!</h1>

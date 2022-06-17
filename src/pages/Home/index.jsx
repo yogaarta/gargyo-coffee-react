@@ -34,6 +34,12 @@ import Profil3 from "../../assets/img/profil3.png"
 import { getUserDataAction } from '../../redux/actionCreator/userData'
 
 class Home extends Component {
+    constructor(){
+        super();
+        this.state = {
+            pageActive: "home"
+        }
+    }
     componentDidMount() {
         document.title = "Gargyo Coffee"
         window.scrollTo(0, 0);
@@ -46,7 +52,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header pageActive={this.state.pageActive}/>
                 <main>
                     <div className="row custom-banner">
                         <div className="col custom-banner-left">

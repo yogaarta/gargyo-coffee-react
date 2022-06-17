@@ -21,7 +21,8 @@ class Payment extends Component {
         this.state = {
             product: [],
             payment: "",
-            isSuccess: false
+            isSuccess: false,
+            pageActive: "cart"
         }
     }
 
@@ -51,6 +52,7 @@ class Payment extends Component {
 
     componentDidMount() {
         document.title = "Payment"
+        window.scroll(0, 0)
         const { addToCart: { productId } } = this.props
         axios
             .get(`${process.env.REACT_APP_BE_HOST}/products/${productId}`)
@@ -71,7 +73,7 @@ class Payment extends Component {
         }
         return (
             <div>
-                <Header />
+                <Header pageActive={this.state.pageActive}/>
                 <main className="pm-main-container">
                     <div className="pm-title">Checkout your item now!</div>
                     <section className="pm-main-content">

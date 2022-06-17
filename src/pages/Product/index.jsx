@@ -62,11 +62,11 @@ class Product extends Component {
             })
     }
 
-    // doAxios = () => {
-    //     this.setState({
-    //         doAxios: true
-    //     })
-    // }
+    doAxios = () => {
+        this.setState({
+            doAxios: true
+        })
+    }
 
     componentDidUpdate() {
         if (this.state.doAxios) {
@@ -120,8 +120,8 @@ class Product extends Component {
         const { roles } = this.props
         return (
             <div>
-                <Header setSearchName={this.setSearchName.bind(this)} 
-                // doAxios={this.doAxios()}
+                <Header setSearchName={this.setSearchName.bind(this)}
+                doAxios={this.doAxios} pageActive={this.state.pageActive}
                 />
                 <main className="row custom-main-container">
                     <aside className="col-4 custom-promo-column">
@@ -175,13 +175,15 @@ class Product extends Component {
                             <p>4. Should make member card to apply coupon</p>
                         </div>
                         {roles !== "admin" ? <></> :
-                            <div className="p-add-promo-button">Add new promo</div>
+                            <Link to={"/promo/new"}  className="p-link-button">
+                                <div className="p-add-promo-button">Add new promo</div>
+                            </Link>
                         }
                     </aside>
                     <main className="col-8 custom-main-product-column">
                         <nav className="custom-product-nav">
                             <ul className="row">
-                                <li className="col-2">
+                                <li className="col-4">
                                     <div className={this.state.categoryActive === "favorite" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={
                                             () => {
@@ -191,13 +193,14 @@ class Product extends Component {
                                                 })
                                             }
                                         }
-                                    >Favorite & Promo</div>
+                                    >Favorite {'&'} Promo</div>
                                 </li>
                                 <li className="col">
                                     <div className={this.state.categoryActive === "coffee" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={
                                             () => {
                                                 this.setState({
+                                                    page: 1,
                                                     doAxios: true,
                                                     categoryActive: "coffee"
                                                 })
@@ -205,10 +208,11 @@ class Product extends Component {
                                         }
                                     >Coffee</div>
                                 </li>
-                                <li className="col">
+                                <li className="col-3">
                                     <div className={this.state.categoryActive === "noncoffee" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
+                                                page: 1,
                                                 doAxios: true,
                                                 categoryActive: "noncoffee"
                                             })
@@ -219,6 +223,7 @@ class Product extends Component {
                                     <div className={this.state.categoryActive === "food" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
+                                                page: 1,
                                                 doAxios: true,
                                                 categoryActive: "food"
                                             })
@@ -229,6 +234,7 @@ class Product extends Component {
                                     <div className={this.state.categoryActive === "all" ? "custom-product-nav-active" : "custom-product-nav-inactive"}
                                         onClick={() => {
                                             this.setState({
+                                                page: 1,
                                                 doAxios: true,
                                                 categoryActive: "all"
                                             })
@@ -298,6 +304,7 @@ class Product extends Component {
                                         <div className='product-page-button-empty'></div> :
                                         <div className="product-page-button-prev"
                                             onClick={() => {
+                                                window.scroll(0, 0)
                                                 this.setState({
                                                     page: this.state.page - 1,
                                                     doAxios: true
@@ -311,6 +318,7 @@ class Product extends Component {
                                         <div className='product-page-button-empty'></div> :
                                         <div className="product-page-button-next"
                                             onClick={() => {
+                                                window.scroll(0, 0)
                                                 this.setState({
                                                     page: this.state.page + 1,
                                                     doAxios: true
@@ -322,7 +330,9 @@ class Product extends Component {
                             <div className="custom-notes">*the price has been cutted by discount appears</div>
                         </div>
                         {roles !== "admin" ? <></> :
-                            <div className="p-new-product-button">Add new product</div>
+                            <Link to={"/product/new"} className="p-link-button">
+                                <div className="p-new-product-button">Add new product</div>
+                            </Link>
                         }
                     </main>
                 </main>

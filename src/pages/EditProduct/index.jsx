@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
-import './NewProduct.css'
+import withParams from '../../Helper/withParams'
+import './EditProduct.css'
 //img import
 import Camera from '../../assets/img/camera.png'
 
-export default class NewProduct extends Component {
+class EditProduct extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,7 +16,7 @@ export default class NewProduct extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     document.title = "Add New Product"
     window.scrollTo(0, 0);
   }
@@ -24,8 +25,8 @@ export default class NewProduct extends Component {
       <main>
         <Header />
         <div className="new-global-container">
-          <div className='new-title'><Link to="/product" className='new-link-title'> Products</Link> 
-          <span>{'>'} Add New Product</span></div>
+          <div className='new-title'><Link to="/product" className='new-link-title'> Products</Link>
+            <span>{'>'} Add New Product</span></div>
           <section className='new-main-container'>
             <div className='new-left-container'>
               <div className="new-pict-default"><img src={Camera} alt="pict" className='new-pict' /></div>
@@ -41,33 +42,6 @@ export default class NewProduct extends Component {
               <input type="text" name='price' id='price' className='new-text-input' placeholder='Input price' />
               <label htmlFor="description" className='new-label'>Description :</label>
               <input type="text" name='description' id='description' className='new-text-input' placeholder='Describe product' />
-              {/* <div className="new-choose-size">
-                <h4 className="new-size-title">Choose Product Size</h4>
-                <div className="new-size-container">
-                  <label className="new-size-vector">R
-                    <input type="radio" className='new-size-input' name='new-size-input'
-                      onClick={() => {
-                        this.setState({ size: "Regular" })
-                      }
-                      }
-                    /><span className='new-size-checkmark'></span>
-                  </label>
-                  <label className="new-size-vector">L
-                    <input type="radio" className='new-size-input' name='new-size-input'
-                      onClick={() => {
-                        this.setState({ size: "Large" })
-                      }}
-                    /><span className='new-size-checkmark'></span>
-                  </label>
-                  <label className="new-size-vector">XL
-                    <input type="radio" className='new-size-input' name='new-size-input'
-                      onClick={() => {
-                        this.setState({ size: "Extra Large" })
-                      }}
-                    /><span className='new-size-checkmark'></span>
-                  </label>
-                </div>
-              </div> */}
               <div className="new-category-container">
                 <h4 className="new-category-title">Product Category :</h4>
                 <div className="new-category-button">
@@ -105,3 +79,5 @@ export default class NewProduct extends Component {
     )
   }
 }
+
+export default withParams(EditProduct)

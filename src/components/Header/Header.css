@@ -225,6 +225,10 @@
     color: #000000;
     border-radius: 30px;
 }
+
+.header-search:focus{
+    outline: none;
+}
 .magn-glass2{
     width: 20px;
     height: 20px;

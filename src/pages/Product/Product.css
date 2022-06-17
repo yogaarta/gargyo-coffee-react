@@ -146,6 +146,8 @@
     letter-spacing: 0em;
     text-align: center;
     color: #6A4029;
+    text-decoration: none;
+
     background-color: #FFBA33;
     border-radius: 20px;
     width: 90%;
@@ -161,6 +163,14 @@
     -ms-user-select: none;
     user-select: none;
     -o-user-select: none;
+}
+
+.p-add-promo-button:hover {
+    background-color: #fcaf16;
+}
+
+.p-add-promo-button:active {
+    background-color: #FFBA33;
 }
 
 .p-new-product-button {
@@ -189,6 +199,14 @@
     -ms-user-select: none;
     user-select: none;
     -o-user-select: none;
+}
+
+.p-new-product-button:hover {
+    background-color: #552d17;
+}
+
+.p-new-product-button:active {
+    background-color: #6A4029;
 }
 
 /* main product */
@@ -439,6 +457,10 @@
     text-align: left;
 
     color: #6A4029;
+}
+
+.p-link-button {
+    text-decoration: none;
 }
 
 @media (max-width:840px) {

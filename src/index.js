@@ -22,6 +22,7 @@ import PrivateNotLoggedIn from "./components/privateRoute/PrivateNotLoggedIn";
 import Dashboard from "./pages/Dashboard";
 import NewProduct from './pages/NewProduct';
 import NewPromo from './pages/NewProduct/NewPromo';
+import EditProduct from './pages/EditProduct';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
               </PrivateNotLoggedIn>
             } />
             <Route path="/product/*" element={<Product />} />
+            <Route path="/product/edit/:id" element={<EditProduct />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/forgot" element={<Forgot />} />
             <Route path="/payment" element={
