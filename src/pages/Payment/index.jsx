@@ -126,7 +126,9 @@ class Payment extends Component {
                                 </div>
                             </section>
                             :
-                            <section className="pm-left-content pm-empty-left-content">Your Cart is Empty
+                            <section className="pm-left-content pm-empty-left-content">
+                                Your Cart is Empty, <br />
+                                <span>please add product to cart</span>
                             </section>
                         }
                         <section className="pm-right-content">
@@ -203,11 +205,14 @@ class Payment extends Component {
                                         </form>
                                     </div>
                                 </div>
-
                             </div>
+                            {delivery === "" && size === "" ?
+                            <div className="pm-disable-confirm-button"></div>
+                            :
                             <div className="pm-confirm-button" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 onClick={() => this.confirmAndPay()}
                             >Confirm and Pay</div>
+                        }
                         </section>
                     </section>
                 </main>

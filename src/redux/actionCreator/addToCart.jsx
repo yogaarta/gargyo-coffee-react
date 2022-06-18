@@ -1,10 +1,12 @@
 import { addToCartString, resetCartString } from "./actionString";
 
-export const addToCartAction = (size, delivery, id) => ({
+export const addToCartAction = (size, delivery, id, name, pict) => ({
     type: addToCartString,
     productId: id,
-    size: size,
-    delivery: delivery 
+    productName: name,
+    productPict: pict,
+    size,
+    delivery 
 })
 
 export const resetCartAction = () => ({

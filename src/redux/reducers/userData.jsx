@@ -16,6 +16,10 @@ export const getUserDataReducer = (prevState = initialState, action) => {
             return { ...prevState, data: action.payload.data.data[0], isLoading: false, isSuccess: true, isLoggedIn: true }
         case getUserDataString + REJECTED:
             return { ...prevState, isLoading: false, isSuccess: false, err: action.payload.data }
+        // case patchUserDataString + PENDING:
+        //     return { ...prevState, isLoading: true, err: null}
+        // case patchUserDataString + FULFILLED:
+        //     return { ...prevState, data: action.payload}
         case logoutString:
             return { ...initialState }
         default:

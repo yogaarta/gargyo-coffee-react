@@ -75,8 +75,10 @@ class ProductDetail extends Component {
                                         onClick={() => {
                                             const addSize = this.state.size !== "" ? this.state.size : null
                                             const addDeliv = this.state.delivery !== "" ? this.state.delivery : null
+                                            const productName = this.state.product.name
+                                            const productPict = this.state.product.picture
                                             addSize !== null && addDeliv !== null ?
-                                                doAddToCart(addSize, addDeliv, params.id) :
+                                                doAddToCart(addSize, addDeliv, params.id, productName, productPict) :
                                                 this.setState({
                                                     isShow: true
                                                 })
@@ -185,10 +187,10 @@ class ProductDetail extends Component {
                                 :
                                 <div className="pd-product-checkout">
                                     <div className="pd-checkout-img">
-                                        <img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="coldbrew" className='pd-check-out-img' />
+                                        <img src={`${process.env.REACT_APP_BE_HOST}${addToCart.productPict}`} alt="coldbrew" className='pd-check-out-img' />
                                     </div>
                                     <div className="pd-checkout-info">
-                                        <h4 className="pd-checkout-name">{this.state.product.name}</h4>
+                                        <h4 className="pd-checkout-name">{addToCart.productName}</h4>
                                         <div className="pd-checkout-details">
                                             <p>
                                                 x{counter} {addToCart.size} <br />{addToCart.delivery}
@@ -260,8 +262,8 @@ const mapDispatchToProps = (dispatch) => {
         doCounterDown: () => {
             dispatch(counterDown())
         },
-        doAddToCart: (size, delivery, id) => {
-            dispatch(addToCartAction(size, delivery, id))
+        doAddToCart: (size, delivery, id, name, pict) => {
+            dispatch(addToCartAction(size, delivery, id, name, pict))
         },
     }
 }

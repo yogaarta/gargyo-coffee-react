@@ -6,11 +6,12 @@ import 'bootstrap'
 
 import "./Profile.css"
 // import img
-import Profpic from "../../assets/img/profile photo.png"
+import Profpic from "../../assets/img/default-pict.jpg"
 import EditIcon from "../../assets/img/Vectoredit.png"
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { logoutAction } from '../../redux/actionCreator/auth'
+import { getUserDataAction } from '../../redux/actionCreator/userData'
 
 
 class Profile extends Component {
@@ -35,43 +36,36 @@ class Profile extends Component {
         }
     }
 
-    dateFormat = (date) => {
-        const newDate = new Date(date);
-        new Intl.DateTimeFormat(['ban', 'id']).format(newDate)
-        return 
-        // let date = new Date(this.state.profile.birthday)
-        // let year = date.getFullYear()
-        // let month = date.getMonth() + 1
-        // if(month.length < 2) month = '0' + month.toString()
-        // let day = date.getDate()
-        // if(day.length < 2) day = '0' + day.toString()
-        // let newDate = `${year}-${month}-${day}`
-        // // let newDate = date.toISOString().split('T')[0]
-        // return newDate
-    }
-
     componentDidMount() {
         document.title = "Profile"
         const { token = null } = this.props.userInfo || {}
-        const config = { headers: { Authorization: `Bearer ${token}` } }
-        axios
-            .get(`${process.env.REACT_APP_BE_HOST}/users`, config)
-            .then(result => {
-                this.setState({
-                    profile: result.data.data[0],
-                })
+        const { isLoading, data } = this.props.userData
+        // const config = { headers: { Authorization: `Bearer ${token}` } }
+        // axios
+        //     .get(`${process.env.REACT_APP_BE_HOST}/users`, config)
+        //     .then(result => {
+        //         this.setState({
+        //             profile: result.data.data[0],
+        //         })
 
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+        this.props.dispatch(getUserDataAction(token))
+        if (!isLoading) {
+            this.setState({
+                profile: data
             })
-            .catch(error => {
-                console.log(error)
-            })
+        }
 
 
 
     }
 
     componentDidUpdate() {
-        const { token } = this.props.userInfo
+        const { token } = this.props.userInfo || {}
+        // const { isLoading, data } = this.props.userData
         if (this.state.isUpdated) {
             const config = { headers: { Authorization: `Bearer ${token}` } }
             axios
@@ -84,6 +78,12 @@ class Profile extends Component {
                 .catch(error => {
                     console.log(error)
                 })
+            // this.props.dispatch(getUserDataAction(token))
+            // if (!isLoading) {
+            //     this.setState({
+            //         profile: data
+            //     })
+            // }
 
             this.setState({
                 isUpdated: false
@@ -92,7 +92,7 @@ class Profile extends Component {
     }
 
     render() {
-        const { isLoggedOut } = this.props
+        const { isLoggedOut, isLoading } = this.props
         if (isLoggedOut === false) {
             return <Navigate to="/" />
         }
@@ -105,7 +105,10 @@ class Profile extends Component {
                     </div>
                     <div className="main-card">
                         <div className="profile-card">
-                            <div className='profile-picture-container'><img src={this.state.profile.profile_picture ? `${process.env.REACT_APP_BE_HOST}${this.state.profile.profile_picture}` : Profpic} alt="profile_photo" className="profile-picture" />
+                            <div className='profile-picture-container'>
+                                <img src={ this.state.file === null ?
+                                    this.state.profile.profile_picture ? `${this.state.profile.profile_picture
+                                    }` : Profpic : URL.createObjectURL(this.state.file)} alt="profile_photo" className="profile-picture" />
                             </div>
                             <div className="profile-text">
                                 <h4 className="profile-name">{this.state.profile.display_name ? this.state.profile.display_name : "Display Name"}</h4>
@@ -167,7 +170,6 @@ class Profile extends Component {
                                     <h4 className="form-title">Contacts</h4>
                                     <div className="edit-bullet"
                                         onClick={() => {
-                                            // console.log(this.dateFormat())
                                             this.state.isEdit ?
                                                 this.setState({
                                                     isEdit: false
@@ -243,7 +245,6 @@ class Profile extends Component {
                                         <input type="date" name="date" id="date" className="input-right profile-input"
                                             placeholder={"Enter birth date"}
                                             value=
-                                            // {this.dateFormat(this.state.profile.birthday)}
                                             {this.state.isEdit ? null : this.state.profile.birthday}
                                             disabled={this.state.isEdit ? false : true}
                                             onChange={(e) => {
@@ -335,17 +336,19 @@ class Profile extends Component {
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title profile-modal-title" id="exampleModalLabel">Update Success</h5>
+                                <h5 className="modal-title profile-modal-title" id="exampleModalLabel">{isLoading ? "Processing, Please wait a moment" : "Update Success"}</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-primary profile-btn-primary" data-bs-dismiss="modal"
-                                    onClick={() => {
-                                        this.setState({
-                                            isRegistered: true
-                                        })
-                                    }}
-                                >Proceed</button>
+                                {isLoading ? <></> :
+                                    <button type="button" className="btn btn-primary profile-btn-primary" data-bs-dismiss="modal"
+                                        onClick={() => {
+                                            this.setState({
+                                                isRegistered: true
+                                            })
+                                        }}
+                                    >Proceed</button>
+                                }
                             </div>
                         </div>
                     </div>
@@ -356,8 +359,8 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (reduxState) => {
-    const { auth: { userInfo, isSuccess, isLoggedOut } } = reduxState
-    return { userInfo, isSuccess, isLoggedOut }
+    const { auth: { userInfo, isSuccess, isLoggedOut }, userData } = reduxState
+    return { userInfo, isSuccess, isLoggedOut, userData }
 }
 
 export default connect(mapStateToProps)(Profile)

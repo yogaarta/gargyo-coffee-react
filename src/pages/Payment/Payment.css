@@ -39,9 +39,16 @@
     line-height: 53px;
     letter-spacing: 0em;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
 }
 
+.pm-empty-left-content span{
+    font-size: 25px;
+    font-weight: 500;
+}
 .pm-order-summary {
     font-family: Poppins;
     font-size: 35px;

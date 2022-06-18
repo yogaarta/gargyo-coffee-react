@@ -6,7 +6,7 @@ import "./Header.css"
 import Logo from "../../assets/img/coffee logo.png"
 import MagnGlass from "../../assets/img/Magn Glass Vector.png"
 import ChatLogo from "../../assets/img/chat logo.png"
-import MiniPict from "../../assets/img/profile photo.png"
+import MiniPict from "../../assets/img/default-pict.jpg"
 import { connect } from 'react-redux';
 import { searchProductAction } from '../../redux/actionCreator/searchProduct';
 
@@ -78,7 +78,7 @@ class Header extends Component {
                                 </div>
                                 <div className="header-profile">
                                     <Link to="/profile">
-                                        <img src={profile_picture ? `${process.env.REACT_APP_BE_HOST}${profile_picture}` : MiniPict} alt="mini-pict" className="mini-photo"
+                                        <img src={profile_picture ? `${profile_picture}` : MiniPict} alt="mini-pict" className="mini-photo"
                                         />
                                     </Link>
                                 </div>
