@@ -89,7 +89,9 @@ class ProductDetail extends Component {
                                 </>
                                 :
                                 <>
-                                    <div className="pd-addcart-button">Edit Product</div>
+                                    <Link to={`/product/edit/${this.state.product.id}`} className="pd-addcart-button">
+                                        <div>Edit Product</div>
+                                    </Link>
                                     <div className="pd-delete-button">Delete Product</div>
                                 </>
                             }

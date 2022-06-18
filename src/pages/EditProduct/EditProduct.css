@@ -1,5 +1,6 @@
 .new-global-container {
   padding: 5% 7.5%;
+  border-top: 1px solid #9F9F9F;
 }
 
 .new-title {
@@ -12,7 +13,7 @@
 
 }
 
-.new-title a{
+.new-title a {
   text-decoration: none;
 
   color: #4F5665;
@@ -28,6 +29,11 @@
   color: #6A4029
 }
 
+.new-title span a {
+  text-decoration: none;
+  color: #6A4029
+}
+
 .new-main-container {
   display: flex;
   justify-content: space-between;
@@ -38,6 +44,18 @@
   flex-direction: column;
   width: 40%;
   padding: 20px 2.5%;
+}
+
+.new-pict-default-container {
+  width: 200px;
+  height: 200px;
+
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin: 20px 0;
 }
 
 .new-pict-default {
@@ -51,6 +69,13 @@
   align-items: center;
   align-self: center;
   margin: 20px 0;
+}
+
+.new-product-pict {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .new-pict {
@@ -81,6 +106,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.new-image-upload{
+  width: 0px;
+  height: 0px;
+  opacity: 0;
 }
 
 .new-gallery-button:hover {
@@ -181,11 +212,11 @@
   display: flex;
 }
 
-.new-start-date{
+.new-start-date {
   width: 50%;
 }
 
-.new-date-input{
+.new-date-input {
   font-family: Rubik;
   font-size: 16px;
   font-weight: 400;
