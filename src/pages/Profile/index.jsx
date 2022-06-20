@@ -78,7 +78,7 @@ class Profile extends Component {
   componentDidUpdate() {
     const { token } = this.props.userInfo || {}
     // const { isLoading, data } = this.props.userData
-    if (this.state.doUpdated) {
+    if (this.state.doUpdate) {
       const config = { headers: { Authorization: `Bearer ${token}` } }
       axios
         .get(`${process.env.REACT_APP_BE_HOST}/users`, config)
@@ -98,7 +98,7 @@ class Profile extends Component {
       // }
 
       this.setState({
-        doUpdated: false
+        doUpdate: false
       })
     }
   }
