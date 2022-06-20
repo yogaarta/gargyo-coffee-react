@@ -156,7 +156,7 @@ class Profile extends Component {
               <div className="editpass-button">Edit Password</div>
               <div className="save-change-text">Do you want to save the change?</div>
               <div className="save-change-button"
-                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                // data-bs-toggle="modal" data-bs-target="#exampleModal"
                 onClick={() => {
                   this.setState({ isShow: true })
                   const { email, mobile_number, display_name, first_name, last_name, address, birthday, gender } = this.state;
