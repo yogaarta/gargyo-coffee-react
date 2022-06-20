@@ -24,6 +24,7 @@ import NewProduct from './pages/NewProduct';
 import NewPromo from './pages/NewPromo';
 import EditProduct from './pages/EditProduct';
 import EditPromo from './pages/EditPromo';
+import PrivateAdmin from './components/privateRoute/PrivateAdmin';
 
 
 function App() {
@@ -49,7 +50,11 @@ function App() {
               </PrivateNotLoggedIn>
             } />
             <Route path="/product/*" element={<Product />} />
-            <Route path="/product/edit/:id" element={<EditProduct />} />
+            <Route path="/product/edit/:id" element={
+              <PrivateAdmin redirectedTo='/' extraData={{ isAuthenticated: false }}>
+                <EditProduct />
+              </PrivateAdmin>
+            } />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/forgot" element={<Forgot />} />
             <Route path="/payment" element={
@@ -62,10 +67,26 @@ function App() {
                 <History />
               </PrivateNotLoggedIn>
             } />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/product/new" element={<NewProduct />} />
-            <Route path="/promo/new" element={<NewPromo />} />
-            <Route path="/promo/:id" element={<EditPromo />} />
+            <Route path="/dashboard" element={
+              <PrivateAdmin redirectedTo='/' extraData={{ isAuthenticated: false }}>
+                <Dashboard />
+              </PrivateAdmin>
+            } />
+            <Route path="/product/new" element={
+              <PrivateAdmin redirectedTo='/' extraData={{ isAuthenticated: false }}>
+                <NewProduct />
+              </PrivateAdmin>
+            } />
+            <Route path="/promo/new" element={
+              <PrivateAdmin redirectedTo='/' extraData={{ isAuthenticated: false }}>
+                <NewPromo />
+              </PrivateAdmin>
+            } />
+            <Route path="/promo/:id" element={
+              <PrivateAdmin redirectedTo='/' extraData={{ isAuthenticated: false }}>
+                <EditPromo />
+              </PrivateAdmin>
+            } />
             <Route
               path="*"
               element={

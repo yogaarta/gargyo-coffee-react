@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
+import { Modal } from "react-bootstrap";
 // import axios from 'axios'
 
 // import Header from './components/Header/Header';
@@ -32,12 +33,14 @@ import Profil2 from "../../assets/img/profil2.png"
 import Profil3 from "../../assets/img/profil3.png"
 
 import { getUserDataAction } from '../../redux/actionCreator/userData'
+import withLocation from '../../Helper/withLocation'
 
 class Home extends Component {
     constructor(){
         super();
         this.state = {
-            pageActive: "home"
+            pageActive: "home",
+            isShow: false
         }
     }
     componentDidMount() {
@@ -47,6 +50,12 @@ class Home extends Component {
         if (isLoggedIn) {
             const { token = null } = this.props.userInfo || {}
             dispatch(getUserDataAction(token))
+        }
+        const { state = null } = this.props.location;
+        if (state !== null && !state.isAuthenticated) {
+            this.setState({
+                isShow: true,
+            });
         }
     }
     render() {
@@ -272,6 +281,21 @@ class Home extends Component {
                     </div>
                 </main>
                 <Footer />
+                <Modal
+                    show={this.state.isShow}
+                    onHide={() => {
+                        this.setState({ isShow: false },
+                        );
+                    }}
+                >
+                    <Modal.Header>
+                        <Modal.Title className='profile-modal-title'>You are not an admin!</Modal.Title>
+                    </Modal.Header>
+                    {/* <Modal.Body></Modal.Body> */}
+                    <Modal.Footer>
+                        {/* <Button></Button> */}
+                    </Modal.Footer>
+                </Modal>
             </div>
 
         )
@@ -284,4 +308,4 @@ const mapStateToProps = (reduxState) => {
 }
 
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(withLocation(Home))
