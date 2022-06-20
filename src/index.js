@@ -21,8 +21,9 @@ import PrivateLoggedIn from "./components/privateRoute/PrivateLoggedIn";
 import PrivateNotLoggedIn from "./components/privateRoute/PrivateNotLoggedIn";
 import Dashboard from "./pages/Dashboard";
 import NewProduct from './pages/NewProduct';
-import NewPromo from './pages/NewProduct/NewPromo';
+import NewPromo from './pages/NewPromo';
 import EditProduct from './pages/EditProduct';
+import EditPromo from './pages/EditPromo';
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/product/new" element={<NewProduct />} />
             <Route path="/promo/new" element={<NewPromo />} />
+            <Route path="/promo/:id" element={<EditPromo />} />
             <Route
               path="*"
               element={

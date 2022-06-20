@@ -39,6 +39,7 @@ class ProductDetail extends Component {
     }
 
     componentDidMount() {
+        window.scroll({ top: 0 })
         const { params } = this.props
         axios
             .get(`${process.env.REACT_APP_BE_HOST}/products/${params.id}`)
@@ -63,7 +64,7 @@ class ProductDetail extends Component {
                     <section className="pd-main-content">
                         <div className="pd-left-content">
                             <div className="pd-main-img-container">
-                                <img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="coldbrew" className="pd-main-img" />
+                                <img src={`${this.state.product.picture}`} alt="coldbrew" className="pd-main-img" />
                             </div>
                             <div className="pd-main-product-name">
                                 <h2>{this.state.product.name}</h2>

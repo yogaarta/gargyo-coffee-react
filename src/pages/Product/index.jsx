@@ -12,9 +12,9 @@ import { currencyFormatter } from '../../Helper/formater'
 import "./Product.css"
 
 import Check from "../../assets/img/Vectorcheck.png"
-import Promo1 from "../../assets/img/promo1.png"
-import Promo2 from "../../assets/img/promo2.png"
-import Promo3 from "../../assets/img/promo3.png"
+// import Promo1 from "../../assets/img/promo1.png"
+// import Promo2 from "../../assets/img/promo2.png"
+// import Promo3 from "../../assets/img/promo3.png"
 
 
 class Product extends Component {
@@ -22,6 +22,8 @@ class Product extends Component {
         super(props);
         this.state = {
             product: [],
+            promo: [],
+            promoApplied: "",
             categoryActive: "all",
             doAxios: false,
             sort: "category",
@@ -54,6 +56,16 @@ class Product extends Component {
                 this.setState({
                     product: result.data.data,
                     totalPage: result.data.meta.totalPage
+                });
+            }).catch(error => {
+                console.log(error)
+            })
+        axios
+            .get(`${process.env.REACT_APP_BE_HOST}/promos/today`)
+            .then(result => {
+                console.log(result)
+                this.setState({
+                    promo: result.data.data,
                 });
             }).catch(error => {
                 console.log(error)
@@ -119,7 +131,7 @@ class Product extends Component {
         return (
             <div>
                 <Header setSearchName={this.setSearchName.bind(this)}
-                doAxios={this.doAxios} pageActive={this.state.pageActive}
+                    doAxios={this.doAxios} pageActive={this.state.pageActive}
                 />
                 <main className="row custom-main-container">
                     <aside className="col-4 custom-promo-column">
@@ -128,18 +140,40 @@ class Product extends Component {
                             <p className="custom-promo-paragraph">Coupons will be updated every weeks. Check them out! </p>
                         </div>
                         <div className="p-promo-card-container">
-                            <div className="custom-promo-card row mother-day-card">
-                                <div className="col-4 custom-promo-pict"><img
-                                    src={Promo1}
-                                    alt="mother's-day-promo" className="custom-promo-img" /></div>
-                                <div className="col custom-card-text">
-                                    <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
+                            {this.state.promo.map((promo, index) => (
+                                this.state.promoApplied !== promo.id ? 
+                
+                                    <div className={`custom-promo-card row ${this.state.promoApplied === promo.id ? "custom-promo-card-selected" : null} ${index === 0 || index === 3 ? "mother-day-card" : index === 1 ? "sunday-morning-card" : "halloween-card"}`}
+                                    onClick={() => {
+                                        this.state.promoApplied === promo.id ?
+                                        this.setState({
+                                            promoApplied: ""
+                                        })
+                                        :
+                                        this.setState({
+                                            promoApplied: promo.id
+                                        })
+                                    }}
+                                    >
+                                    <div className="col-4 custom-promo-pict">
+                                        <img src={promo.picture} alt={promo.name} className="custom-promo-img" /></div>
+                                    <div className="col custom-card-text">
+                                        <p className="custom-card-info"><b>{promo.code}</b><br />{promo.description}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="custom-promo-card row sunday-morning-card">
-                                <div className="col-4 custom-promo-pict"><img
-                                    src={Promo2}
-                                    alt="free-sunday-morning" className="custom-promo-img" /></div>
+                                :
+                            
+                                <div className={`custom-promo-card-detail row ${index === 0 || index === 3 ? "mother-day-card" : index === 1 ? "sunday-morning-card" : "halloween-card"}`}>
+                                    <div className="col-4 custom-promo-pict">
+                                        <img src={promo.picture} alt={promo.name} className="custom-promo-img" /></div>
+                                    <div className="col custom-card-text">
+                                        <p className="custom-card-info"><b>{promo.code}</b><br />{promo.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                            {/* <div className="custom-promo-card row sunday-morning-card">
+                                <div className="col-4 custom-promo-pict">
+                                    <img src={Promo2} alt="free-sunday-morning" className="custom-promo-img" /></div>
                                 <div className="col custom-card-text">
                                     <p className="custom-card-info"><b>Get a cup of coffee for free on sunday morning</b><br />Only at 7 to 9
                                         AM
@@ -147,23 +181,27 @@ class Product extends Component {
                                 </div>
                             </div>
                             <div className="custom-promo-card row mother-day-card">
-                                <div className="col-4 custom-promo-pict"><img
-                                    src={Promo1}
-                                    alt="mother's-day-promo" className="custom-promo-img" /></div>
+                                <div className="col-4 custom-promo-pict">
+                                    <img src={Promo1} alt="mother's-day-promo" className="custom-promo-img" /></div>
                                 <div className="col custom-card-text">
                                     <p className="custom-card-info"><b>HAPPY MOTHER'S DAY!</b><br />Get one of our favorite menu for free!</p>
                                 </div>
                             </div>
                             <div className="custom-promo-card row halloween-card">
-                                <div className="col-4 custom-promo-pict"><img
-                                    src={Promo3}
-                                    alt="halloween-promo" className="custom-promo-img" /></div>
+                                <div className="col-4 custom-promo-pict">
+                                    <img src={Promo3} alt="halloween-promo" className="custom-promo-img" /></div>
                                 <div className="col custom-card-text">
                                     <p className="custom-card-info"><b>HAPPY HALLOWEEN!
                                     </b><br />Do you like chicken wings? Get 1 free only if you buy pinky promise</p>
                                 </div>
-                            </div>
-                            <div className="custom-apply-button">Apply Coupon</div>
+                            </div> */}
+                            {roles !== "admin" ?
+                                <div className="custom-apply-button">Apply Coupon</div>
+                                :
+                                <Link to={this.state.promoApplied !== "" ? `/promo/${this.state.promoApplied}` : "/product"}>
+                                    <div className="custom-apply-button">Edit Coupon</div>
+                                </Link>
+                            }
                         </div>
                         <div className="custom-term">
                             <p className="custom-term-title">Terms and Condition</p>
@@ -173,7 +211,7 @@ class Product extends Component {
                             <p>4. Should make member card to apply coupon</p>
                         </div>
                         {roles !== "admin" ? <></> :
-                            <Link to={"/promo/new"}  className="p-link-button">
+                            <Link to={"/promo/new"} className="p-link-button">
                                 <div className="p-add-promo-button">Add new promo</div>
                             </Link>
                         }
@@ -282,7 +320,7 @@ class Product extends Component {
                                             <div className="card custom-product-card">
                                                 <div className="custom-card-img-container">
                                                     <Link to={`/product/${product.id}`}>
-                                                        <img src={`${process.env.REACT_APP_BE_HOST}${product.picture}`} className="card-img-top" alt={product.name} />
+                                                        <img src={`${product.picture}`} className="card-img-top" alt={product.name} />
                                                     </Link>
                                                 </div>
                                                 <div className="custom-product-promo">0%</div>

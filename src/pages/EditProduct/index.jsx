@@ -22,7 +22,8 @@ class EditProduct extends Component {
       description: "",
       picture: "",
       file: null,
-      isUpdated: false
+      isUpdated: false,
+      isShow: false
     }
   }
 
@@ -57,11 +58,11 @@ class EditProduct extends Component {
           <section className='new-main-container'>
             <div className='new-left-container'>
               <div className="new-pict-default-container">
-                {this.state.file === null ?
+                {!this.state.file ?
                   this.state.product.picture ?
-                    <img src={`http://localhost:8080${this.state.product.picture}`} alt={this.state.product.name} className="new-product-pict" />
+                    <img src={`${this.state.product.picture}`} alt={this.state.product.name} className="new-product-pict" />
                     : <div className="new-pict-default"><img src={Camera} alt="pict" className='new-pict' /></div>
-                  : <img src={URL.createObjectURL(this.state.file)} alt="preview" className='new-product-pict' />
+                  : <img src={this.state.file} alt="preview" className='new-product-pict' />
                 }
               </div>
               <div className="new-take-pict-button">Take a picture</div>
@@ -69,9 +70,14 @@ class EditProduct extends Component {
                 <input type="file" name='image-upload' id='image-upload' className='new-image-upload'
                   onChange={(e) => {
                     console.log(e.target.files[0])
-                    this.setState({
-                      file: e.target.files[0],
-                    })
+                    const file = e.target.files[0]
+                    if (file) {
+                      const reader = new FileReader()
+                      reader.onload = () => {
+                        this.setState({ file: reader.result, picture: file})
+                      }
+                      reader.readAsDataURL(file)
+                    }
                   }}
                 />
                 Choose from gallery</label>
@@ -79,6 +85,7 @@ class EditProduct extends Component {
                 onClick={() => {
                   this.setState({
                     file: null,
+                    picture: null,
                     name: this.state.product.name,
                     price: this.state.product.price,
                     description: this.state.product.description,
@@ -87,13 +94,14 @@ class EditProduct extends Component {
               >Cancel</div>
               <div className="new-save-button"
                 onClick={() => {
-                  const { name, price, description, category, file } = this.state
+                  this.setState({ isShow: true })
+                  const { name, price, description, category, picture } = this.state
                   const body = new FormData();
                   body.append('name', name);
                   body.append('price', price);
                   body.append('description', description);
                   body.append('category_id', category);
-                  body.append('picture', file)
+                  body.append('picture', picture)
 
                   const { token } = this.props.userInfo
                   const config = { headers: { Authorization: `Bearer ${token}`, "content-type": "multipart/form-data" } }
@@ -144,7 +152,7 @@ class EditProduct extends Component {
                 <h4 className="new-category-title">Product Category :</h4>
                 <div className="new-category-button">
                   <label className="new-category-button-inactive">
-                    <input type="radio" name="new-category-input" className='new-category-input' />
+                    <input type="radio" name="new-category-input" className='new-category-input' checked={this.state.category === "1" ? true : false} />
                     <span className="new-category-checkmark"
                       onClick={() => {
                         this.setState({ category: "1" })
@@ -152,7 +160,7 @@ class EditProduct extends Component {
                     >Coffee</span>
                   </label>
                   <label className="new-category-button-inactive">
-                    <input type="radio" name="new-category-input" className='new-category-input' />
+                    <input type="radio" name="new-category-input" className='new-category-input' checked={this.state.category === "2" ? true : false} />
                     <span className="new-category-checkmark"
                       onClick={() => {
                         this.setState({ category: "2" })
@@ -160,7 +168,7 @@ class EditProduct extends Component {
                     >Non Coffee</span>
                   </label>
                   <label className="new-category-button-inactive">
-                    <input type="radio" name="new-category-input" className='new-category-input' />
+                    <input type="radio" name="new-category-input" className='new-category-input' checked={this.state.category === "4" ? true : false} />
                     <span className="new-category-checkmark"
                       onClick={() => {
                         this.setState({ category: "4" })
@@ -174,14 +182,14 @@ class EditProduct extends Component {
         </div>
         <Footer />
         <Modal
-          show={this.state.isUpdated}
+          show={this.state.isShow}
           onHide={() => {
-            this.setState({ isUpdated: false },
+            this.setState({ isUpdated: false, isShow: false },
             );
           }}
         >
           <Modal.Header>
-            <Modal.Title className='profile-modal-title'>Update Success</Modal.Title>
+            <Modal.Title className='profile-modal-title'>{this.state.isUpdated ? "Update Success" : "Processing, please wait.."}</Modal.Title>
           </Modal.Header>
           {/* <Modal.Body></Modal.Body> */}
           <Modal.Footer>

@@ -30,6 +30,7 @@ class Profile extends Component {
       address: "",
       birthday: "",
       gender: "",
+      picture: null,
       file: null,
       isUpdated: false,
       isEdit: false
@@ -55,7 +56,8 @@ class Profile extends Component {
     this.props.dispatch(getUserDataAction(token))
     if (!isLoading) {
       this.setState({
-        profile: data
+        profile: data,
+        gender: data.gender
       })
     }
 
@@ -108,7 +110,7 @@ class Profile extends Component {
               <div className='profile-picture-container'>
                 <img src={this.state.file === null ?
                   this.state.profile.profile_picture ? `${this.state.profile.profile_picture
-                    }` : Profpic : URL.createObjectURL(this.state.file)} alt="profile_photo" className="profile-picture" />
+                    }` : Profpic : this.state.file} alt="profile_photo" className="profile-picture" />
               </div>
               <div className="profile-text">
                 <h4 className="profile-name">{this.state.profile.display_name ? this.state.profile.display_name : "Display Name"}</h4>
@@ -118,13 +120,29 @@ class Profile extends Component {
                 <input type="file" name='image-upload' id='image-upload' className='profile-input-img'
                   onChange={(e) => {
                     console.log(e.target.files[0])
-                    this.setState({
-                      file: e.target.files[0],
-                    })
+                    const file = e.target.files[0]
+                    if (file) {
+                      const reader = new FileReader()
+                      reader.onload = () => {
+                        this.setState({ file: reader.result, picture: file})
+                      }
+                      reader.readAsDataURL(file)
+                    }
+                    // console.log(e.target.files[0])
+                    // this.setState({
+                    //   file: e.target.files[0],
+                    // })
                   }}
                 />
                 Choose photo</label>
-              <div className="remove-button">Remove photo</div>
+              <div className="remove-button"
+              onClick={() => {
+                this.setState({
+                  file: null,
+                  picture: null
+                })
+              }}
+              >Remove photo</div>
               <div className="editpass-button">Edit Password</div>
               <div className="save-change-text">Do you want to save the change?</div>
               <div className="save-change-button"
@@ -133,7 +151,7 @@ class Profile extends Component {
                   const { email, mobile_number, display_name, first_name, last_name, address, birthday, gender } = this.state;
 
                   let body = new FormData()
-                  body.append('profile_picture', this.state.file);
+                  body.append('profile_picture', this.state.picture);
                   body.append('email', email);
                   body.append('mobile_number', mobile_number);
                   body.append('display_name', display_name);
@@ -272,7 +290,7 @@ class Profile extends Component {
                   <label htmlFor="last-name">Last Name:</label>
                   <input type="text" name="last-name" id="last-name" className="input-left profile-input"
                     placeholder={"Enter last name"}
-                    value={this.state.isEdit ? null : this.state.profile.last_name}
+                    value={this.state.isEdit ? false : this.state.profile.last_name}
                     disabled={this.state.isEdit ? false : true}
                     onChange={(e) => {
                       this.setState({
@@ -285,6 +303,7 @@ class Profile extends Component {
                   <label className="radio-container">Male
                     <input type="radio" name="radio"
                       disabled={this.state.isEdit ? false : true}
+                      checked={this.state.gender === "male" ? true : false}
                       onChange={() => {
                         this.setState({
                           gender: "male"
@@ -296,6 +315,7 @@ class Profile extends Component {
                   <label className="radio-container">Female
                     <input type="radio" name="radio"
                       disabled={this.state.isEdit ? false : true}
+                      checked={this.state.gender === "female" ? true : false}
                       onChange={() => {
                         this.setState({
                           gender: "female"
