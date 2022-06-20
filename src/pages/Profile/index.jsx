@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Modal } from "react-bootstrap"
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import { Link, Navigate } from 'react-router-dom'
@@ -32,8 +33,10 @@ class Profile extends Component {
       gender: "",
       picture: null,
       file: null,
+      doUpdate: false,
       isUpdated: false,
-      isEdit: false
+      isEdit: false,
+      isShow: false,
     }
   }
 
@@ -57,6 +60,13 @@ class Profile extends Component {
     if (!isLoading) {
       this.setState({
         profile: data,
+        email: data.email,
+        mobile_number: data.mobile_number,
+        display_name: data.display_name,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        address: data.address,
+        birthday: data.birthday,
         gender: data.gender
       })
     }
@@ -68,7 +78,7 @@ class Profile extends Component {
   componentDidUpdate() {
     const { token } = this.props.userInfo || {}
     // const { isLoading, data } = this.props.userData
-    if (this.state.isUpdated) {
+    if (this.state.doUpdated) {
       const config = { headers: { Authorization: `Bearer ${token}` } }
       axios
         .get(`${process.env.REACT_APP_BE_HOST}/users`, config)
@@ -88,13 +98,13 @@ class Profile extends Component {
       // }
 
       this.setState({
-        isUpdated: false
+        doUpdated: false
       })
     }
   }
 
   render() {
-    const { isLoggedOut, isLoading } = this.props
+    const { isLoggedOut } = this.props
     if (isLoggedOut === false) {
       return <Navigate to="/" />
     }
@@ -124,7 +134,7 @@ class Profile extends Component {
                     if (file) {
                       const reader = new FileReader()
                       reader.onload = () => {
-                        this.setState({ file: reader.result, picture: file})
+                        this.setState({ file: reader.result, picture: file })
                       }
                       reader.readAsDataURL(file)
                     }
@@ -136,18 +146,19 @@ class Profile extends Component {
                 />
                 Choose photo</label>
               <div className="remove-button"
-              onClick={() => {
-                this.setState({
-                  file: null,
-                  picture: null
-                })
-              }}
+                onClick={() => {
+                  this.setState({
+                    file: null,
+                    picture: null
+                  })
+                }}
               >Remove photo</div>
               <div className="editpass-button">Edit Password</div>
               <div className="save-change-text">Do you want to save the change?</div>
               <div className="save-change-button"
                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                 onClick={() => {
+                  this.setState({ isShow: true })
                   const { email, mobile_number, display_name, first_name, last_name, address, birthday, gender } = this.state;
 
                   let body = new FormData()
@@ -169,6 +180,7 @@ class Profile extends Component {
                     .then(result => {
                       console.log(result)
                       this.setState({
+                        doUpdate: true,
                         isUpdated: true
                       })
                     })
@@ -204,8 +216,8 @@ class Profile extends Component {
                     <label htmlFor="email">Email Address:</label>
                     <input type="text" name="email" id="email" className="input-left profile-input"
                       placeholder={"Enter email address"}
-                      value={this.state.isEdit ? null : this.state.profile.email}
-                      disabled={this.state.isEdit ? false : true}
+                      value={this.state.profile.email}
+                      disabled={true}
                       onChange={(e) => {
                         this.setState({
                           email: e.target.value
@@ -217,7 +229,7 @@ class Profile extends Component {
                     <label htmlFor="phone">Mobile number:</label>
                     <input type="text" name="phone" id="phone" className="input-right profile-input"
                       placeholder={"Enter number"}
-                      value={this.state.isEdit ? null : this.state.profile.mobile_number}
+                      value={this.state.isEdit ? this.state.mobile_number : this.state.profile.mobile_number}
                       disabled={this.state.isEdit ? false : true}
                       onChange={(e) => {
                         this.setState({
@@ -232,7 +244,7 @@ class Profile extends Component {
                   <input type="text" name="address" id="address"
                     className="input-left profile-input"
                     placeholder={"Enter delivery address"}
-                    value={this.state.isEdit ? null : this.state.profile.address}
+                    value={this.state.isEdit ? this.state.address : this.state.profile.address}
                     disabled={this.state.isEdit ? false : true}
                     onChange={(e) => {
                       this.setState({
@@ -248,7 +260,7 @@ class Profile extends Component {
                   <div className="label-input">
                     <label htmlFor="display-name">Display Name:</label>
                     <input type="text" name="display-name" id="display-name" className="input-left profile-input"
-                      value={this.state.isEdit ? null : this.state.profile.display_name}
+                      value={this.state.isEdit ? this.state.display_name : this.state.profile.display_name}
                       disabled={this.state.isEdit ? false : true}
                       placeholder="Enter display name"
                       onChange={(e) => {
@@ -263,7 +275,7 @@ class Profile extends Component {
                     <input type="date" name="date" id="date" className="input-right profile-input"
                       placeholder={"Enter birth date"}
                       value=
-                      {this.state.isEdit ? null : this.state.profile.birthday}
+                      {this.state.isEdit ? this.state.birthday : this.state.profile.birthday}
                       disabled={this.state.isEdit ? false : true}
                       onChange={(e) => {
                         this.setState({
@@ -277,7 +289,7 @@ class Profile extends Component {
                   <label htmlFor="first-name">First Name:</label>
                   <input type="text" name="first-name" id="first-name" className="input-left profile-input"
                     placeholder={"Enter first name"}
-                    value={this.state.isEdit ? null : this.state.profile.first_name}
+                    value={this.state.isEdit ? this.state.first_name : this.state.profile.first_name}
                     disabled={this.state.isEdit ? false : true}
                     onChange={(e) => {
                       this.setState({
@@ -352,7 +364,7 @@ class Profile extends Component {
           </div>
         </div>
         {/* UPDATE MODAL */}
-        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {/* <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
@@ -372,7 +384,24 @@ class Profile extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
+        <Modal
+          show={this.state.isShow}
+          onHide={() => {
+            this.setState({ isUpdated: false, isShow: false },
+            );
+            // this.setState({
+            //   isSuccess: true
+            // })
+          }}
+        >
+          <Modal.Header>
+            <Modal.Title className='profile-modal-title'>{this.state.isUpdated ? "Update Profile Success" : "Processing, please wait.."}</Modal.Title>
+          </Modal.Header>
+          <Modal.Footer>
+            {/* <Button></Button> */}
+          </Modal.Footer>
+        </Modal>
       </div >
     )
   }

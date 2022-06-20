@@ -1,23 +1,46 @@
 import React, { Component } from 'react'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
+import moment from 'moment'
 
 import "./Dashboard.css"
 
 import Option from "../../assets/img/option.png"
 import Admin from "../../assets/img/adminpict.png"
 import { connect } from 'react-redux'
+import axios from 'axios'
 
 class Dashboard extends Component {
-    componentDidMount(){
+    constructor(){
+        super();
+        this.state = {
+            daily: []
+        }
+    }
+
+    componentDidMount() {
         document.title = "Dashboard"
+        const { token = null } = this.props.userInfo || {}
+        const config = { headers: { Authorization: `Bearer ${token}` } }
+        axios
+            .get(`${process.env.REACT_APP_BE_HOST}/transactions/daily`, config)
+            .then(result => {
+                console.log(result.data.data)
+                this.setState({
+                    daily: result.data.data,
+                })
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
 
     }
     render() {
-        // const today = (new Date())
-        // today.setDate(today.getDate()+3)
-        // today.toDateString()
-        // console.log(today)
+        let heightResult = this.state.daily.map(daily => (
+            daily.revenue / 1000000 * 100 
+        ))
+        const today = new Date(Date.now())
         return (
             <>
                 <Header />
@@ -55,66 +78,68 @@ class Dashboard extends Component {
                                 <div className="db-mainchart">
                                     <div className="db-chart-column">
                                         <div className="db-chart-column-positive">
-                                            <div className="db-chart-column-positive-bar" style={{height:"20%"}}></div>
+                                            <div className="db-chart-column-positive-bar" style={heightResult[0] ? {height: `${heightResult[0]}%`} : {height: "0%"}}></div>
                                         </div>
                                         <div className="db-chart-column-negative">
-                                            <div className="db-chart-column-negative-bar" style={{height:"80%"}}></div>
+                                            <div className="db-chart-column-negative-bar" style={{ height: "0%" }}></div>
                                         </div>
-                                        <div className="db-chart-column-bottom-label">Mon</div>
+                                        <div className="db-chart-column-bottom-label">
+                                            {moment(today).format('MMM Do YY')}
+                                            </div>
                                     </div>
                                     <div className="db-chart-column">
                                         <div className="db-chart-column-positive">
-                                            <div className="db-chart-column-positive-bar" style={{height:"80%"}}></div>
+                                            <div className="db-chart-column-positive-bar" style={heightResult[1] ? {height: `${heightResult[1]}%`} : {height: "0%"}}></div>
                                         </div>
                                         <div className="db-chart-column-negative">
-                                            <div className="db-chart-column-negative-bar" style={{height:"60%"}}></div>
+                                            <div className="db-chart-column-negative-bar" style={{ height: "60%" }}></div>
                                         </div>
-                                        <div className="db-chart-column-bottom-label">Tue</div>
+                                        <div className="db-chart-column-bottom-label">{moment(today.setDate(today.getDate() - 1)).format('MMM Do YY')}</div>
                                     </div>
                                     <div className="db-chart-column">
                                         <div className="db-chart-column-positive">
-                                            <div className="db-chart-column-positive-bar" style={{height:"60%"}}></div>
+                                            <div className="db-chart-column-positive-bar" style={heightResult[2] ? {height: `${heightResult[2]}%`} : {height: "0%"}}></div>
                                         </div>
                                         <div className="db-chart-column-negative">
-                                            <div className="db-chart-column-negative-bar" style={{height:"40%"}}></div>
+                                            <div className="db-chart-column-negative-bar" style={{ height: "40%" }}></div>
                                         </div>
-                                        <div className="db-chart-column-bottom-label">Wed</div>
+                                        <div className="db-chart-column-bottom-label">{moment(today.setDate(today.getDate() - 1)).format('MMM Do YY')}</div>
                                     </div>
                                     <div className="db-chart-column">
                                         <div className="db-chart-column-positive">
-                                            <div className="db-chart-column-positive-bar" style={{height:"50%"}}></div>
+                                            <div className="db-chart-column-positive-bar" style={heightResult[3] ? {height: `${heightResult[3]}%`} : {height: "0%"}}></div>
                                         </div>
                                         <div className="db-chart-column-negative">
-                                            <div className="db-chart-column-negative-bar" style={{height:"20%"}}></div>
+                                            <div className="db-chart-column-negative-bar" style={{ height: "20%" }}></div>
                                         </div>
-                                        <div className="db-chart-column-bottom-label">Thur</div>
+                                        <div className="db-chart-column-bottom-label">{moment(today.setDate(today.getDate() - 1)).format('MMM Do YY')}</div>
                                     </div>
                                     <div className="db-chart-column">
                                         <div className="db-chart-column-positive">
-                                            <div className="db-chart-column-positive-bar" style={{height:"45%"}}></div>
+                                            <div className="db-chart-column-positive-bar" style={heightResult[4] ? {height: `${heightResult[4]}%`} : {height: "0%"}}></div>
                                         </div>
                                         <div className="db-chart-column-negative">
-                                            <div className="db-chart-column-negative-bar" style={{height:"40%"}}></div>
+                                            <div className="db-chart-column-negative-bar" style={{ height: "40%" }}></div>
                                         </div>
-                                        <div className="db-chart-column-bottom-label">Fri</div>
+                                        <div className="db-chart-column-bottom-label">{moment(today.setDate(today.getDate() - 1)).format('MMM Do YY')}</div>
                                     </div>
                                     <div className="db-chart-column">
                                         <div className="db-chart-column-positive">
-                                            <div className="db-chart-column-positive-bar" style={{height:"65%"}}></div>
+                                            <div className="db-chart-column-positive-bar" style={heightResult[5] ? {height: `${heightResult[5]}%`} : {height: "0%"}}></div>
                                         </div>
                                         <div className="db-chart-column-negative">
-                                            <div className="db-chart-column-negative-bar" style={{height:"50%"}}></div>
+                                            <div className="db-chart-column-negative-bar" style={{ height: "50%" }}></div>
                                         </div>
-                                        <div className="db-chart-column-bottom-label">Sat</div>
+                                        <div className="db-chart-column-bottom-label">{moment(today.setDate(today.getDate() - 1)).format('MMM Do YY')}</div>
                                     </div>
                                     <div className="db-chart-column">
                                         <div className="db-chart-column-positive">
-                                            <div className="db-chart-column-positive-bar" style={{height:"100%"}}></div>
+                                            <div className="db-chart-column-positive-bar" style={heightResult[6] ? {height: `${heightResult[6]}%`} : {height: "0%"}}></div>
                                         </div>
                                         <div className="db-chart-column-negative">
-                                            <div className="db-chart-column-negative-bar" style={{height:"50%"}}></div>
+                                            <div className="db-chart-column-negative-bar" style={{ height: "50%" }}></div>
                                         </div>
-                                        <div className="db-chart-column-bottom-label">Sun</div>
+                                        <div className="db-chart-column-bottom-label">{moment(today.setDate(today.getDate() - 1)).format('MMM Do YY')}</div>
                                     </div>
                                 </div>
                             </div>
@@ -161,4 +186,9 @@ class Dashboard extends Component {
     }
 }
 
-export default connect()(Dashboard)
+const mapStateToProps = (reduxState) => {
+    const { auth: { userInfo } } = reduxState
+    return { userInfo }
+}
+
+export default connect(mapStateToProps)(Dashboard)

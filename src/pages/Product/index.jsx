@@ -156,7 +156,6 @@ class Product extends Component {
             <div className="p-promo-card-container">
               {this.state.promo.map((promo, index) => (
                 this.state.promoApplied !== promo.id ?
-
                   <div className={`custom-promo-card row ${this.state.promoApplied === promo.id ? "custom-promo-card-selected" : null} ${index === 0 || index === 3 ? "mother-day-card" : index === 1 ? "sunday-morning-card" : "halloween-card"}`}
                     onClick={() => {
                       this.state.promoApplied === promo.id ?
@@ -172,22 +171,26 @@ class Product extends Component {
                     <div className="col-4 custom-promo-pict">
                       <img src={promo.picture} alt={promo.name} className="custom-promo-img" /></div>
                     <div className="col custom-card-text">
-                      <p className="custom-card-info"><b>{promo.code}</b><br />{moment(promo.end_date).format('MMM Do YYYY')}</p>
+                      <div className='product-promo-code'>{promo.code}</div>
+                      <div className="product-promo-info-bottom">
+                        <div className="product-promo-date">Valid until <br />{moment(promo.end_date).format('MMM Do YY')}</div>
+                        <div className="product-promo-discount">{`${promo.discount}%`}</div>
+                      </div>
                     </div>
                   </div>
                   :
 
                   <div className={`custom-promo-card-detail row ${index === 0 || index === 3 ? "mother-day-card" : index === 1 ? "sunday-morning-card" : "halloween-card"}`}
-                  onClick={() => {
-                    this.state.promoApplied === promo.id ?
-                      this.setState({
-                        promoApplied: ""
-                      })
-                      :
-                      this.setState({
-                        promoApplied: promo.id
-                      })
-                  }}
+                    onClick={() => {
+                      this.state.promoApplied === promo.id ?
+                        this.setState({
+                          promoApplied: ""
+                        })
+                        :
+                        this.setState({
+                          promoApplied: promo.id
+                        })
+                    }}
                   >
                     <div className="product-top-promo">
                       <div className="col-4 custom-promo-pict">
@@ -195,12 +198,16 @@ class Product extends Component {
                       <div className="col custom-card-text">
                         <div className="product-promo-code">{promo.code}</div>
                         <div className="custom-card-info">
-                          <div className="product-promo-date">{moment(promo.end_date).format('MMM Do YYYY')}</div>
-                          <div className="product-promo-discount">{promo.discount}</div>
-                          {promo.description}</div>
+                          <div className="product-promo-date">Valid until <br />{moment(promo.end_date).format('MMM Do YYYY')}</div>
+                          <div className="product-promo-discount">{`${promo.discount}%`}</div>
+                          {/* {promo.description} */}
+                          </div>
                       </div>
                     </div>
-                    <div className="product-bottom-promo"></div>
+                    <div className="product-bottom-promo">
+                      <div className="promo-bottom-title">Description</div>
+                      <div className="promo-bottom-desc">{promo.description}</div>
+                    </div>
                   </div>
               ))}
               {/* <div className="custom-promo-card row sunday-morning-card">
@@ -229,9 +236,9 @@ class Product extends Component {
                             </div> */}
               {roles !== "admin" ?
                 <div className="custom-apply-button"
-                onClick={()=> {
-                  this.applyPromoHandler(this.state.promoApplied)
-                }}
+                  onClick={() => {
+                    this.applyPromoHandler(this.state.promoApplied)
+                  }}
                 >Apply Coupon</div>
                 :
                 <Link to={this.state.promoApplied !== "" ? `/promo/${this.state.promoApplied}` : "/product"}>
@@ -351,8 +358,8 @@ class Product extends Component {
             <div className="custom-food-container">
               <div className="row row-cols-2 row-cols-md-4 g-4 custom-product-row">
                 {this.state.error === true ? <div>DATA NOT FOUND</div> :
-                  this.state.product.map((product) => (
-                    <div key={product.id} className="col custom-product-card-container">
+                  this.state.product.map((product, idx) => (
+                    <div key={product[idx]} className="col custom-product-card-container">
                       <div className="card custom-product-card">
                         <div className="custom-card-img-container">
                           <Link to={`/product/${product.id}`}>
