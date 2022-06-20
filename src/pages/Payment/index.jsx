@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Modal } from "react-bootstrap"
 import Header from "../../components/Header/Header"
 import Footer from "../../components/Footer/Footer"
 import axios from 'axios'
@@ -20,16 +21,25 @@ class Payment extends Component {
         super();
         this.state = {
             product: [],
+            transaction: [],
             payment: "",
             isSuccess: false,
-            pageActive: "cart"
+            pageActive: "cart",
+            isShow: false,
+            isUpdated: false,
         }
     }
 
     confirmAndPay = () => {
-        const { counter, addToCart: { delivery, productId }, id } = this.props
+        this.setState({isShow: true})
+        const { counter, addToCart: { delivery, productId, promo, promoId }, id } = this.props
+        const subtotal = this.state.product.price * counter
+        const discount = promo !== 0 ? (this.state.product.price * counter * promo / 100) : 0
+        const tax = this.state.product.price * counter * 10 / 100
+        const shipping = delivery === "Door Delivery" ? 10000 : 0
         const product_id = productId
-        const total_price = (this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0)
+        const promo_id = promoId
+        const total_price = (subtotal) - (discount) + (tax) + (shipping)
         const quantity = counter
         const user_id = id
         const payment_method = this.state.payment
@@ -38,11 +48,15 @@ class Payment extends Component {
         const { token } = this.props.userInfo
         const config = { headers: { Authorization: `Bearer ${token}` } }
 
-        const body = { product_id, total_price, quantity, user_id, payment_method, delivery_method }
+        const body = { product_id, total_price, quantity, user_id, payment_method, delivery_method, promo_id }
         axios
             .post(`${process.env.REACT_APP_BE_HOST}/transactions`, body, config)
             .then(result => {
                 console.log(result)
+                this.setState({
+                    transaction: result.data.data,
+                    isUpdated: true
+                })
             })
             .catch(error => {
                 console.log(error)
@@ -69,10 +83,14 @@ class Payment extends Component {
         }
     }
     render() {
-        const { counter, addToCart: { size, delivery }, address, mobile_number, display_name, email } = this.props
+        const { counter, addToCart: { size, delivery, promo }, address, mobile_number, display_name, email } = this.props
         if (this.state.isSuccess === true) {
             return <Navigate to="/product" />
         }
+        const subtotal = this.state.product.price * counter
+        const discount = promo !== 0 ? (this.state.product.price * counter * promo / 100) : 0
+        const tax = this.state.product.price * counter * 10 / 100
+        const shipping = delivery === "Door Delivery" ? 10000 : 0
         return (
             <div>
                 <Header pageActive={this.state.pageActive} />
@@ -84,7 +102,7 @@ class Payment extends Component {
                                 <div className="pm-order-summary">Order Summary</div>
                                 <div className="pm-all-order">
                                     <div className="pm-order-item">
-                                        <div className="pm-item-img"><img src={`${process.env.REACT_APP_BE_HOST}${this.state.product.picture}`} alt="product-info" className="pm-product-img" /></div>
+                                        <div className="pm-item-img"><img src={`${this.state.product.picture}`} alt="product-info" className="pm-product-img" /></div>
                                         <div className="pm-item-detail">
                                             <p>{this.state.product.name}</p>
                                             <p>x{counter}</p>
@@ -107,21 +125,25 @@ class Payment extends Component {
                                 <div className="pm-all-order-info">
                                     <div className="pm-subtotal">
                                         <div className="pm-info">SUBTOTAL</div>
-                                        <div className="pm-price">{currencyFormatter.format(this.state.product.price * counter)}</div>
+                                        <div className="pm-price">{currencyFormatter.format(subtotal)}</div>
+                                    </div>
+                                    <div className="pm-subtotal">
+                                        <div className="pm-info">DISCOUNT</div>
+                                        <div className="pm-price">{currencyFormatter.format(discount)}</div>
                                     </div>
                                     <div className="pm-tax">
                                         <div className="pm-info">TAX {'&'} FEES</div>
-                                        <div className="pm-price">{currencyFormatter.format(this.state.product.price * counter * 10 / 100)}</div>
+                                        <div className="pm-price">{currencyFormatter.format(tax)}</div>
                                     </div>
                                     <div className="pm-shipping">
                                         <div className="pm-info">SHIPPING</div>
-                                        <div className="pm-price">{currencyFormatter.format(delivery === "Door Delivery" ? 10000 : 0)}</div>
+                                        <div className="pm-price">{currencyFormatter.format(shipping)}</div>
                                     </div>
                                 </div>
                                 <div className="pm-total-order-price">
                                     <div className="pm-total-info-title">TOTAL</div>
                                     <div className="pm-total-info-price">
-                                        {currencyFormatter.format((this.state.product.price * counter) + (this.state.product.price * counter * 10 / 100) + (delivery === "Door Delivery" ? 10000 : 0))}
+                                        {currencyFormatter.format((subtotal) - (discount) + (tax) + (shipping))}
                                     </div>
                                 </div>
                             </section>
@@ -207,18 +229,18 @@ class Payment extends Component {
                                 </div>
                             </div>
                             {delivery === "" && size === "" ?
-                            <div className="pm-disable-confirm-button"></div>
-                            :
-                            <div className="pm-confirm-button" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                onClick={() => this.confirmAndPay()}
-                            >Confirm and Pay</div>
-                        }
+                                <div className="pm-disable-confirm-button"></div>
+                                :
+                                <div className="pm-confirm-button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    onClick={() => this.confirmAndPay()}
+                                >Confirm and Pay</div>
+                            }
                         </section>
                     </section>
                 </main>
                 <Footer />
                 {/* MODAL */}
-                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                {/* <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -239,7 +261,25 @@ class Payment extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
+                <Modal
+                    show={this.state.isShow}
+                    onHide={() => {
+                        // this.setState({ isUpdated: false, isShow: false },
+                        // );
+                        this.props.dispatch(resetCartAction())
+                        this.setState({
+                            isSuccess: true
+                        })
+                    }}
+                >
+                    <Modal.Header>
+                        <Modal.Title className='profile-modal-title'>{this.state.isUpdated ? "Transaction Success" : "Processing, please wait.."}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Footer>
+                        {/* <Button></Button> */}
+                    </Modal.Footer>
+                </Modal>
             </div>
         )
     }

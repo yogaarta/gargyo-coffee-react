@@ -1,4 +1,4 @@
-import { addToCartString, resetCartString } from "./actionString";
+import { addToCartString, applyPromoString, resetCartString } from "./actionString";
 
 export const addToCartAction = (size, delivery, id, name, pict) => ({
     type: addToCartString,
@@ -7,6 +7,12 @@ export const addToCartAction = (size, delivery, id, name, pict) => ({
     productPict: pict,
     size,
     delivery 
+})
+
+export const applyPromoAction = (id, promo) => ({
+    type: applyPromoString,
+    promoId: id,
+    promo,
 })
 
 export const resetCartAction = () => ({

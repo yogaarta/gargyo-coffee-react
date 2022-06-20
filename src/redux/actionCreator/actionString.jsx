@@ -10,6 +10,7 @@ export const patchUserDataString= "PATCH_USER_DATA"
 export const searchProductString = "SEARCH_PRODUCT"
 
 export const addToCartString = "ADD_TO_CART"
+export const applyPromoString = "APPLY_PROMO"
 export const resetCartString = "RESET_CART"
 
 export const PENDING = "_PENDING";

@@ -11,7 +11,7 @@ import { Modal } from "react-bootstrap";
 
 // import img
 import axios from 'axios'
-import { addToCartAction } from '../../redux/actionCreator/addToCart'
+import { addToCartAction, resetCartAction } from '../../redux/actionCreator/addToCart'
 import { currencyFormatter } from '../../Helper/formater'
 
 class ProductDetail extends Component {
@@ -55,7 +55,7 @@ class ProductDetail extends Component {
     }
 
     render() {
-        const { params, counter, doCounterUp, doCounterDown, doAddToCart, addToCart, roles } = this.props
+        const { params, counter, doCounterUp, doCounterDown, doAddToCart, addToCart, roles, doResetCart } = this.props
         return (
             <div>
                 <Header />
@@ -190,7 +190,7 @@ class ProductDetail extends Component {
                                 :
                                 <div className="pd-product-checkout">
                                     <div className="pd-checkout-img">
-                                        <img src={`${process.env.REACT_APP_BE_HOST}${addToCart.productPict}`} alt="coldbrew" className='pd-check-out-img' />
+                                        <img src={`${addToCart.productPict}`} alt="coldbrew" className='pd-check-out-img' />
                                     </div>
                                     <div className="pd-checkout-info">
                                         <h4 className="pd-checkout-name">{addToCart.productName}</h4>
@@ -203,6 +203,9 @@ class ProductDetail extends Component {
                                     <div className="pd-checkout-quantity">
                                         <div className="pd-minus-button"
                                             onClick={() => {
+                                                if (this.props.counter === 1) {
+                                                    doResetCart()
+                                                }
                                                 doCounterDown()
                                                 this.setState({
                                                     counter: this.props.counter
@@ -268,6 +271,9 @@ const mapDispatchToProps = (dispatch) => {
         doAddToCart: (size, delivery, id, name, pict) => {
             dispatch(addToCartAction(size, delivery, id, name, pict))
         },
+        doResetCart: () => {
+            dispatch(resetCartAction())
+        }
     }
 }
 
