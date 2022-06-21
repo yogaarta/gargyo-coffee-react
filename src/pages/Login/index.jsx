@@ -102,7 +102,7 @@ class Login extends Component {
                                     </div>
                                     <Link to={"/forgot"}><p className="forgot">Forgot Password?</p></Link>
 
-                                    {/* {isSuccess === false ? <div className='signup-error'>{errorMsg}</div> : <></>} */}
+                                    {isSuccess === false ? <div className='signup-error'>{this.props.err.err.msg}</div> : <></>}
 
 
                                     <div className="signup"
@@ -207,8 +207,8 @@ class Login extends Component {
 // };
 
 const mapStateToProps = (reduxState) => {
-    const { auth: { userInfo, isSuccess } } = reduxState
-    return { userInfo, isSuccess }
+    const { auth: { userInfo, isSuccess, err } } = reduxState
+    return { userInfo, isSuccess, err }
 }
 
 export default connect(mapStateToProps)(withLocation(Login))

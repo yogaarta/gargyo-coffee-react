@@ -11,7 +11,7 @@ const initialState = {
 const authReducer = (prevState = initialState, action) => {
     switch (action.type) {
         case loginString + PENDING:
-            return { ...prevState, err: null, isLoading: true }
+            return { ...prevState, err: null, isLoading: true, isSuccess: null }
 
         case loginString + FULFILLED:
             return { ...prevState, isLoading: false, userInfo: action.payload.data.data, isSuccess: true, isLoggedIn: true }
