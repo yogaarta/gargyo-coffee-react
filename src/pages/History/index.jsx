@@ -70,8 +70,6 @@ class History extends Component {
         this.setState({
             history: newHistory
         })
-        console.log(this.state.history)
-        console.log(newHistory)
     }
 
     deleteHistory = () => {

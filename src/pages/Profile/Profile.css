@@ -481,6 +481,10 @@ label {
     color: #6A4029
 }
 
+.profile-modal-title span{
+    color: red
+}
+
 .profile-modal-title-error {
     font-family: 'Poppins';
     font-style: normal;

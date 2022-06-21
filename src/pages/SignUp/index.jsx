@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link, Navigate } from 'react-router-dom'
+import { Modal } from "react-bootstrap";
 import 'bootstrap'
 // import img
 import Logo from "../../assets/img/coffee logo.png"
@@ -24,6 +25,8 @@ export default class SignUp extends Component {
             errorMsg: "",
             isRegistered: false,
             isPasswordShown: false,
+            isShow: false,
+            isUpdated: false
         };
     };
 
@@ -92,10 +95,13 @@ export default class SignUp extends Component {
                                         }}
                                     />
 
-                                    {this.state.isError ? <div className='signup-error'>{this.state.errorMsg}</div> : <></>}
+                                    {/* {this.state.isError ? <div className='signup-error'>{this.state.errorMsg}</div> : <></>} */}
 
                                     <div className="signup" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                         onClick={() => {
+                                            this.setState({
+                                                isShow: true,
+                                            })
                                             const { email, pass, mobile_number } = this.state;
                                             const body = { email, pass, mobile_number };
                                             axios
@@ -103,12 +109,11 @@ export default class SignUp extends Component {
                                                 .then(result => {
                                                     console.log(result.data.data)
                                                     this.setState({
-                                                        isError: false,
+                                                        isUpdated: true,
                                                     })
                                                 })
                                                 .catch(error => {
                                                     console.log(error.response)
-
                                                     this.setState({
                                                         isError: true,
                                                         errorMsg: `${error.response.data.err.msg}`
@@ -176,13 +181,12 @@ export default class SignUp extends Component {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </footer>
                     </div>
                 </div>
                 {/* MODAL */}
-                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                {/* <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -204,7 +208,35 @@ export default class SignUp extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
+                <Modal
+                    show={this.state.isShow}
+                    onHide={() => {
+                        this.state.isUpdated ? 
+                        this.setState({
+                            isRegistered: true,
+                            isShow: false,
+                            isError: false,
+                            errorMsg: ""
+                        })
+                        :
+                        this.setState({
+                            isUpdated: false,
+                            isShow: false,
+                            isError: false,
+                            errorMsg: ""
+                        });
+                    }}
+                >
+                    <Modal.Header>
+                        <Modal.Title className='profile-modal-title'>{this.state.isUpdated ? "Register Success" : this.state.isError ? <span>{this.state.errorMsg}</span> : "Processing, please wait.."}</Modal.Title>
+                    </Modal.Header>
+                    {/* <Modal.Body className='new-modal-body'>
+                    </Modal.Body> */}
+                    <Modal.Footer>
+                        {/* <Button></Button> */}
+                    </Modal.Footer>
+                </Modal>
             </div>
 
         )
