@@ -26,7 +26,10 @@ export default class HistoryTransactionCard extends Component {
                                 </div>
                             </div>
                             <div className="h-product-checklist">
-                                <input type="checkbox" name={this.props.id} id={this.props.id} />
+                                <input type="checkbox" name={this.props.id} id={this.props.id} 
+                                onChange={(e) => {
+                                    console.log(e.target.value)
+                                }}/>
                             </div>
                         </div>
                     </div>
