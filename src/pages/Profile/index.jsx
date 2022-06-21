@@ -302,7 +302,7 @@ class Profile extends Component {
                   <label htmlFor="last-name">Last Name:</label>
                   <input type="text" name="last-name" id="last-name" className="input-left profile-input"
                     placeholder={"Enter last name"}
-                    value={this.state.isEdit ? false : this.state.profile.last_name}
+                    value={this.state.isEdit ? this.state.last_name : this.state.profile.last_name}
                     disabled={this.state.isEdit ? false : true}
                     onChange={(e) => {
                       this.setState({

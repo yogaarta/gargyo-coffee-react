@@ -166,11 +166,9 @@ class Login extends Component {
                                                 <p>About Us</p>
                                                 <p>Privacy Policy</p>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                         </footer>

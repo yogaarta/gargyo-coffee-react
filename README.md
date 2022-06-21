@@ -18,7 +18,11 @@
 ![html](https://img.shields.io/badge/html-5-orange)
 ![css](https://img.shields.io/badge/css-3-blue)
 ![bootstrap](https://img.shields.io/badge/bootstrap-5-lightgrey)
+
+<br>
+
 ![reactjs](https://img.shields.io/badge/reactjs-18-blue)
+![redux](https://img.shields.io/badge/redux-4-blue)
 
 <br>
 
@@ -56,10 +60,18 @@
 
 <img src="src/assets/img/home-page.PNG" style="width: 600px">
 <img src="src/assets/img/login.PNG" style="width: 600px">
-<img src="src/assets/img/profile-page.PNG" style="width: 600px">
-<img src="src/assets/img/product-page.PNG" style="width: 600px">
+<img src="src/assets/img/profile-ss.PNG" style="width: 600px">
+<img src="src/assets/img/product-ss.PNG" style="width: 600px">
+<img src="src/assets/img/payment-ss.PNG" style="width: 600px">
+<img src="src/assets/img/success-trans-ss.PNG" style="width: 600px">
 
 </div>
 
-## BACKEND
+## RELATED BACKEND PROJECT
 [gargyo-coffee-backend](https://github.com/yogaarta/gargyo_coffee.git)
+
+## DEPLOYED PROJECT
+[gargyo-coffee-netlify](https://gargyo-coffee-app.netlify.app/)
+<br>
+
+[gargyo-coffee-heroku](https://gargyo-coffee.herokuapp.com/)
